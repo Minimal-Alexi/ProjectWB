@@ -17,3 +17,11 @@ Toivoa is a modern web 2.0 app that is based in the capital of Finland, Helsinki
 Vendors can create product listings using an upload form, allowing them to tailor the presentation of their products to their own desires, using the Toivoa API, certified vendors may be allowed to tailor their marketing for specific user audiences.
 
 In effect, Toivoa means to facilitate the trade of goods, services and information, between sellers, buyers, and marketing corporations.
+
+
+## Other Files:
+[Trello](https://trello.com/b/1t8Yq6Fw/web-development-project)
+
+[Powerpoint](https://slides.com/alex-45/bento/edit)
+
+[Product Backlog](https://metropoliafi-my.sharepoint.com/:w:/g/personal/alexpop_metropolia_fi/EWnk-rKG6LdApG7MgeOgfmEBVyxV3d2NOnAz1n_Gjzp5nw?e=SPBVCs)
