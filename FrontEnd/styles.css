@@ -13,7 +13,7 @@ header {
   justify-content: space-between;
   align-items: center;
   background: #3f8af4;
-  padding: 1rem 0;
+  padding: 2rem 0;
 }
 
 .logo-search-container {
@@ -73,7 +73,7 @@ header {
 }
 
 .hero img {
-  flex-grow: 12;
+  flex-grow: 2;
   height: 100%;
   max-width: 100%;
   border-radius: 1.5rem;
@@ -84,16 +84,17 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 1rem 8rem 1rem 0;
+  padding: 1rem 20rem 1rem 0;
   background: #f6f6f6;
   border-radius: 1.5rem;
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 
 .side-navigation li {
   list-style-type: none;
   padding: 0.5rem 2rem;
   line-height: 1.5rem;
+  min-width: 200px;
 }
 
 .side-navigation li a {
@@ -131,7 +132,7 @@ header {
   grid-template-columns: auto auto auto auto;
   gap: 10px;
   /* background-color: #2196F3; */
-  padding: 10px;
+  /* padding: 0 5rem; */
 }
 .product-card {
   background: #f5f5f5;
@@ -141,8 +142,8 @@ header {
 }
 
 .product-image {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 240px;
+  /* max-height: 100%; */
   object-fit: cover;
 }
 
