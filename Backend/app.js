@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 
-const { getRoot } = require('./controller'); // getRoot is imported
+const logger = require("./Middleware/logger");
 
-app.get('/', getRoot); // getRoot is used as a callback
+//middleware
+app.use(express.json());
+app.use(logger)
 
-const port = 3001;
+const port = 4000;
 // Start the server
 app.listen(port, () => {
   console.log(`The server is running at http://localhost:${port}`);
