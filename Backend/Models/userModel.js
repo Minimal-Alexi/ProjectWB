@@ -63,9 +63,7 @@ const deleteOnebyID = (id) =>
         return false;
     }
 
-
-// This is for testing the usermodel.
-if(require.main)
+if(require.main === module)
     {
         //Creating users, 2 valid 1 invalid. Test for impossibilities.
         console.log("addOne Called:",
