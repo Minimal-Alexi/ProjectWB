@@ -48,6 +48,11 @@ body {
     margin-bottom: 5rem;
 }
 
+.create-title {
+    margin-bottom: 1rem;
+    padding-top: 2.5rem;
+}
+
 .submit-stuff input,
 .submit-stuff button {
     font-size: 18px;
