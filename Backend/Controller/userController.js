@@ -26,7 +26,8 @@ const getUserbyID = (req,res) =>
 
 const createUser = (req,res) =>
     {
-        const user = Users.addOne(...req.body)
+        console.log(req.body);
+        const user = Users.addOne({...req.body})
         if(user)
             {
                 res.json(user);
