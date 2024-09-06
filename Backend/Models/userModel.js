@@ -109,3 +109,12 @@ if(require.main)
         //Final array should only have item 2.
         console.log("getAll Called:",getAll());
     }
+
+    module.exports = 
+    {
+        getAll,
+        addOne,
+        findOnebyID,
+        updateOnebyID,
+        deleteOnebyID,
+    }
