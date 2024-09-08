@@ -46,7 +46,7 @@ const updateUser = (req,res) =>
         updatedUser = Users.updateOnebyID(userID);
         if(updatedUser)
             {
-                res.json(updateUserd);
+                res.json(updatedUser);
             }
         else
         {
