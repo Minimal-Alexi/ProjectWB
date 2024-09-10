@@ -30,7 +30,7 @@ const createUser = (req,res) =>
         const user = Users.addOne({...req.body})
         if(user)
             {
-                res.json(user);
+                res.status(201).json(user);
             }
         else
         {
@@ -62,7 +62,7 @@ const deleteUser = (req,res) =>
         deletedUser = Users.deleteOnebyID(userID);
         if(deletedUser)
             {
-                res.json({message:"Succesfully deleted user."});
+                res.status(204).send();
             }
         else
         {

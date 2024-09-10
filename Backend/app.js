@@ -13,6 +13,7 @@ app.use(logger)
 
 app.use("/users",userRouter)
 
+
 // Start the server
 app.listen(port, () => {
   console.log(`The server is running at http://localhost:${port}`);
