@@ -236,6 +236,12 @@ header {
     margin-bottom: 1rem;
   }
 
+  .trending-discover {
+    padding: 0 1rem;
+    margin-top: 0;
+    gap: 1rem;
+  }
+
 
   .trending,
   .discover {
@@ -249,12 +255,8 @@ header {
 }
 
 @media (max-width: 576px) {
-
-
   .logo-search-container img {
-    /* width: 4rem; */
-    width: 40%;
-    /* margin-bottom: 1rem; */
+    display: none;
   }
 
   .logo-search-container .search {
@@ -270,11 +272,8 @@ header {
     margin: 0;
   }
 
-
-  .trending-discover {
-    padding: 0 1rem;
-    margin-top: 0;
-    gap: 1rem;
+  .hero {
+    gap: 0;
   }
 
   .product-container {
