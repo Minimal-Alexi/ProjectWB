@@ -1,2 +1,4 @@
 node_modules/
 /Backend/security_credentials.json
+
+.DS_Store
