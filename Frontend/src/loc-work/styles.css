@@ -253,28 +253,28 @@ header {
 
   .logo-search-container img {
     /* width: 4rem; */
-    width: 60%;
+    width: 40%;
+    /* margin-bottom: 1rem; */
   }
 
   .logo-search-container .search {
-    width: 60%;
+    width: auto;
+
   }
 
   .search input {
-    width: auto;
+    padding: 0;
   }
 
   .search{
     margin: 0;
   }
 
-  .search form {
-    width: 100%;
-  }
 
   .trending-discover {
-    padding: 1rem 1rem;
+    padding: 0 1rem;
     margin-top: 0;
+    gap: 1rem;
   }
 
   .product-container {
