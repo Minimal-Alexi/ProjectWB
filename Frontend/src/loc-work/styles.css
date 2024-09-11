@@ -213,6 +213,7 @@ header {
   margin: 2rem 0;
   background: #6179b7;
   color: white;
+  border-radius: 5px;
 }
 
 /* MEDIA QUERIES */
@@ -276,11 +277,8 @@ header {
     gap: 0;
   }
 
-  .product-container {
-    grid-template-columns: 1fr;
-  }
 
   .btn {
-    width: 100%;
+    width: 65%;
   }
 }
