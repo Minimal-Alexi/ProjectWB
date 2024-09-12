@@ -48,12 +48,5 @@ export const products = [
     price: "$69.99",
     reviews: "⭐⭐⭐⭐⭐ (431 reviews)",
     image: ps5_1,
-  },
-  {
-    id: 4,
-    name: "Product Name 5",
-    price: "$59.99",
-    reviews: "⭐⭐⭐⭐⭐ (505 reviews)",
-    image: ps5_1,
-  },
+  }
 ];

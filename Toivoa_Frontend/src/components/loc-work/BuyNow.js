@@ -19,28 +19,34 @@ const BuyNow = () => {
     setIsClick("minus");
   };
   return (
-    <>
-      <button
-        onClick={handleIncrementQuantity}
-        style={{
-          backgroundColor: isClick === "plus" ? "#6179B7" : "transparent",
-          color: "black",
-        }}
-      >
-        +
-      </button>
-      <p>{quantity}</p>
-      <button
-        onClick={handleDecrementQuantity}
-        style={{
-          backgroundColor: isClick === "minus" ? "#6179B7" : "transparent",
-          color: "black",
-        }}
-      >
-        -
-      </button>
-      <button>Buy Now</button>
-    </>
+    <div className="buy-now-container">
+      <div className="button-wrapper">
+        <button className="change-quality"
+          onClick={handleIncrementQuantity}
+          style={{
+            backgroundColor: isClick === "plus" ? "#6179B7" : "transparent",
+            color: "black",
+          }}
+        >
+          +
+        </button>
+        <p className="quantity-display">{quantity}</p>
+        <button className="change-quality"
+          onClick={handleDecrementQuantity}
+          style={{
+            backgroundColor: isClick === "minus" ? "#6179B7" : "transparent",
+            color: "black",
+          }}
+        >
+          -
+        </button>
+        
+      </div>
+      <button className="buy-now-btn">Buy Now</button>
+      <div className="heart-icon">
+      <i class="fa-regular fa-heart"></i>
+      </div>
+    </div>
   );
 };
 

@@ -1,5 +1,3 @@
-// src/components/ProductPage.js
-import React, { useState } from "react";
 import "./ProductDetails.css"; // Ensure your CSS file is linked here
 import { productData, products } from "./productData";
 
@@ -13,24 +11,36 @@ import ColorSelect from "./ColorSelect";
 
 const ProductPage = () => {
   return (
-    <div className="product-page">
-      <ProductThumbnailsDisplay />
-      <div className="product-details">
-        <ProductInfo />
-        <h4>Select Color:</h4>
-        <div className="colors">
-          {productData.colors.map((color, index) => (
-            <ColorSelect {...color}/>
-          ))}
-        </div>
+    <div className="product-detail-wrapper">
+      <div className="category-path">
+        <p>Account / Gaming / Havic HV G-92 Gamepad</p>
+      </div>
+      <div className="product-page">
+        <div>
+          <ProductThumbnailsDisplay />
+          <div className="product-details">
+            <ProductInfo />
+            <div className="color-select-wrapper">
+              <h4>Colours:</h4>
 
-        <SizeSelect />
-        <BuyNow />
-        <Delivery />
-        <p>Related Item</p>
-        {products.map((product) => (
-          <ProductCard {...product} key={product.id} />
-        ))}
+              <div className="colors">
+                {productData.colors.map((color, index) => (
+                  <ColorSelect {...color} index={index} />
+                ))}
+              </div>
+            </div>
+
+            <SizeSelect />
+            <BuyNow />
+            <Delivery />
+          </div>
+          <p>Related Item</p>
+          <div className="product-card-container">
+            {products.map((product) => (
+              <ProductCard {...product} key={product.id} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
