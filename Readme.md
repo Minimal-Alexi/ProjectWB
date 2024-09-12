@@ -27,6 +27,7 @@ If you want to test and to use the backend of the application, make sure to use 
 ## 1.4 Contribution
 
 In order to contribute to code, pull this branch from the repository, and then run the command:
-git checkout -b (Your_branch_name)
+
+<code>git checkout -b (Your_branch_name)</code>
 
 This is to ensure that the merging process will all be handled by one person at the end.
