@@ -30,4 +30,4 @@ In order to contribute to code, pull this branch from the repository, and then r
 
 <code>git checkout -b (Your_branch_name)</code>
 
-This is to ensure that the merging process will all be handled by one person at the end.
+This is to ensure that the merging process will all be handled by one person at the end. When you finish your branch, send a pull request to sprint-2 branch.
