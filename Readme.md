@@ -3,7 +3,7 @@
 # 1.0 Introduction
 
 ## 1.1 Members
-Pop Alex
+Pop Alex (Backend & Sys Ops.)
 
 Loc Dang
 
