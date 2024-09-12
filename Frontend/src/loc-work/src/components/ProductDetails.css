@@ -1,0 +1,43 @@
+/* src/components/ProductPage.css */
+
+.product-page {
+    display: flex;
+    padding: 20px;
+  }
+  
+  .image-container {
+    display: flex;
+    margin-right: 20px;
+  }
+  
+  .image-thumbnails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 400px; /* You can adjust this to your needs */
+  }
+  
+  .image-thumbnails img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+  
+  .image-thumbnails img.active {
+    border-color: blue;
+  }
+  
+  .main-image {
+    flex-grow: 1;
+  }
+  
+  .main-image img {
+    width: 400px; /* Adjust this width according to your layout */
+    height: 100%;
+    object-fit: cover;
+  }
+  
