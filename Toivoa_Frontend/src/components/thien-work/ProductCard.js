@@ -1,12 +1,13 @@
-import img from "./Loc-old-work/ps5.png"
+import products from './products';
 
 const ProductContainer = () => {
-    return (
-        <section className="product-container">
-        <div className="product-card">
+  return (
+    <section className="product-container">
+      {products.map((product, index) => (
+        <div className="product-card" key={index}>
           <div className="image-container">
             <img
-              src={img}
+              src={product.image}
               alt="Product Image"
               className="product-image"
             />
@@ -16,139 +17,14 @@ const ProductContainer = () => {
             <button className="add-to-cart">Add to cart</button>
           </div>
           <div className="product-info">
-            <h2 className="product-name">Product Name</h2>
-            <p className="product-price">$29.99</p>
-            <p className="product-reviews">⭐⭐⭐⭐☆ (120 reviews)</p>
+            <h2 className="product-name">{product.name}</h2>
+            <p className="product-price">{product.price}</p>
+            <p className="product-reviews">{product.reviews}</p>
           </div>
         </div>
-        <div className="product-card">
-          <div className="image-container">
-            <img
-              src={img}
-              alt="Product Image"
-              className="product-image"
-            />
-            <a href="#" className="wishlist" aria-label="View Wishlist">
-              <i className="fa-regular fa-heart"></i>
-            </a>
-            <button className="add-to-cart">Add to cart</button>
-          </div>
-          <div className="product-info">
-            <h2 className="product-name">Product Name</h2>
-            <p className="product-price">$29.99</p>
-            <p className="product-reviews">⭐⭐⭐⭐☆ (120 reviews)</p>
-          </div>
-        </div>
-        <div className="product-card">
-          <div className="image-container">
-            <img
-              src={img}
-              alt="Product Image"
-              className="product-image"
-            />
-            <a href="#" className="wishlist" aria-label="View Wishlist">
-              <i className="fa-regular fa-heart"></i>
-            </a>
-            <button className="add-to-cart">Add to cart</button>
-          </div>
-          <div className="product-info">
-            <h2 className="product-name">Product Name</h2>
-            <p className="product-price">$29.99</p>
-            <p className="product-reviews">⭐⭐⭐⭐☆ (120 reviews)</p>
-          </div>
-        </div>
-        <div className="product-card">
-          <div className="image-container">
-            <img
-              src={img}
-              alt="Product Image"
-              className="product-image"
-            />
-            <a href="#" className="wishlist" aria-label="View Wishlist">
-              <i className="fa-regular fa-heart"></i>
-            </a>
-            <button className="add-to-cart">Add to cart</button>
-          </div>
-          <div className="product-info">
-            <h2 className="product-name">Product Name</h2>
-            <p className="product-price">$29.99</p>
-            <p className="product-reviews">⭐⭐⭐⭐☆ (120 reviews)</p>
-          </div>
-        </div>
-        <div className="product-card">
-          <div className="image-container">
-            <img
-              src={img}
-              alt="Product Image"
-              className="product-image"
-            />
-            <a href="#" className="wishlist" aria-label="View Wishlist">
-              <i className="fa-regular fa-heart"></i>
-            </a>
-            <button className="add-to-cart">Add to cart</button>
-          </div>
-          <div className="product-info">
-            <h2 className="product-name">Product Name</h2>
-            <p className="product-price">$29.99</p>
-            <p className="product-reviews">⭐⭐⭐⭐☆ (120 reviews)</p>
-          </div>
-        </div>
-        <div className="product-card">
-          <div className="image-container">
-            <img
-              src={img}
-              alt="Product Image"
-              className="product-image"
-            />
-            <a href="#" className="wishlist" aria-label="View Wishlist">
-              <i className="fa-regular fa-heart"></i>
-            </a>
-            <button className="add-to-cart">Add to cart</button>
-          </div>
-          <div className="product-info">
-            <h2 className="product-name">Product Name</h2>
-            <p className="product-price">$29.99</p>
-            <p className="product-reviews">⭐⭐⭐⭐☆ (120 reviews)</p>
-          </div>
-        </div>
-        <div className="product-card">
-          <div className="image-container">
-            <img
-              src={img}
-              alt="Product Image"
-              className="product-image"
-            />
-            <a href="#" className="wishlist" aria-label="View Wishlist">
-              <i className="fa-regular fa-heart"></i>
-            </a>
-            <button className="add-to-cart">Add to cart</button>
-          </div>
-          <div className="product-info">
-            <h2 className="product-name">Product Name</h2>
-            <p className="product-price">$29.99</p>
-            <p className="product-reviews">⭐⭐⭐⭐☆ (120 reviews)</p>
-          </div>
-        </div>
-        <div className="product-card">
-          <div className="image-container">
-            <img
-              src={img}
-              alt="Product Image"
-              className="product-image"
-            />
-            <a href="#" className="wishlist" aria-label="View Wishlist">
-              <i className="fa-regular fa-heart"></i>
-            </a>
-            <button className="add-to-cart">Add to cart</button>
-          </div>
-          <div className="product-info">
-            <h2 className="product-name">Product Name</h2>
-            <p className="product-price">$29.99</p>
-            <p className="product-reviews">⭐⭐⭐⭐☆ (120 reviews)</p>
-          </div>
-        </div>
-      </section>
-    );
-  };
+      ))}
+    </section>
+  );
+};
   
   export default ProductContainer;
