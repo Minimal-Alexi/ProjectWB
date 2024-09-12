@@ -1,4 +1,4 @@
-import ProductDetails from './components/ProductDetails'
+import ProductDetails from './components/loc-work/ProductDetails'
 import './App.css';
 
 function App() {

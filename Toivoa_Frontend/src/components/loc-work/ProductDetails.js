@@ -1,7 +1,7 @@
 // src/components/ProductPage.js
 import React, { useState } from "react";
 import "./ProductDetails.css"; // Ensure your CSS file is linked here
-import ps5_main from "../images/ps5_controller_main.png";
+import ps5_main from "../../images/ps5.png";
 import ps5_1 from "../images/ps5_controller1.png";
 import ps5_2 from "../images/ps5_controller2.jpg";
 import ps5_3 from "../images/ps5_controller3.png";

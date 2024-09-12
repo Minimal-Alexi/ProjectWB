@@ -1,7 +1,7 @@
 {
   "name": "toivoa",
   "version": "1.0.0",
-  "main": "Backend/app.js",
+  "main": "app.js",
   "scripts": {
     "test": "node feedbackLib.js",
     "start": "node app.js",
@@ -12,8 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.19.2",
-    "react": "^18.3.1"
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
