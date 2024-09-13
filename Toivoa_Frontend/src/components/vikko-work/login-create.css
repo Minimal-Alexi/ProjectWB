@@ -22,11 +22,14 @@ body {
     justify-content: flex-start;
 }
 
-.blue-rectangle {
-    background-color: #3F8AF4;
+.invisible-rectangle {
+    /*background-color: #3F8AF4;*/
     margin-left: 1rem;
     width: 400px;
     height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .submit-stuff {
@@ -75,4 +78,9 @@ body {
 
 .switch-to-create:hover {
     color: #334c8a;
+}
+
+.image {
+    width: 500px;
+    margin-left: 6rem;
 }

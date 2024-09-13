@@ -3,7 +3,7 @@
 # 1.0 Introduction
 
 ## 1.1 Members
-Pop Alex
+Pop Alex (Backend & Sys Ops.)
 
 Loc Dang
 
@@ -23,3 +23,11 @@ In effect, Toivoa means to facilitate the trade of goods, services and informati
 ## 1.3 Setup
 
 If you want to test and to use the backend of the application, make sure to use the security_credentials.template.json to create a file called "security_credentials.json" of the same type.
+
+## 1.4 Contribution
+
+In order to contribute to code, pull this branch from the repository, and then run the command:
+
+<code>git checkout -b (Your_branch_name)</code>
+
+This is to ensure that the merging process will all be handled by one person at the end. When you finish your branch, send a pull request to sprint-2 branch.
