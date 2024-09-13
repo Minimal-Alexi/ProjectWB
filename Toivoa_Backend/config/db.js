@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 require('dotenv').config();
 
-const connectDB = async () => {
+/* const connectDB = async () => {
   const maxRetries = 5;
   let attempts = 0;
 
@@ -47,6 +47,17 @@ const testInsert = async () => {
 };
 
 testInsert();
+ */
+
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect("mongodb://localhost:27017/web-dev");
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+};
 
 
 module.exports = connectDB;

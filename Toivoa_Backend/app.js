@@ -1,3 +1,4 @@
+const connectDB = require("./config/db");
 const express = require("express");
 const app = express();
 require('dotenv').config();
@@ -8,6 +9,7 @@ const userRouter = require("./Router/userRouter");
 
 const logger = require("./Middleware/logger");
 const {unknownEndpoint,errorHandler} = require("./Middleware/errorHandling");
+connectDB();
 
 //middleware
 app.use(express.json());

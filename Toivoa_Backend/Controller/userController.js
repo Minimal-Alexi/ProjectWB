@@ -43,7 +43,6 @@ const createUser = async (req, res) => {
         req.body.password = passwordEssentials.hashedPassword;
         req.body.passwordSalt = passwordEssentials.passwordSalt;
         const newUser = await Users.create({...req.body});
-        console.log(newUser);
         res.status(201).json(newUser);
     }
     catch (error) {
