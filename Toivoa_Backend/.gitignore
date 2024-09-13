@@ -1,4 +1,3 @@
 node_modules/
-./security_credentials.json
-
+.env
 .DS_Store
