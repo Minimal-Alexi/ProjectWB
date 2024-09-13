@@ -22,7 +22,7 @@ In effect, Toivoa means to facilitate the trade of goods, services and informati
 
 ## 1.3 Setup
 
-If you want to test and to use the backend of the application, make sure to use the security_credentials.template.json to create a file called "security_credentials.json" of the same type.
+If you want to test and to use the backend of the application, make sure to use the .env.template file to create a file called ".env" of the same type. Adjust the values accordingly.
 
 ## 1.4 Contribution
 
