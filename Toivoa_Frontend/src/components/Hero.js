@@ -1,4 +1,4 @@
-import bannerImg from "./Loc-old-work/iphone.png";
+import bannerImg from "../images/iphone.png";
 
 const Hero = () => {
     return (

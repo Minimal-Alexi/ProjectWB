@@ -1,4 +1,4 @@
-import img from "./Loc-old-work/ps5.png"
+import img from "../images/ps5.png"
 
 const products = [
     {

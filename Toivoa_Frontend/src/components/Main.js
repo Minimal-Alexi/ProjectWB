@@ -1,17 +1,19 @@
 import Hero from "./Hero";
 import NavBar from "./NavBar";
 import TrendingDiscover from "./TrendingDiscovery";
-import ProducCard from "./ProductCard"
+import ProductCard from "./ProductCard"
 import ViewAllButton from "./ViewAll";
 import Footer from "./Footers";
-import './style.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+//import './style.css';
 
 const Main = () => (
     <div>
       <NavBar />
       <Hero/>
       <TrendingDiscover/>
-      <ProducCard/>
+      <ProductCard/>
       <ViewAllButton/>
       <Footer/>
     </div>
