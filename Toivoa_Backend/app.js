@@ -21,7 +21,6 @@ app.use("/users",userRouter)
 
 // Error handling
 app.use(unknownEndpoint);
-
 app.use(errorHandler);
 
 // Start the server

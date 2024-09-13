@@ -38,9 +38,13 @@ const getUserbyID = async (req, res) => {
 const createUser = async (req, res) => {
     try
     {
-        //process passwords first before anything else! TO BE DONE
-        const newUser = await Users.create({...req.body})
-        res.status(201).json(newCar);
+        const {passwordEncryption} = require('../Middleware/passwordHandling');
+        const passwordEssentials = await passwordEncryption(req.body.password)
+        req.body.password = passwordEssentials.hashedPassword;
+        req.body.passwordSalt = passwordEssentials.passwordSalt;
+        const newUser = await Users.create({...req.body});
+        console.log(newUser);
+        res.status(201).json(newUser);
     }
     catch (error) {
         res.status(400).json({ message: "Failed to create user", error: error.message });
