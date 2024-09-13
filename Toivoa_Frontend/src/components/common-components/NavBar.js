@@ -1,8 +1,8 @@
-import main_logo from "../images/main_logo.png";
+import main_logo from "../../images/main_logo.png";
 import { useState, useRef, useEffect } from 'react';
-import Create from './Create';
-import Login from './Login';
-import './login-create.css'
+import Create from '../loginRegistryPage/Create';
+import Login from '../loginRegistryPage/Login';
+import '../loginRegistryPage/login-create.css';
 
 const NavBar = () => {
 

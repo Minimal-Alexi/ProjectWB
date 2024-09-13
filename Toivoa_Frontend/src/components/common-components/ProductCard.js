@@ -1,5 +1,5 @@
-import products from './products';
-import productDetails from './productPage/ProductDetails';
+import {products} from '../../data.js';
+//import productDetails from '../productPage/ProductDetails';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const ProductContainer = () => {

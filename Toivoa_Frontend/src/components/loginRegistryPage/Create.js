@@ -1,21 +1,39 @@
-import Input from './Input';
-import Image from '../images/image.jpeg';
+import Input from '../common-components/Input'
+import Image from '../../images/image.jpeg';
 
-const Login = ({ switchToCreate }) => {
+const CreateAccount = ({ switchToLogin }) => {
     return (
         <div className="white-rectangle">
             <div className="invisible-rectangle">
+                <h1>
                 <img src={Image} alt='Image' className='image' />
+                </h1>
             </div>
             <div>
                 <ul className="submit-stuff">
-                    <li><h1 className="login-title">Log in</h1></li>
+                    <li><h1 className="create-title">Create account</h1></li>
+                    <li>
+                        <Input
+                            type="text"
+                            id="name" name="name"
+                            placeholder="Enter your account name"
+                            className="input" />
+                    </li>
+                    <li>
+                        <Input
+                            type="tel"
+                            id="phonenumber"
+                            name="phonenumber"
+                            placeholder="Enter your phonenumber"
+                            className="input"
+                        />
+                    </li>
                     <li>
                         <Input
                             type="email"
                             id="email"
                             name="email"
-                            placeholder="Enter your email or phonenumber"
+                            placeholder="Enter your email"
                             className="input"
                         />
                     </li>
@@ -32,7 +50,7 @@ const Login = ({ switchToCreate }) => {
                         <button type="submit">Submit</button>
                     </li>
                     <li>
-                        <a onClick={switchToCreate} className="switch-to-create">Don't have an account?</a>
+                        <a onClick={switchToLogin} className="switch-to-create">Switch to login</a>
                     </li>
                 </ul>
             </div>
@@ -40,4 +58,4 @@ const Login = ({ switchToCreate }) => {
     );
 };
 
-export default Login;
+export default CreateAccount;
