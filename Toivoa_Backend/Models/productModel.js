@@ -63,11 +63,11 @@ productSchema = new Schema(
             type: String,
             required: true,
         },
-        frontImage:
+/*         frontImage:
         {
             type: Image,
             required: false,
-        },
+        }, */
         reviewList:
         {
             type: [reviewSchema],
@@ -76,7 +76,7 @@ productSchema = new Schema(
         price:
         {
             type: Number,
-            required: false,
+            required: true,
         },
 
     });

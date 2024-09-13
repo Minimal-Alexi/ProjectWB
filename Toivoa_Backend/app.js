@@ -4,9 +4,6 @@ const app = express();
 require('dotenv').config();
 const port = process.env.PORT || 4000
 
-const userRouter = require("./Router/userRouter");
-
-
 const logger = require("./Middleware/logger");
 const {unknownEndpoint,errorHandler} = require("./Middleware/errorHandling");
 connectDB();
@@ -17,9 +14,13 @@ app.use(logger)
 
 
 //routes
+const userRouter = require("./Router/userRouter");
+const productRouter = require("./Router/productRouter");
 
-app.use("/users",userRouter)
 
+
+app.use("/users",userRouter);
+app.use("/products",productRouter);
 
 // Error handling
 app.use(unknownEndpoint);
