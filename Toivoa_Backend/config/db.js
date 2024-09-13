@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 require('dotenv').config();
 
-/* const connectDB = async () => {
+const connectDB = async () => {
   const maxRetries = 5;
   let attempts = 0;
 
@@ -21,43 +21,5 @@ require('dotenv').config();
     }
   }
 };
-
-const testInsert = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/web-dev");
-    const Users = require('../Models/userModel');
-    const newUser = new Users({
-      username:"gbond0",
-      email:"gbond0@jimdo.com",
-      firstName:"Grady",
-      lastName:"Bond",
-      password:"yF5.GpVsQhx,$s\\b",
-      passwordSalt:"yF5.GpVsQhx,$s\\b",
-      accountType: 2,
-      countryCode:"ID"
-    });
-
-    await newUser.save();
-    console.log("User inserted successfully");
-  } catch (error) {
-    console.error("Failed to insert user:", error.message);
-  } finally {
-    mongoose.disconnect();
-  }
-};
-
-testInsert();
- */
-
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect("mongodb://localhost:27017/web-dev");
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  }
-};
-
 
 module.exports = connectDB;
