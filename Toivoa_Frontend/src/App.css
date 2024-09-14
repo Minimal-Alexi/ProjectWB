@@ -5,7 +5,8 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-header {}
+header {
+}
 
 .navbar {
   display: flex;
@@ -21,7 +22,7 @@ header {}
 }
 
 .logo-search-container img {
-  width: 6rem;
+  width: 8rem;
 }
 
 .search {
@@ -94,8 +95,6 @@ header {}
   padding-right: 10rem;
   background: #f6f6f6;
   border-radius: 1.5rem;
-
-
 }
 
 .side-navigation li {
@@ -155,15 +154,22 @@ header {}
 }
 
 .product-image {
-  max-width: 240px;
-  /* max-height: 100%; */
-  /* object-fit: cover; */
+  /* max-width: 240px;
+  max-height: 100%; */
+  height: 240px;
+  max-width: 90%;
+  object-fit: scale-down;
+  
+  
 }
 
 .image-container {
   background: #3f8af4;
   position: relative;
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
 }
 
 .image-container .wishlist {
@@ -179,6 +185,10 @@ header {}
 
 .image-container:hover .add-to-cart {
   display: block;
+  background-color: #6179b7;
+  border: none;
+  border-radius: 5px;
+  opacity: 70%;
   /* Make the button visible on hover */
 }
 
@@ -243,7 +253,6 @@ header {}
     gap: 1rem;
   }
 
-
   .trending,
   .discover {
     width: 100%;
@@ -262,7 +271,6 @@ header {}
 
   .logo-search-container .search {
     width: auto;
-
   }
 
   .search input {
