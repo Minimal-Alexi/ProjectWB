@@ -5,26 +5,19 @@ import Login from '../loginRegistryPage/Login';
 import '../loginRegistryPage/login-create.css';
 
 const NavBar = () => {
-
   const [showLogin, setShowLogin] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
-  const [showLoginButton, setShowLoginButton] = useState(true);
-  const [showCreateButton, setShowCreateButton] = useState(true);
 
   const ref = useRef(null);
 
   const showL = () => {
     setShowLogin(true);
     setShowCreate(false);
-    setShowLoginButton(false);
-    setShowCreateButton(false);
   };
 
   const showC = () => {
     setShowLogin(false);
     setShowCreate(true);
-    setShowLoginButton(false);
-    setShowCreateButton(false);
   };
 
   const clickEventLogin = () => {
@@ -41,8 +34,6 @@ const NavBar = () => {
     ) {
       setShowLogin(false);
       setShowCreate(false);
-      setShowLoginButton(true);
-      setShowCreateButton(true);
     }
   };
 
@@ -80,8 +71,8 @@ const NavBar = () => {
         <a onClick={clickEventCreate} className="sign-up-btn">Sign Up</a>
         <a onClick={clickEventLogin} className="sign-in-btn">Sign In</a>
         <div ref={ref} className="login-create">
-          {showLogin ? <Login switchToCreate={showC} /> : null}
-          {showCreate ? <Create switchToLogin={showL} /> : null}
+          {showLogin ? (<div className="popup-container"><Login switchToCreate={showC} /></div>) : null}
+          {showCreate ? (<div className="popup-container"><Create switchToLogin={showL} /></div>) : null}
         </div>
       </div>
     </nav>

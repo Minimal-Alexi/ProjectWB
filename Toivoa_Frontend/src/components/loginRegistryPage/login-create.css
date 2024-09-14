@@ -1,5 +1,3 @@
-
-
 .white-rectangle {
     background-color: white;
     width: 1000px;
@@ -12,7 +10,6 @@
 }
 
 .invisible-rectangle {
-    /*background-color: #3F8AF4;*/
     margin-left: 1rem;
     width: 400px;
     height: 400px;
@@ -72,4 +69,21 @@
 .image {
     width: 500px;
     margin-left: 6rem;
+}
+
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-container {
+    backdrop-filter: blur(5px);
 }
