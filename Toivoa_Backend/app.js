@@ -1,18 +1,34 @@
+const connectDB = require("./config/db");
 const express = require("express");
 const app = express();
-const port = require('./security_credentials.json').port;
-
-const userRouter = require("./Router/userRouter");
-
+require('dotenv').config();
+const port = process.env.PORT || 4000
 
 const logger = require("./Middleware/logger");
+const {unknownEndpoint,errorHandler} = require("./Middleware/errorHandling");
+connectDB();
 
 //middleware
 app.use(express.json());
 app.use(logger)
 
-app.use("/users",userRouter)
 
+//routes
+const userRouter = require("./Router/userRouter");
+const productRouter = require("./Router/productRouter");
+const orderRouter = require("./Router/orderRouter");
+const adRouter = require("./Router/adRouter");
+
+
+
+app.use("/users",userRouter);
+app.use("/products",productRouter);
+app.use("/orders",orderRouter);
+app.use("/ads",adRouter);
+
+// Error handling
+app.use(unknownEndpoint);
+app.use(errorHandler);
 
 // Start the server
 app.listen(port, () => {

@@ -1,123 +1,84 @@
-/*product example
-
-    name: "Baseball Bat",
-    vendor: "Bat.Co",
-    description: "A bat to hit your enemies with."
-    reviewScore: 4.5,
-    reviewNr: 1,
-    reviewList:[...]
+/*
+    commentID:"21903DKSAKJ"
+    userID:"9138249iISDAJFDKA"
+    rating: 3.5
+    comment:"Shit product."
+    date: "04.01.1994"
 */
 
-const Reviews = require('./commentModel')
+const mongoose = require("mongoose");
 
-let productArray = [];
-let nextID = 1;
+const Schema = mongoose.Schema;
 
-const getAllProducts = () =>
+const reviewSchema = new mongoose.Schema({
+    userID: 
     {
-        return productArray;
+        type: Schema.Types.ObjectId, ref: "User",
+        required: true 
+    },
+    rating: 
+    {
+        type: Number,
+        required: true,
+        min: 1, 
+        max: 5 
+    },
+    comment:
+    {
+        type: String,
+        required: true 
+    },
+    date:
+    { 
+        type: Date, 
+        default: Date.now 
     }
+});
 
-const addOneProduct = (productData) =>
+/*
+    productID:"9138249iISDAJFDKA"
+    vendorID:"KSAJDLKQWAKMDS"
+    name:"Banana"
+    description:"A lovely banana."
+    frontImage: img
+    categories:"Foods"
+    reviewList:...
+    price: 500000000000
+*/
+
+productSchema = new Schema(
     {
-        const {name,vendor,description} = productData;
-        if (!name,!vendor,!description)
+        vendorID:
         {
-            return false;
-        }
-        const newProduct = 
+            type: Schema.Types.ObjectId, ref: "User",
+            required: true,
+        },
+        name:
         {
-            id:nextID++,
-            ...productData,
-            reviewNr: 0,
-            reviewList: []
-
-        }
-        productArray.push(newProduct);
-        return newProduct;
-    }
-
-
-
-const findOneProductbyID = (id) => 
-    {
-        const numericID = Number(id)
-        const foundProduct = productArray.find(product => product.id === numericID);
-        return foundProduct || false;
-    }
-
-const updateOneProductbyID = (id,updateData) => 
-    {
-        const updateProduct = findOneProductbyID(id);
-        if(updateProduct)
-            {
-                if(updateData)
-                    {
-                        Object.assign(updateProduct,updateData);
-                    }
-                return updateProduct;
-            }
-        return false;
-    }
-
-const deleteOneProductbyID = (id) => 
-    {
-        const deleteProduct = findOneProductbyID(id);
-        if (deleteProduct)
-            {
-                productArray = productArray.filter(product => product.id!==deleteProduct.id);
-                return true;
-            }
-        return false;
-    }
-
-
-
-if(require.main === module)
-    {
-        //Creating users, 2 valid 1 invalid. Test for impossibilities.
-        console.log("addOne Called:",
-            addOneProduct(
+            type: String,
+            required: true,
+        },
+        description:
         {
-            name: "Baseball Bat",
-            vendor: "Bat.Co",
-            description: "A bat to hit your enemies with."
-        }))
-        console.log("addOne Called:",
-            addOneProduct(
+            type: String,
+            required: true,
+        },
+/*         frontImage:
         {
-            name: "Sock",
-            vendor: "Sock.Co",
-            description: "For special people."
-        }))
-        console.log("addOne Called:",
-            addOneProduct(
+            type: Image,
+            required: false,
+        }, */
+        reviewList:
         {
-            name: "Faker - Get Faked."
-        }))
+            type: [reviewSchema],
+            required: false,
+        },
+        price:
+        {
+            type: Number,
+            required: true,
+        },
 
-        //Checking array. Test for impossibilities.
-        console.log("getAll Called:",getAllProducts());
-        console.log("getOnebyId called:",findOneProductbyID(1));
-        console.log("getOnebyId called:",findOneProductbyID(3));
+    });
 
-        //Checking update. Test for impossibilities.
-        console.log("updateOneProductbyID called:", updateOneProductbyID(1,{name:"Baseball Gold Bat"}));
-        console.log("updateOneProductbyID called:", updateOneProductbyID(3,{name:"Faker - Get Faked."}));
-
-        //Checking delete. Test for impossibilities.
-        console.log("deleteOneProductbyID called:", deleteOneProductbyID(1));
-        console.log("deleteOneProductbyID called:", deleteOneProductbyID(3));
-
-        //Final array should only have item 2.
-        console.log("getAll Called:",getAllProducts());
-    }
-
-    module.exports = 
-    {
-        getAllProducts,
-        addOneProduct,
-        findOneProductbyID,
-        updateOneProductbyID,
-        deleteOneProductbyID,
-    }
+    module.exports = mongoose.model("Product", productSchema);
