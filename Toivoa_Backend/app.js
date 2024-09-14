@@ -17,13 +17,14 @@ app.use(logger)
 const userRouter = require("./Router/userRouter");
 const productRouter = require("./Router/productRouter");
 const orderRouter = require("./Router/orderRouter");
-
+const adRouter = require("./Router/adRouter");
 
 
 
 app.use("/users",userRouter);
 app.use("/products",productRouter);
 app.use("/orders",orderRouter);
+app.use("/ads",adRouter);
 
 // Error handling
 app.use(unknownEndpoint);

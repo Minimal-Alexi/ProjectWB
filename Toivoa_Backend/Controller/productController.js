@@ -40,7 +40,7 @@ const getProductbyID = async (req, res) => {
 const createProduct = async (req, res) => {
     try
     {
-        if(await vendorCheck(req.body.vendorID))
+        if(await vendorCheck(req.body.vendorID,1))
             {
                 const newProduct = await Products.create({...req.body});
                 res.status(201).json(newProduct);

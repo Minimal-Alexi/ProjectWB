@@ -14,11 +14,11 @@ const adSchema = new Schema(
             type:Number,
             required:true,
         },
-        image:
+/*         image:
         {
             type: Image,
             required: false,
-        },
+        }, */
     }
 );
 
