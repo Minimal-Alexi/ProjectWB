@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import main_logo from "../../images/main_logo.png";
 import { useState, useRef, useEffect } from 'react';
 import Create from '../loginRegistryPage/Create';
@@ -60,15 +61,15 @@ const NavBar = () => {
         </div>
       </div>
       <div className="user-options">
-        <a href="#" className="cart" aria-label="View Cart">
+        <Link to="/" className="cart" aria-label="View Cart">
         <ShoppingCart size={32} />
-        </a>
-        <a href="#" className="wishlist" aria-label="View Wishlist">
+        </Link>
+        <Link to="/" className="wishlist" aria-label="View Wishlist">
         <Heart size={32} />
-        </a>
-        <a href="#" className="user-icon" aria-label="User">
+        </Link>
+        <Link to="/" className="user-icon" aria-label="User">
         <User size={32} />
-        </a>
+        </Link>
         <a onClick={clickEventCreate} className="sign-up-btn">Sign Up</a>
         <a onClick={clickEventLogin} className="sign-in-btn">Sign In</a>
         <div ref={ref} className="login-create">

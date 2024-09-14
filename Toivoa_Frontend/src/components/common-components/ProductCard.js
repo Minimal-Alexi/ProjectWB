@@ -1,6 +1,7 @@
-import {products} from '../../data.js';
+import { products } from "../../data.js";
 //import productDetails from '../productPage/ProductDetails';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Heart } from "phosphor-react";
 
 const ProductContainer = () => {
   return (
@@ -16,7 +17,7 @@ const ProductContainer = () => {
               className="product-image"
             />
             <a href="#" className="wishlist" aria-label="View Wishlist">
-              <i className="fa-regular fa-heart"></i>
+              <Heart size={32} />
             </a>
             <button className="add-to-cart">Add to cart</button>
           </div>
@@ -31,5 +32,5 @@ const ProductContainer = () => {
     // </BrowserRouter>
   );
 };
-  
-  export default ProductContainer;
+
+export default ProductContainer;
