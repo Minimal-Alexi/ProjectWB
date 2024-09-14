@@ -1,0 +1,22 @@
+[
+    {
+        "productID": "66e489d3ddc1a04412f4a880",
+        "userID": "66e465f26f798fd7d7635d67",
+        "quantity": 2
+    },
+    {
+        "productID": "66e5a19290e030d3e95ed4e5",
+        "userID": "66e465f16f798fd7d7635d65",
+        "quantity": 5
+    },
+    {
+        "productID": "66e489d3ddc1a04412f4a880",
+        "userID": "66e465f16f798fd7d7635d65",
+        "quantity": 1
+    },
+    {
+        "productID": "66e5a19290e030d3e95ed4e5",
+        "userID": "66e465f26f798fd7d7635d67",
+        "quantity": 3
+    }
+]

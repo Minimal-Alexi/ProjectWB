@@ -16,11 +16,14 @@ app.use(logger)
 //routes
 const userRouter = require("./Router/userRouter");
 const productRouter = require("./Router/productRouter");
+const orderRouter = require("./Router/orderRouter");
+
 
 
 
 app.use("/users",userRouter);
 app.use("/products",productRouter);
+app.use("/orders",orderRouter);
 
 // Error handling
 app.use(unknownEndpoint);

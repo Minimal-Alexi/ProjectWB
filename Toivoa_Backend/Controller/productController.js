@@ -1,4 +1,4 @@
-const Products = require('../Models/ProductModel');
+const Products = require('../Models/productModel');
 const mongoose = require("mongoose");
 
 const {vendorCheck} = require('../Middleware/verificationHandling');
@@ -79,6 +79,8 @@ const updateProduct = async (req, res) => {
             res.status(500).json({ message: "Failed to update Product." });
         }
 }
+
+//PATCH /products/:productID
 
 //DELETE /products/:productID
 
