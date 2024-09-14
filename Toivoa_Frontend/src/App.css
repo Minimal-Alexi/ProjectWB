@@ -185,6 +185,10 @@ header {
 
 .image-container:hover .add-to-cart {
   display: block;
+  background-color: #6179b7;
+  border: none;
+  border-radius: 5px;
+  opacity: 70%;
   /* Make the button visible on hover */
 }
 
