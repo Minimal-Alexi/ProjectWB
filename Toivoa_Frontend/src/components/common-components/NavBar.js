@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import Create from '../loginRegistryPage/Create';
 import Login from '../loginRegistryPage/Login';
 import '../loginRegistryPage/login-create.css';
+import { ShoppingCart, MagnifyingGlass, Heart, User  } from "phosphor-react";
 
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -55,18 +56,18 @@ const NavBar = () => {
               aria-label="Search"
             />
           </form>
-          <i className="fa-solid fa-magnifying-glass"></i>
+          <MagnifyingGlass size={32} />
         </div>
       </div>
       <div className="user-options">
         <a href="#" className="cart" aria-label="View Cart">
-          <i className="fa-solid fa-cart-shopping"></i>
+        <ShoppingCart size={32} />
         </a>
         <a href="#" className="wishlist" aria-label="View Wishlist">
-          <i className="fa-regular fa-heart"></i>
+        <Heart size={32} />
         </a>
         <a href="#" className="user-icon" aria-label="User">
-          <i className="fa-regular fa-user"></i>
+        <User size={32} />
         </a>
         <a onClick={clickEventCreate} className="sign-up-btn">Sign Up</a>
         <a onClick={clickEventLogin} className="sign-in-btn">Sign In</a>
