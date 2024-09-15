@@ -64,7 +64,7 @@ const NavBar = () => {
         <Link to="/cart" className="cart" aria-label="View Cart">
           <ShoppingCart size={32} />
         </Link>
-        <Link to="/" className="wishlist" aria-label="View Wishlist">
+        <Link to="/wishList" className="wishlist" aria-label="View Wishlist">
           <Heart size={32} />
         </Link>
         <Link to="/" className="user-icon" aria-label="User">
