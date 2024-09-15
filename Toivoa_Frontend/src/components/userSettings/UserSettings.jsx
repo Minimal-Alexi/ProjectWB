@@ -1,4 +1,6 @@
 import React, {useState} from "react"
+import style from './userSettings.module.css';
+import Input from '../common-components/Input';
 
 const UserSettingsPage = () => 
     {
@@ -26,11 +28,11 @@ const UserSettingsPage = () =>
                 
             } 
           return (
-            <section className="userSetting">
+            <section className={style.userSetting}>
                 <h3>Edit your profile.</h3>
                 <form>
-                    <div className="sidebySide">
-                        <div>
+                    <div>
+                        <div className={style.sidebySide}>
                             <p>First Name</p>
                             <input
                                 name="name.firstName"
@@ -44,7 +46,7 @@ const UserSettingsPage = () =>
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div>
+                        <div className={style.sidebySide}>
                             <p>Age</p>
                             <input
                                 name="personal.age"
@@ -58,7 +60,7 @@ const UserSettingsPage = () =>
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div>
+                        <div className={style.sidebySide}>
                             <p>Country</p>
                             <input
                                 name="location.countryCode"
@@ -72,7 +74,7 @@ const UserSettingsPage = () =>
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div>
+                        <div className={style.sidebySide}>
                             <p>Phone number</p>
                             <input
                                 name="sensitive.phonenr"
