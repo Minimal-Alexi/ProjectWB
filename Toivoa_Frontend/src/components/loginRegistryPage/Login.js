@@ -1,7 +1,7 @@
 import Input from '../common-components/Input';
 import Image from '../../images/image.jpeg';
 
-const Login = ({ switchToCreate }) => {
+const Login = ({ switchToCreate, closeEvent }) => {
     return (
         <div className="white-rectangle">
             <div className="invisible-rectangle">
@@ -36,6 +36,7 @@ const Login = ({ switchToCreate }) => {
                     </li>
                 </ul>
             </div>
+            <button onClick={closeEvent} className='closeButton'><h1>x</h1></button>
         </div>
     );
 };
