@@ -1,6 +1,6 @@
 import Hero from "./Hero";
 import TrendingDiscover from "./TrendingDiscovery";
-import ProductCard from "../common-components/ProductCard";
+import ProductContainer from "../common-components/ProductContainer";
 import ViewAllButton from "../common-components/ViewAll";
 
 
@@ -8,7 +8,7 @@ const Main = () => (
   <div className="Main">
     <Hero />
     <TrendingDiscover />
-    <ProductCard />
+    <ProductContainer />
     <ViewAllButton />
   </div>
 );

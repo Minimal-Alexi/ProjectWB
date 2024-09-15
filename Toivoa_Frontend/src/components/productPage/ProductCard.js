@@ -9,7 +9,7 @@ const ProductCard = (props) => {
               alt="Product"
               className="product-image"
             />
-            <a href="#" className="wishlist" aria-label="View Wishlist">
+            <a href="/wishlist" className="wishlist" aria-label="View Wishlist">
               <Heart size={16} /> 
             </a>
             <button className="add-to-cart">Add to cart</button>

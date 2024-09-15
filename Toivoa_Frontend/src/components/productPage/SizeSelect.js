@@ -1,16 +1,15 @@
 import { useState } from "react";
-import { productData } from "./productData";
 
-const SizeSelect = () => {
-  const [selectedSize, setSelectedSize] = useState(null); // Track selected size
-
+const SizeSelect = (props) => {
+  const [selectedSize, setSelectedSize] = useState(); // Track selected size
+  console.log(props);
   const handleSizeClick = (size) => {
     setSelectedSize(size); // Update selected size
   };
   return (
     <div className="size-wrapper">
       <p>Size: </p>
-      {productData.sizes.map((size, index) => (
+      {props.sizes.map((size, index) => (
         <button className="size-btn"
           key={index}
           onClick={() => handleSizeClick(size)}

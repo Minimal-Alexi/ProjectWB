@@ -23,27 +23,28 @@ export const productData = {
 
 export const products = [
   {
+    id:1,
     name: "Product Name 1",
     price: "$29.99",
     reviews: "⭐⭐⭐⭐☆ (120 reviews)",
     image: ps5_1,
   },
   {
-    id: 1,
+    id: 2,
     name: "Product Name 2",
     price: "$39.99",
     reviews: "⭐⭐⭐⭐⭐ (200 reviews)",
     image: ps5_1,
   },
   {
-    id: 2,
+    id: 3,
     name: "Product Name 3",
     price: "$19.99",
     reviews: "⭐⭐⭐⭐⭐ (320 reviews)",
     image: ps5_1,
   },
   {
-    id: 3,
+    id: 4,
     name: "Product Name 4",
     price: "$69.99",
     reviews: "⭐⭐⭐⭐⭐ (431 reviews)",

@@ -1,15 +1,14 @@
-import { productData } from "./productData";
 
 
-
-const ProductInfo = () => {
+const ProductInfo = (props) => {
+  // console.log(props)
   return (
     <div className="text-info">
-      <h1>{productData.name}</h1>
-      <p>{productData.reviews}</p>
-      {productData.isInStock ? <p>in Stock</p> : <p>{productData.isInStock ? "In stock" : "Out of Stock"}</p>}
-      <p>${productData.price}</p>
-      <p>{productData.description}</p>
+      <h1>{props.name}</h1>
+      <p>{props.reviews}</p>
+      {props.isInStock ? <p>in Stock</p> : <p>{props.isInStock ? "In stock" : "Out of Stock"}</p>}
+      <p>${props.price}</p>
+      <p>{props.description}</p>
     </div>
   );
 };

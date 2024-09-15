@@ -6,6 +6,10 @@
   padding: 1rem 3rem;
 }
 
+.category-path {
+  padding: 2rem 0;
+}
+
 .product-details {
   display: flex;
   justify-content: space-between;

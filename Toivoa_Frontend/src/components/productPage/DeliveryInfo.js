@@ -17,8 +17,8 @@ const deliveryData = [
 const DeliveryInfo = () => {
   return (
     <div className="delivery-container">
-      {deliveryData.map(delivery => (
-        <Delivery {...delivery}/>
+      {deliveryData.map((delivery, index) => (
+        <Delivery {...delivery} key={index}/>
       ))}
     </div>
   );

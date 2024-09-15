@@ -1,10 +1,9 @@
-import "./ProductPage.css"; // Ensure your CSS file is linked here
-import { useState } from "react";
-import { productData, products } from "./productData";
-
+import "./ProductPage.css";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { products } from "../../data";
 
 import ProductCard from "./ProductCard";
-// import ProductThumbnailsDisplay from "./ProductThumbnailsDisplay";
 import BuyNow from "./BuyNow";
 import SizeSelect from "./SizeSelect";
 import ProductInfo from "./ProductInfo";
@@ -12,24 +11,44 @@ import ColorSelect from "./ColorSelect";
 import DeliveryInfo from "./DeliveryInfo"
 
 const ProductPage = () => {
-  const [selectedImage, setSelectedImage] = useState(productData.images[0]);
+  const { id } = useParams();
+  const [selectedImage, setSelectedImage] = useState("");
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    // Find the product based on the ID from the URL
+    const foundProduct = products.find(p => p.id === parseInt(id));
+    if (foundProduct) {
+      setProduct(foundProduct);
+      // console.log('product is: ',foundProduct)
+      setSelectedImage(foundProduct.image[0]); // Changed from 'images' to 'image'
+    }
+  }, [id]);
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="product-page-wrapper">
       <div className="category-path">
-        <p>Account / Gaming / Havic HV G-92 Gamepad</p>
+        <p>Account / Gaming / {product.name}</p>
       </div>
       <div className="product-details">
         <div className="image-thumbnails">
-          {productData.images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`Thumbnail ${index + 1}`}
-              onClick={() => setSelectedImage(img)}
-              className={selectedImage === img ? "active" : ""}
-            />
-          ))}
+          {Array.isArray(product.image) ? (
+            product.image.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`Thumbnail ${index + 1}`}
+                onClick={() => setSelectedImage(img)}
+                className={selectedImage === img ? "active" : ""}
+              />
+            ))
+          ) : (
+            <p>No images available</p>
+          )}
         </div>
 
         <img
@@ -39,18 +58,19 @@ const ProductPage = () => {
         />
 
         <div className="product-details-text">
-          <ProductInfo />
+          
+          <ProductInfo {...product} />
           <div className="color-select-wrapper">
             <h4>Colours:</h4>
 
             <div className="colors">
-              {productData.colors.map((color, index) => (
-                <ColorSelect {...color} index={index} />
+              {product.colors && product.colors.map((color, index) => (
+                <ColorSelect {...color} key={index} />
               ))}
             </div>
           </div>
-          <SizeSelect />
-          <BuyNow />
+          <SizeSelect sizes={product.sizes} />
+          <BuyNow product={product} />
           <DeliveryInfo />
         </div>
       </div>
@@ -59,9 +79,12 @@ const ProductPage = () => {
         <p>Related Item</p>
       </div>
       <div className="product-card-container-related">
-        {products.map((product) => (
-          <ProductCard {...product} key={product.id} />
-        ))}
+        {products
+          .filter(p => p.id !== parseInt(id))
+          .slice(0, 4)
+          .map((relatedProduct) => (
+            <ProductCard {...relatedProduct} key={relatedProduct.id} />
+          ))}
       </div>
     </div>
   );
