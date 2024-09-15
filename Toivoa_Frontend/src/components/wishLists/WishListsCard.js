@@ -1,6 +1,6 @@
-import {Heart } from '@phosphor-icons/react'
+import {Trash } from '@phosphor-icons/react'
 
-const ProductCard = (props) => {
+const WishListsCard = (props) => {
     return (
         <div className="product-card">
           <div className="image-container">
@@ -10,17 +10,16 @@ const ProductCard = (props) => {
               className="product-image"
             />
             <a href="#" className="wishlist" aria-label="View Wishlist">
-              <Heart size={16} /> 
+              <Trash size={16} /> 
             </a>
             <button className="add-to-cart">Add to cart</button>
           </div>
           <div className="product-info">
             <h2 className="product-name">{props.name}</h2>
             <p className="product-price">{props.price}</p>
-            <p className="product-reviews">{props.reviews}</p>
           </div>
         </div>
     )
 }
 
-export default ProductCard
+export default WishListsCard
