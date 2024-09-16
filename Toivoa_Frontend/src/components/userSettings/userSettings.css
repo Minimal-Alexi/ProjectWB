@@ -17,7 +17,7 @@
 
 .user-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .user-nav{
