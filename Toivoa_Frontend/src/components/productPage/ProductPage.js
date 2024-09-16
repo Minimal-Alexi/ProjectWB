@@ -1,9 +1,9 @@
 import "./ProductPage.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { products } from "../../data";
+import { products, relatedProducts } from "../../data";
 
-import ProductCard from "./ProductCard";
+import RelatedProductCard from "./RelatedProductCard";
 import BuyNow from "./BuyNow";
 import SizeSelect from "./SizeSelect";
 import ProductInfo from "./ProductInfo";
@@ -79,11 +79,9 @@ const ProductPage = () => {
         <p>Related Item</p>
       </div>
       <div className="product-card-container-related">
-        {products
-          .filter(p => p.id !== parseInt(id))
-          .slice(0, 4)
+        {relatedProducts
           .map((relatedProduct) => (
-            <ProductCard {...relatedProduct} key={relatedProduct.id} />
+            <RelatedProductCard {...relatedProduct} key={relatedProduct.id} />
           ))}
       </div>
     </div>

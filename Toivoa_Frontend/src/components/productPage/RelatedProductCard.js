@@ -1,6 +1,6 @@
 import {Heart } from '@phosphor-icons/react'
 
-const ProductCard = (props) => {
+const RelatedProductCard = (props) => {
     return (
         <div className="product-card">
           <div className="image-container">
@@ -23,4 +23,4 @@ const ProductCard = (props) => {
     )
 }
 
-export default ProductCard
+export default RelatedProductCard
