@@ -1,111 +1,165 @@
-import React, {useState} from "react"
-import style from './userSettings.module.css';
-import Input from '../common-components/Input';
+import React, { useState } from "react";
+import "./userSettings.css";
+// import Input from "../common-components/Input";
 
-const UserSettingsPage = () => 
-    {
+const UserSettingsPage = () => {
+  const [newAccountDetails, setNewAccountDetails] = useState({
+    name: { firstName: "", lastName: "" },
+    location: { countryCode: "", address: "" },
+    sensitive: { password: "", email: "", phonenr: "" },
+    personal: { age: "", gender: "" },
+  });
 
-        const [newAccountDetails,setnewAccountDetails] = useState({
-            name:{firstName:"",lastName:""},
-            location:{countryCode:"",address:""},
-            sensitive:{password:"",email:"",phonenr:""},
-            personal:{age:"",gender:""}
-        })
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    const [section, key] = name.split(".");
+    setNewAccountDetails((prevDetails) => ({
+      ...prevDetails,
+      [section]: {
+        ...prevDetails[section],
+        [key]: value,
+      },
+    }));
+  };
 
-        const handleInputChange = (event) => {
-            const { name, value } = event.target;
-            const [section, key] = name.split(".");
-            setnewAccountDetails((prevDetails) => ({
-                ...prevDetails,
-                [section]: {
-                    ...prevDetails[section],
-                    [key]: value
-                }
-            }));
-          }
-        const cancelHandler = () => 
-            {
-                
-            } 
-          return (
-            <section className={style.userSetting}>
-                <h3>Edit your profile.</h3>
-                <form>
-                    <div>
-                        <div className={style.sidebySide}>
-                            <p>First Name</p>
-                            <input
-                                name="name.firstName"
-                                value={newAccountDetails.name.firstName}
-                                onChange={handleInputChange}
-                            />
-                            <p>Last Name</p>
-                            <input
-                                name="name.lastName"
-                                value={newAccountDetails.name.lastName}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className={style.sidebySide}>
-                            <p>Age</p>
-                            <input
-                                name="personal.age"
-                                value={newAccountDetails.personal.age}
-                                onChange={handleInputChange}
-                            />
-                            <p>Gender</p>
-                            <input
-                                name="personal.gender"
-                                value={newAccountDetails.personal.gender}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className={style.sidebySide}>
-                            <p>Country</p>
-                            <input
-                                name="location.countryCode"
-                                value={newAccountDetails.location.countryCode}
-                                onChange={handleInputChange}
-                            />
-                            <p>Address</p>
-                            <input
-                                name="location.address"
-                                value={newAccountDetails.location.address}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className={style.sidebySide}>
-                            <p>Phone number</p>
-                            <input
-                                name="sensitive.phonenr"
-                                value={newAccountDetails.sensitive.phonenr}
-                                onChange={handleInputChange}
-                            />
-                            <p>Email</p>
-                            <input
-                                name="sensitive.email"
-                                value={newAccountDetails.sensitive.email}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                    </div>
-                    <div className="passwordBox">
-                        <h4>Password change</h4>
-                        <div className="currentPasswordBox">
-                            <p>{newAccountDetails.sensitive.password}</p>
-                            <button>Reveal password</button>
-                        </div>
-                        <input
-                            name="sensitive.password"
-                            value={newAccountDetails.sensitive.password}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <button type="button">Cancel</button>
-                    <button type="submit">Save changes</button>
-                </form>
+  const cancelHandler = () => {
+    // Implement cancel logic here
+  };
+
+  return (
+    <main className="user-setting-container">
+      <div className="navigate-text">
+        <p>Home / My Account</p>
+        <p>
+          Welcome <a href="">Guest</a>
+        </p>
+      </div>
+      <div className="user-container">
+        <div className="user-nav">
+          <div className="user-account">
+            <div className="user-manage">
+              <h4>Manage My Account</h4>
+              <ul>
+                <li>
+                  <a href="">My profile</a>
+                </li>
+                <li>
+                  <a href="">Address Book</a>
+                </li>
+                <li>
+                  <a href="">My Payment Options</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="user-manage">
+            <h4>My Orders</h4>
+            <ul>
+              <li>
+                <a href="">My Returns</a>
+              </li>
+              <li>
+                <a href="">My Cancellations</a>
+              </li>
+            </ul>
+          </div>
+          <div className="user-manage">
+            <h4>My Wishlists</h4>
+          </div>
+        </div>
+        <div className="user-form">
+          <h4>Edit your profile</h4>
+          <form>
+            <section>
+              <div className="info-section">
+                <div className="info">
+                  <label htmlFor="firstName">First Name</label>
+                  <input
+                    id="firstName"
+                    name="name.firstName"
+                    value={newAccountDetails.name.firstName}
+                    onChange={handleInputChange}
+                    placeholder="Enter your first name"
+                  />
+                </div>
+                <div className="info">
+                  <label htmlFor="lastName">Last Name</label>
+                  <input
+                    id="lastName"
+                    name="name.lastName"
+                    value={newAccountDetails.name.lastName}
+                    onChange={handleInputChange}
+                    placeholder="Enter your last name"
+                  />
+                </div>
+              </div>
+              <div className="info-section">
+                <div className="info">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    value={newAccountDetails.personal.email}
+                    onChange={handleInputChange}
+                    type="email"
+                    placeholder="example@email.com"
+                  />
+                </div>
+                <div className="info">
+                  <label htmlFor="gender">Address</label>
+                  <input
+                    id="address"
+                    name="personal.address"
+                    value={newAccountDetails.personal.address}
+                    onChange={handleInputChange}
+                    placeholder="Enter your address"
+                  />
+                </div>
+              </div>
             </section>
-        );
-    }
+
+            <section className="password-section">
+              <p>Password Changes</p>
+
+              <div className="password">
+                <input
+                  id="currentPassword"
+                  name="sensitive.password"
+                  value={newAccountDetails.sensitive.currentPassword}
+                  onChange={handleInputChange}
+                  type="password"
+                  placeholder="Current Password"
+                />
+                <input
+                  id="newPassword"
+                  name="sensitive.password"
+                  value={newAccountDetails.sensitive.newPassword}
+                  onChange={handleInputChange}
+                  type="password"
+                  placeholder="New Password"
+                />
+                <input
+                  id="confirmNewPassword"
+                  name="sensitive.password"
+                  value={newAccountDetails.sensitive.confirmNewPassword}
+                  onChange={handleInputChange}
+                  type="password"
+                  placeholder="Confirm New Password"
+                />
+              </div>
+            </section>
+
+            <div className="user-form-button-container">
+              <button type="button" onClick={cancelHandler} className="">
+                Cancel
+              </button>
+              <button type="submit" className="">Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  );
+};
 
 export default UserSettingsPage;
