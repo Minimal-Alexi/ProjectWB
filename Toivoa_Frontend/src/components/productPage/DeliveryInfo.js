@@ -1,6 +1,5 @@
 import Delivery from "./Delivery";
 
-
 const deliveryData = [
   {
     type: "free",
@@ -17,9 +16,9 @@ const deliveryData = [
 const DeliveryInfo = () => {
   return (
     <div className="delivery-container">
-      {deliveryData.map((delivery, index) => (
-        <Delivery {...delivery} key={index}/>
-      ))}
+      {deliveryData.map((delivery, index) => {
+        return <Delivery {...delivery} key={index} />;
+      })}
     </div>
   );
 };

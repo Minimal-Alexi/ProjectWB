@@ -120,3 +120,34 @@ export const relatedProducts = [
     image: product6,
   },
 ];
+
+export const wishProducts = [
+  {
+    id: 1,
+    name: "Amazonire Tv ",
+    price: 899.99,
+    reviews: "⭐⭐⭐☆☆ (600 reviews)",
+    image: product3,
+  },
+  {
+    id: 2,
+    name: "Air Pod pro",
+    price: 259.99,
+    reviews: "⭐⭐⭐⭐☆ (780 reviews)",
+    image: product4,
+  },
+  {
+    id: 3,
+    name: "Nikon Camera",
+    price: 509.99,
+    reviews: "⭐⭐⭐⭐☆ (780 reviews)",
+    image: product5,
+  },
+  {
+    id: 4,
+    name: "Anker Sound",
+    price: 39.90,
+    reviews: "⭐⭐⭐⭐☆ (780 reviews)",
+    image: product6,
+  },
+];

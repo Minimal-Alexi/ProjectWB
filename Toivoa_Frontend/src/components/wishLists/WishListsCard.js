@@ -1,6 +1,12 @@
 import {Trash } from '@phosphor-icons/react'
 
 const WishListsCard = (props) => {
+  const handleDelete = () => {
+    // console.log("test")
+    // console.log(props.onDelete)
+    // console.log(props.id)
+    props.onDelete(props.id)
+  }
     return (
         <div className="product-card">
           <div className="image-container">
@@ -9,7 +15,7 @@ const WishListsCard = (props) => {
               alt="Product"
               className="product-image"
             />
-            <a href="#" className="wishlist" aria-label="View Wishlist">
+            <a href="#" className="wishlist" aria-label="View Wishlist" onClick={handleDelete}>
               <Trash size={16} /> 
             </a>
             <button className="add-to-cart">Add to cart</button>
