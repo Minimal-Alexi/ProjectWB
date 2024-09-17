@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import Create from '../loginRegistryPage/Create';
 import Login from '../loginRegistryPage/Login';
 import '../loginRegistryPage/login-create.css';
+import { ShoppingCart, MagnifyingGlass, Heart, User } from "phosphor-react";
+
 
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -70,11 +72,6 @@ const NavBar = () => {
         <a onClick={clickEventLogin} className="sign-in-btn">
           Sign In
         </a>
-        <a href="#" className="user-icon" aria-label="User">
-          <i className="fa-regular fa-user"></i>
-        </a>
-        <a onClick={clickEventCreate} className="sign-up-btn">Sign Up</a>
-        <a onClick={clickEventLogin} className="sign-in-btn">Sign In</a>
       </div>
       <div className="login-create">
         {showLogin ? (
