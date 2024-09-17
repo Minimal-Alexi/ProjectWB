@@ -1,0 +1,37 @@
+.flex-container {
+    text-align: center;
+
+}
+
+.box {
+    display: inline-block;
+    background-color: #6179b7;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 5px;
+    width: 30%;
+    /* Adjust the width as needed */
+    text-align: center;
+}
+
+.Purple-box {
+    display: inline-block;
+    background-color: #6179b7;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 5px;
+    width: 80%;
+    /* Adjust the width as needed */
+    text-align: center;
+}
+
+.Blue-box {
+    display: inline-block;
+    background-color: #3f8af4;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 5px;
+    width: 80%;
+    /* Adjust the width as needed */
+    text-align: center;
+}
