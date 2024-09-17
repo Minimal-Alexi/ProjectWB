@@ -1,14 +1,13 @@
 import Delivery from "./Delivery";
 
-
 const deliveryData = [
   {
-    icon: "fa-solid fa-truck",
+    type: "free",
     header: "Free Delivery",
     content: "Enter your postal code for Delivery Availability",
   },
   {
-    icon: "fa-solid fa-rotate-left",
+    icon: "return",
     header: "Return Delivery",
     content: "Free 30 Days Delivery Returns. Details",
   },
@@ -16,11 +15,11 @@ const deliveryData = [
 
 const DeliveryInfo = () => {
   return (
-    <>
-      {deliveryData.map(delivery => (
-        <Delivery {...delivery}/>
-      ))}
-    </>
+    <div className="delivery-container">
+      {deliveryData.map((delivery, index) => {
+        return <Delivery {...delivery} key={index} />;
+      })}
+    </div>
   );
 };
 

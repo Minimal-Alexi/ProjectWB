@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import main_logo from "../../images/main_logo.png";
 import { useState, useEffect, useRef } from 'react';
 import Create from '../loginRegistryPage/Create';
@@ -38,7 +39,9 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="logo-search-container">
-        <img src={main_logo} alt="Toivoa Logo" />
+        <Link to="/" className="main" aria-label="Main Page">
+          <img src={main_logo} alt="Toivoa Logo" />
+        </Link>
         <div className="search">
           <form action="#" method="get" aria-label="Search Form">
             <input
@@ -48,15 +51,24 @@ const NavBar = () => {
               aria-label="Search"
             />
           </form>
-          <i className="fa-solid fa-magnifying-glass"></i>
+          <MagnifyingGlass size={32} />
         </div>
       </div>
       <div className="user-options">
-        <a href="#" className="cart" aria-label="View Cart">
-          <i className="fa-solid fa-cart-shopping"></i>
+        <Link to="/cart" className="cart" aria-label="View Cart">
+          <ShoppingCart size={32} />
+        </Link>
+        <Link to="/wishList" className="wishlist" aria-label="View Wishlist">
+          <Heart size={32} />
+        </Link>
+        <Link to="/" className="user-icon" aria-label="User">
+          <User size={32} />
+        </Link>
+        <a onClick={clickEventCreate} className="sign-up-btn">
+          Sign Up
         </a>
-        <a href="#" className="wishlist" aria-label="View Wishlist">
-          <i className="fa-regular fa-heart"></i>
+        <a onClick={clickEventLogin} className="sign-in-btn">
+          Sign In
         </a>
         <a href="#" className="user-icon" aria-label="User">
           <i className="fa-regular fa-user"></i>

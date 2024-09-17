@@ -6,6 +6,7 @@ import { productData } from "./productData";
 
 const ProductThumbnailsDisplay = (props) => {
 const [selectedImage, setSelectedImage] = useState(productData.images[0]);
+
   return (
     <div className="image-thumbnails-container">
         <div className="image-thumbnails">

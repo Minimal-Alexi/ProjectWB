@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Heart } from "@phosphor-icons/react";
 
 const BuyNow = () => {
   const [quantity, setQuantity] = useState(0);
@@ -21,17 +22,8 @@ const BuyNow = () => {
   return (
     <div className="buy-now-container">
       <div className="button-wrapper">
-        <button className="change-quality"
-          onClick={handleIncrementQuantity}
-          style={{
-            backgroundColor: isClick === "plus" ? "#6179B7" : "transparent",
-            color: "black",
-          }}
-        >
-          +
-        </button>
-        <p className="quantity-display">{quantity}</p>
-        <button className="change-quality"
+        <button
+          className="change-quality"
           onClick={handleDecrementQuantity}
           style={{
             backgroundColor: isClick === "minus" ? "#6179B7" : "transparent",
@@ -40,11 +32,22 @@ const BuyNow = () => {
         >
           -
         </button>
-        
+
+        <p className="quantity-display">{quantity}</p>
+        <button
+          className="change-quality"
+          onClick={handleIncrementQuantity}
+          style={{
+            backgroundColor: isClick === "plus" ? "#6179B7" : "transparent",
+            color: "black",
+          }}
+        >
+          +
+        </button>
       </div>
       <button className="buy-now-btn">Buy Now</button>
       <div className="heart-icon">
-      <i class="fa-regular fa-heart"></i>
+        <Heart size={16} />
       </div>
     </div>
   );

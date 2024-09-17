@@ -7,7 +7,7 @@ import ps5_3 from "../../images/ps5_controller3.png";
 export const productData = {
   id: 1,
   name: "Cool Sneakers",
-  reviews: 80,
+  reviews: "⭐⭐⭐⭐☆ (120 reviews)",
   price: 79.99,
   description: "High-quality sneakers perfect for running and casual wear.",
   images: [ps5_main, ps5_1, ps5_2, ps5_3],
@@ -23,27 +23,28 @@ export const productData = {
 
 export const products = [
   {
+    id:1,
     name: "Product Name 1",
     price: "$29.99",
     reviews: "⭐⭐⭐⭐☆ (120 reviews)",
     image: ps5_1,
   },
   {
-    id: 1,
+    id: 2,
     name: "Product Name 2",
     price: "$39.99",
     reviews: "⭐⭐⭐⭐⭐ (200 reviews)",
     image: ps5_1,
   },
   {
-    id: 2,
+    id: 3,
     name: "Product Name 3",
     price: "$19.99",
     reviews: "⭐⭐⭐⭐⭐ (320 reviews)",
     image: ps5_1,
   },
   {
-    id: 3,
+    id: 4,
     name: "Product Name 4",
     price: "$69.99",
     reviews: "⭐⭐⭐⭐⭐ (431 reviews)",
