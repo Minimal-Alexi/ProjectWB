@@ -1,4 +1,3 @@
-
 import NavBar from "./components/common-components/NavBar";
 import Footer from "./components/common-components/Footers";
 import Main from "./components/mainPage/Main.js";
@@ -8,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ShopContextProvider } from "./components/shoppingCartPage/shopContext";
 import ProductPage from "./components/productPage/ProductPage"
 import WishLists from "./components/wishLists/WishLists"
-
+import ErrorPage from './components/notfound-page/ErrorPage';
 import "./App.css";
 
 const App = () => (
@@ -22,6 +21,7 @@ const App = () => (
           <Route path="/wishList" element={<WishLists />}></Route>
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/user" element={<UserSettingsPage />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>
       <Footer />

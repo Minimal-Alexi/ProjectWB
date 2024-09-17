@@ -1,46 +1,40 @@
 import { Link } from "react-router-dom";
 import main_logo from "../../images/main_logo.png";
-import { useState, useRef, useEffect } from "react";
-import Create from "../loginRegistryPage/Create";
-import Login from "../loginRegistryPage/Login";
-import "../loginRegistryPage/login-create.css";
-import { ShoppingCart, MagnifyingGlass, Heart, User } from "phosphor-react";
+import { useState, useEffect, useRef } from 'react';
+import Create from '../loginRegistryPage/Create';
+import Login from '../loginRegistryPage/Login';
+import '../loginRegistryPage/login-create.css';
 
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
 
-  const ref = useRef(null);
+  const popupRef = useRef(null);
 
-  const showL = () => {
+  const clickEventLogin = () => {
     setShowLogin(true);
     setShowCreate(false);
   };
 
-  const showC = () => {
+  const clickEventCreate = () => {
     setShowLogin(false);
     setShowCreate(true);
   };
 
-  const clickEventLogin = () => {
-    showL();
+  const closeEvent = () => {
+    setShowLogin(false);
+    setShowCreate(false);
   };
 
-  const clickEventCreate = () => {
-    showC();
-  };
-
-  const closeLoginAndCreate = (event) => {
-    if (ref.current && !ref.current.contains(event.target)) {
-      setShowLogin(false);
-      setShowCreate(false);
+  const handleClickOutside = (event) => {
+    if (popupRef.current && !popupRef.current.contains(event.target)) {
+      closeEvent();
     }
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", closeLoginAndCreate);
-    return () => document.removeEventListener("mousedown", closeLoginAndCreate);
-  }, []);
+    document.removeEventListener('mousedown', handleClickOutside);
+  }, [showLogin, showCreate]);
 
   return (
     <nav className="navbar">
@@ -76,18 +70,23 @@ const NavBar = () => {
         <a onClick={clickEventLogin} className="sign-in-btn">
           Sign In
         </a>
-        <div ref={ref} className="login-create">
-          {showLogin ? (
-            <div className="popup-container">
-              <Login switchToCreate={showC} />
-            </div>
-          ) : null}
-          {showCreate ? (
-            <div className="popup-container">
-              <Create switchToLogin={showL} />
-            </div>
-          ) : null}
-        </div>
+        <a href="#" className="user-icon" aria-label="User">
+          <i className="fa-regular fa-user"></i>
+        </a>
+        <a onClick={clickEventCreate} className="sign-up-btn">Sign Up</a>
+        <a onClick={clickEventLogin} className="sign-in-btn">Sign In</a>
+      </div>
+      <div className="login-create">
+        {showLogin ? (
+          <div ref={popupRef} className="popup-container">
+            <Login switchToCreate={clickEventCreate} closeEvent={closeEvent} />
+          </div>
+        ) : null}
+        {showCreate ? (
+          <div ref={popupRef} className="popup-container">
+            <Create switchToLogin={clickEventLogin} closeEvent={closeEvent} />
+          </div>
+        ) : null}
       </div>
     </nav>
   );
