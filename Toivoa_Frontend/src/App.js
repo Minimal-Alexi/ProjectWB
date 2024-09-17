@@ -1,8 +1,9 @@
 
 import NavBar from "./components/common-components/NavBar";
 import Footer from "./components/common-components/Footers";
-import Main from "./components/mainPage/Main.js"
-import { Cart } from "./components/shoppingCartPage/Cart.jsx"
+import Main from "./components/mainPage/Main.js";
+import { Cart } from "./components/shoppingCartPage/Cart.jsx";
+import UserSettingsPage from "./components/userSettings/UserSettings"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ShopContextProvider } from "./components/shoppingCartPage/shopContext";
 import ProductPage from "./components/productPage/ProductPage"
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishList" element={<WishLists />}></Route>
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/user" element={<UserSettingsPage />} />
         </Routes>
       </Router>
       <Footer />
