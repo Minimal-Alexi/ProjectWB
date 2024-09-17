@@ -8,7 +8,7 @@ const SizeSelect = (props) => {
   };
   return (
     <div className="size-wrapper">
-      <p>Size: </p>
+      {props.sizes && <p>Size: </p>}
       {props.sizes.map((size, index) => (
         <button className="size-btn"
           key={index}
