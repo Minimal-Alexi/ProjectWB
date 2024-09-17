@@ -63,7 +63,7 @@ const NavBar = () => {
         <Link to="/wishList" className="wishlist" aria-label="View Wishlist">
           <Heart size={32} />
         </Link>
-        <Link to="/" className="user-icon" aria-label="User">
+        <Link to="/user" className="user-icon" aria-label="User">
           <User size={32} />
         </Link>
         <a onClick={clickEventCreate} className="sign-up-btn">

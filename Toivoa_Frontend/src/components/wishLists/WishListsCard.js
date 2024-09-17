@@ -11,7 +11,7 @@ const WishListsCard = (props) => {
         <div className="product-card">
           <div className="image-container">
             <img
-              src={props.image}
+              src={props.image[0]}
               alt="Product"
               className="product-image"
             />

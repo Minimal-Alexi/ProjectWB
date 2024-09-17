@@ -1,11 +1,14 @@
 import { products } from "../../data.js";
 import { ShopContext } from "../shoppingCartPage/shopContext.jsx";
+import { WishListContext } from "../wishLists/WishListContext.js"; // Import the WishListContext
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Heart } from "phosphor-react";
-import { useContext } from "react";
 
 const ProductContainer = () => {
   const { addToCart, cartItems } = useContext(ShopContext);
+  const { addToWishlist, wishlist } = useContext(WishListContext); // Get the addToWishlist function from context
+
   const navigate = useNavigate();
 
   const handleProductClick = (productId) => {
@@ -16,6 +19,7 @@ const ProductContainer = () => {
     <section className="product-container">
       {products.map((product) => {
         const cartItemAmount = cartItems[product.id];
+        const isInWishlist = wishlist.some((item) => item.id === product.id);
         return (
           <div className="product-card" key={product.id}>
             <div className="image-container">
@@ -24,12 +28,20 @@ const ProductContainer = () => {
                 alt="Product"
                 className="product-image"
               />
-              <a href="/wishlist" className="wishlist" aria-label="View Wishlist">
+              <a
+                className="wishlist"
+                aria-label="Add to Wishlist"
+                onClick={() => addToWishlist(product)} // Add to Wishlist on heart click
+                style={{backgroundColor: isInWishlist ? "#FF6666" : "white"}}
+              >
                 <Heart size={32} />
               </a>
               <button
                 className="add-to-cart"
-                onClick={() => addToCart(product.id)}
+                onClick={(e) => {
+                  e.preventDefault()
+                  addToCart(product.id)
+                }}
               >
                 Add to cart {cartItemAmount > 0 && `(${cartItemAmount})`}
               </button>
