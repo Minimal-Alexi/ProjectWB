@@ -1,4 +1,4 @@
-const NotFound = () => {
+const NotFound = (openMainPage) => {
   return (
     <div className="notfound">
       <ul className="not-found-list-of-items">

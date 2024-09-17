@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Footer.module.css";
+import qrCode from "../../images/qr-code.png";
 
 function Footer() {
   return (
@@ -82,7 +83,7 @@ function Footer() {
               <p>Save 3EUR For New App Users </p>
             </li>
             <li>
-              <p>(placeholder for QR code, app links) </p>
+              <img src={qrCode} alt="qrcode" style={{ width: "100px", height: "100px" }}></img>
             </li>
           </ul>
         </div>

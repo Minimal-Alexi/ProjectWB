@@ -4,11 +4,11 @@ import NotFound from './NotFound';
 import './NotFoundStyling.css'
 
 const ErrorPage = () => (
-    <div className="error-page-container">
-      <NavBar />
-      <NotFound />
-      <Footer />
-    </div>
-  );
+  <div className="error-page-container">
+    <NavBar />
+    <NotFound />
+    <Footer />
+  </div>
+);
 
 export default ErrorPage;
