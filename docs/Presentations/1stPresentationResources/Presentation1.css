@@ -35,3 +35,10 @@
     /* Adjust the width as needed */
     text-align: center;
 }
+
+.link.link:link, 
+.link:visited, 
+.link:hover, 
+.link:active {
+    color:aliceblue
+}
