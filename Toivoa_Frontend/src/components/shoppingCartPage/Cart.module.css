@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* height: 80vh; */
+  min-height: 50vh;
 }
 
 .cartItem {
@@ -62,4 +62,29 @@
   border-radius: 8px;
   margin: 10px;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .cart {
+    display: flex;
+    width: 90%;
+    align-self: center;
+  }
+  .cartItem {
+    display: flex;
+    width: 90%;
+    align-self: center;
+  }
+  .cartItem img {
+    display: flex;
+    width: 20%;
+    align-self: center;
+  }
+
+  .cartItem .description {
+    font-size: smaller;
+    width: 50%;
+    align-self: center;
+  }
+
 }
