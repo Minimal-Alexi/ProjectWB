@@ -5,11 +5,11 @@
 ## 1.1 Members
 Pop Alex (Backend & Sys Ops.)
 
-Loc Dang
+Loc Dang (Frontend Dev)
 
-Ngoc Thien Luu
+Ngoc Thien Luu (SCRUM & Fullstack Dev)
 
-Vikko Veikkolainen
+Vikko Veikkolainen (Frontend dev)
 
 
 ## 1.2 Description and Target Audience
