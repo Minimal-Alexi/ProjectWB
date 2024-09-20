@@ -36,19 +36,47 @@ const getUserbyID = async (req, res) => {
 //POST /users
 
 const createUser = async (req, res) => {
-    try
-    {
-        const {passwordEncryption} = require('../Middleware/passwordHandling');
+    try {
+        const { passwordEncryption } = require('../Middleware/passwordHandling');
+
         const passwordEssentials = await passwordEncryption(req.body.password)
         req.body.password = passwordEssentials.hashedPassword;
         req.body.passwordSalt = passwordEssentials.passwordSalt;
-        const newUser = await Users.create({...req.body});
+        const newUser = await Users.create({ ...req.body });
+
         res.status(201).json(newUser);
     }
     catch (error) {
         res.status(400).json({ message: "Failed to create user", error: error.message });
     }
 }
+
+//POST /users/login
+
+const loginUser = async (req, res) => {
+    try {
+        const {username,password} = req.body;
+        const user = Users.findOne({username});
+        if(!user)
+            {
+                return res.status(400).json({message:"Invalid credentials"});
+            }
+        const {comparePassowrd}  = require('../Middleware/passwordHandling');
+        const isMatch = comparePassowrd(password,user.hashedPassword);
+        if(!isMatch)
+            {
+                return res.status(400).json({message:"Invalid credentials"});
+            }
+        
+        res.status(200).json({message:"Login succesful"});
+        
+        
+    }
+    catch (error)
+    {
+        res.status(500).json({ error: "Server error" });
+    }
+    }
 
 //PUT /users/:userID
 
@@ -58,21 +86,21 @@ const updateUser = async (req, res) => {
         return res.status(400).json({ message: "Invalid userID" })
     }
     try {
-            const updatedUser = await Users.findOneAndUpdate(
-                {_id:userID},
-                {...req.body},
-                {new: true,overwrite:true},
-            )
-            if (updatedUser) {
-                res.status(200).json(updatedUser);
-            }
-            else {
-                res.status(404).json({ message: "User not found." });
-            }
+        const updatedUser = await Users.findOneAndUpdate(
+            { _id: userID },
+            { ...req.body },
+            { new: true, overwrite: true },
+        )
+        if (updatedUser) {
+            res.status(200).json(updatedUser);
         }
+        else {
+            res.status(404).json({ message: "User not found." });
+        }
+    }
     catch (error) {
-            res.status(500).json({ message: "Failed to update user." });
-        }
+        res.status(500).json({ message: "Failed to update user." });
+    }
 }
 
 //DELETE /users/:userID
@@ -83,9 +111,9 @@ const deleteUser = async (req, res) => {
         return res.status(400).json({ message: "Invalid userID" })
     }
     try {
-        const deletedUser = await Users.findOneAndDelete({_id:userID})
+        const deletedUser = await Users.findOneAndDelete({ _id: userID })
         if (deletedUser) {
-            res.status(200).json({message:"User deleted successfully."});
+            res.status(200).json({ message: "User deleted successfully." });
         }
         else {
             res.status(404).json({ message: "User not found." });
@@ -101,6 +129,7 @@ module.exports =
     getAllUsers,
     getUserbyID,
     createUser,
+    loginUser,
     updateUser,
     deleteUser
 }
