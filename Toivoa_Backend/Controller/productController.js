@@ -82,6 +82,8 @@ const updateProduct = async (req, res) => {
 
 //PATCH /products/:productID
 
+
+
 //DELETE /products/:productID
 
 const deleteProduct = async (req, res) => {
