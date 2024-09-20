@@ -69,14 +69,12 @@ const loginUser = async (req, res) => {
             }
         
         res.status(200).json({message:"Login succesful"});
-        
-        
     }
     catch (error)
     {
         res.status(500).json({ error: "Server error" });
     }
-    }
+}
 
 //PUT /users/:userID
 
