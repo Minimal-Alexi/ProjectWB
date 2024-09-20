@@ -56,22 +56,22 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
     try {
         const {username,password} = req.body;
-        const user = Users.findOne({username});
+        const user = await Users.findOne({username});
         if(!user)
             {
                 return res.status(400).json({message:"Invalid credentials"});
             }
-        const {comparePassowrd}  = require('../Middleware/passwordHandling');
-        const isMatch = comparePassowrd(password,user.hashedPassword);
+        const {comparePassword}  = require('../Middleware/passwordHandling');
+        const isMatch = await comparePassword(password,user.password);
         if(!isMatch)
             {
                 return res.status(400).json({message:"Invalid credentials"});
             }
-        
         res.status(200).json({message:"Login succesful"});
     }
     catch (error)
     {
+        console.error(error);
         res.status(500).json({ error: "Server error" });
     }
 }

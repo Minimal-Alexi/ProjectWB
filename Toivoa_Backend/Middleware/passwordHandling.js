@@ -6,7 +6,7 @@ const passwordEncryption = async (password) =>
         const hashedPassword = await bcrypt.hash(password, passwordSalt);
         return {passwordSalt,hashedPassword}
     }
-const comparePassowrd = async (password,storedPassword) => 
+const comparePassword = async (password,storedPassword) => 
     {
         try
         {
@@ -26,5 +26,5 @@ const comparePassowrd = async (password,storedPassword) =>
 
 module.exports = {
     passwordEncryption,
-    comparePassowrd
+    comparePassword
 }
