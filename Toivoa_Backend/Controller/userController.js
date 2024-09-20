@@ -37,6 +37,7 @@ const getUserbyID = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
+        const { createToken } = require('../Middleware/jwtHandling');
         const { passwordEncryption } = require('../Middleware/passwordHandling');
 
         const passwordEssentials = await passwordEncryption(req.body.password)
@@ -44,9 +45,13 @@ const createUser = async (req, res) => {
         req.body.passwordSalt = passwordEssentials.passwordSalt;
         const newUser = await Users.create({ ...req.body });
 
-        res.status(201).json(newUser);
+        //Create JWT Token
+        token = createToken(newUser._id);
+
+        res.status(201).json({ message: "User registered successfully", token });
     }
     catch (error) {
+        console.error(error);
         res.status(400).json({ message: "Failed to create user", error: error.message });
     }
 }
@@ -55,6 +60,8 @@ const createUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
     try {
+        const { createToken } = require('../Middleware/jwtHandling');
+
         const {username,password} = req.body;
         const user = await Users.findOne({username});
         if(!user)
@@ -67,7 +74,9 @@ const loginUser = async (req, res) => {
             {
                 return res.status(400).json({message:"Invalid credentials"});
             }
-        res.status(200).json({message:"Login succesful"});
+        //Create JWT Token
+        token = createToken(user._id);
+        res.status(200).json({message:"Login succesful",token});
     }
     catch (error)
     {
