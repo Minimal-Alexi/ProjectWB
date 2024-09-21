@@ -3,6 +3,7 @@ const router = express.Router();
 const {
     getAllProducts,
     getProductbyID,
+    getProductsbyNumber,
     createProduct,
     updateProduct,
     deleteProduct
@@ -13,6 +14,9 @@ router.get('/',getAllProducts);
 
 //GET /products/:productID
 router.get('/:productID',getProductbyID);
+
+//GET /products&number
+router.get('/',getProductsbyNumber);
 
 //POST /products
 router.post('/',createProduct);

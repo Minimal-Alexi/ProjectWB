@@ -131,6 +131,7 @@ module.exports =
 {
     getAllProducts,
     getProductbyID,
+    getProductsbyNumber,
     createProduct,
     updateProduct,
     deleteProduct
