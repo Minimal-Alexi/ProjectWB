@@ -18,7 +18,7 @@ const getAllProducts = async (req, res) => {
 
 const getProductbyID = async (req, res) => {
     const productID = req.params.productID;
-    if (!mongoose.Types.ObjectId.isValid(ProductID)) {
+    if (!mongoose.Types.ObjectId.isValid(productID)) {
         return res.status(400).json({ message: "Invalid ProductID" })
     }
     try {
@@ -34,6 +34,28 @@ const getProductbyID = async (req, res) => {
         res.status(500).json({ message: "Failed to retrieve Product." });
     }
 }
+
+//GET /products
+
+const getProductsbyNumber = async (req,res) =>
+    {
+        const {limit} = req.query;
+        try
+        {
+            const products = await Products.find().limit(parseInt(limit))
+            if (product) {
+                res.status(200).json(products);
+            }
+            else {
+                res.status(404).json({ message: "Products not found." });
+            }
+        }
+        catch(error)
+        {
+            res.status(500).json({message:"Failed to retrieve Products."});
+        }
+    }
+
 
 //POST /products
 
@@ -81,6 +103,8 @@ const updateProduct = async (req, res) => {
 }
 
 //PATCH /products/:productID
+
+
 
 //DELETE /products/:productID
 
