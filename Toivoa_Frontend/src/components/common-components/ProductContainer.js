@@ -14,6 +14,22 @@ const ProductContainer = () => {
   const handleProductClick = (productId) => {
     navigate(`/product/${productId}`);
   };
+  const productFetching = async (number) =>
+    {
+        try
+        {
+            const link = `http://localhost:4000/api/products?number=${number}`;
+            console.log(link);
+            const response = await fetch(link);
+            const data = response.json();
+            console.log(data);
+        }
+        catch (err) {
+            console.error(err);
+            console.error('Failed to fetch products');
+          }
+    }
+  productFetching(3);
 
   return (
     <section className="product-container">
