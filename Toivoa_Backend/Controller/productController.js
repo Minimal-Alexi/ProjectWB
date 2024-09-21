@@ -4,12 +4,27 @@ const mongoose = require("mongoose");
 const {vendorCheck} = require('../Middleware/verificationHandling');
 
 //GET /products
-const getAllProducts = async (req, res) => {
+const getProductsbyNumberorAll = async (req, res) => {
+    const {number} = req.query;
     try {
-        const ProductList = await Products.find({}).sort({ createdAt: -1 });
-        res.status(200).json(ProductList);
+        if(!number)
+            {
+                const ProductList = await Products.find({}).sort({ createdAt: -1 });
+                res.status(200).json(ProductList);
+            }
+        else
+        {
+            const ProductList = await Products.find().limit(parseInt(number))
+            if (ProductList) {
+                res.status(200).json(ProductList);
+            }
+            else {
+                res.status(404).json({ message: "Products not found." });
+            }
+        }
     }
     catch (error) {
+        console.error(error);
         res.status(500).json({ message: "Failed to retrieve Products." });
     }
 };
@@ -34,28 +49,6 @@ const getProductbyID = async (req, res) => {
         res.status(500).json({ message: "Failed to retrieve Product." });
     }
 }
-
-//GET /products
-
-const getProductsbyNumber = async (req,res) =>
-    {
-        const {limit} = req.query;
-        try
-        {
-            const products = await Products.find().limit(parseInt(limit))
-            if (product) {
-                res.status(200).json(products);
-            }
-            else {
-                res.status(404).json({ message: "Products not found." });
-            }
-        }
-        catch(error)
-        {
-            res.status(500).json({message:"Failed to retrieve Products."});
-        }
-    }
-
 
 //POST /products
 
@@ -129,9 +122,8 @@ const deleteProduct = async (req, res) => {
 
 module.exports =
 {
-    getAllProducts,
+    getProductsbyNumberorAll,
     getProductbyID,
-    getProductsbyNumber,
     createProduct,
     updateProduct,
     deleteProduct

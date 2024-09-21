@@ -21,10 +21,10 @@ const adRouter = require("./Router/adRouter");
 
 
 
-app.use("/users",userRouter);
-app.use("/products",productRouter);
-app.use("/orders",orderRouter);
-app.use("/ads",adRouter);
+app.use("/api/users",userRouter);
+app.use("/api/products",productRouter);
+app.use("/api/orders",orderRouter);
+app.use("/api/ads",adRouter);
 
 // Error handling
 app.use(unknownEndpoint);
