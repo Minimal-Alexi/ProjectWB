@@ -10,6 +10,19 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+const colorSchema = new mongoose.Schema({
+    name:
+    {
+        type:String,
+        required:true
+    },
+    hex:
+    {
+        type:String,
+        required:true
+    }
+})
+
 const reviewSchema = new mongoose.Schema({
     userID: 
     {
@@ -68,6 +81,21 @@ productSchema = new Schema(
             type: Image,
             required: false,
         }, */
+        sizes:
+        {
+            type: [String],
+            required: false,
+        },
+        isInStock:
+        {
+            type: Boolean,
+            required: true,
+        },
+        colors:
+        {
+            type:[colorSchema],
+            required:false
+        },
         reviewList:
         {
             type: [reviewSchema],

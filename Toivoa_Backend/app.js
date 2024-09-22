@@ -13,7 +13,7 @@ connectDB();
 //middleware
 app.use(express.json());
 app.use(logger);
-app.use(cors);
+app.use(cors());
 
 
 //routes
