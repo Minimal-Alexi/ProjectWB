@@ -9,12 +9,15 @@ import ProductPage from "./components/productPage/ProductPage";
 import WishLists from "./components/wishLists/WishLists";
 import ErrorPage from "./components/notfound-page/ErrorPage";
 import { WishListProvider } from "./components/wishLists/WishListContext";
+import { FilterProvider } from "./components/resultPage/FilterContext.js";
+import ResultPage from "./components/resultPage/resultPage.jsx";
 import "./App.css";
 
 const App = () => (
   <div className="Main">
     <WishListProvider>
       <ShopContextProvider>
+      <FilterProvider>
         <Router>
           <NavBar />
           <Routes>
@@ -23,10 +26,12 @@ const App = () => (
             <Route path="/wishList" element={<WishLists />}></Route>
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/user" element={<UserSettingsPage />} />
+            <Route path="/result" element={<ResultPage />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </Router>
         <Footer />
+        </FilterProvider>
       </ShopContextProvider>
     </WishListProvider>
   </div>
