@@ -1,36 +1,52 @@
-import { products } from "../../data.js";
+//import { products } from "../../data.js";
 import { ShopContext } from "../shoppingCartPage/shopContext.jsx";
 import { WishListContext } from "../wishLists/WishListContext.js"; // Import the WishListContext
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Heart } from "phosphor-react";
 
 const ProductContainer = () => {
   const { addToCart, cartItems } = useContext(ShopContext);
   const { addToWishlist, wishlist } = useContext(WishListContext); // Get the addToWishlist function from context
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   const navigate = useNavigate();
 
   const handleProductClick = (productId) => {
     navigate(`/product/${productId}`);
   };
-  const productFetching = async (number) =>
-    {
-        try
+  const productFetching = async (number) => {
+    try {
+      const link = `http://localhost:4000/api/products?number=${number}`;
+      const response = await fetch(link,
         {
-            const link = `http://localhost:4000/api/products?number=${number}`;
-            console.log(link);
-            const response = await fetch(link);
-            const data = response.json();
-            console.log(data);
-        }
-        catch (err) {
-            console.error(err);
-            console.error('Failed to fetch products');
-          }
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
+      if (response.ok) {
+        const data = await response.json();
+        setProducts(data);
+      }
     }
-  productFetching(3);
+    catch (err) {
+      console.error(err);
+      console.error('Failed to fetch products');
+    }
+    finally {
+      setLoading(false);
+    }
+  }
 
+  useEffect(() => {
+    productFetching(10);
+  }, []);
+  if (loading) {
+    return <p>Loading products...</p>;
+  }
   return (
     <section className="product-container">
       {products.map((product) => {
@@ -48,7 +64,7 @@ const ProductContainer = () => {
                 className="wishlist"
                 aria-label="Add to Wishlist"
                 onClick={() => addToWishlist(product)} // Add to Wishlist on heart click
-                style={{backgroundColor: isInWishlist ? "#FF6666" : "white"}}
+                style={{ backgroundColor: isInWishlist ? "#FF6666" : "white" }}
               >
                 <Heart size={32} />
               </a>
@@ -63,7 +79,7 @@ const ProductContainer = () => {
               </button>
             </div>
             <div className="product-info">
-              <h2 
+              <h2
                 className="product-name"
                 onClick={() => handleProductClick(product.id)}
                 style={{ cursor: 'pointer' }}
