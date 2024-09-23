@@ -1,10 +1,3 @@
-/*
-    commentID:"21903DKSAKJ"
-    userID:"9138249iISDAJFDKA"
-    rating: 3.5
-    comment:"Shit product."
-    date: "04.01.1994"
-*/
 
 const mongoose = require("mongoose");
 
@@ -22,6 +15,14 @@ const colorSchema = new mongoose.Schema({
         required:true
     }
 })
+
+/*
+    commentID:"21903DKSAKJ"
+    userID:"9138249iISDAJFDKA"
+    rating: 3.5
+    comment:"Shit product."
+    date: "04.01.1994"
+*/
 
 const reviewSchema = new mongoose.Schema({
     userID: 
@@ -76,11 +77,11 @@ productSchema = new Schema(
             type: String,
             required: true,
         },
-/*         frontImage:
+        image:
         {
-            type: Image,
-            required: false,
-        }, */
+            type: [String],
+            required: true,
+        },
         sizes:
         {
             type: [String],
