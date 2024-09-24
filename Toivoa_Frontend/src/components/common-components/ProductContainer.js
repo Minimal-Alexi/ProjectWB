@@ -9,7 +9,6 @@ const ProductContainer = () => {
   const { addToCart, cartItems } = useContext(ShopContext);
   const { addToWishlist, wishlist } = useContext(WishListContext); // Get the addToWishlist function from context
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
 
 
   const navigate = useNavigate();
@@ -36,17 +35,11 @@ const ProductContainer = () => {
       console.error(err);
       console.error('Failed to fetch products');
     }
-    finally {
-      setLoading(false);
-    }
   }
 
   useEffect(() => {
     productFetching(10);
   }, []);
-  if (loading) {
-    return <p>Loading products...</p>;
-  }
   return (
     <section className="product-container">
       {products.map((product) => {
