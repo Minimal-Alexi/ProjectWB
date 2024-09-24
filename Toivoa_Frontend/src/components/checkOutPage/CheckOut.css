@@ -74,3 +74,14 @@
     color: white;
     background: #6179B7;
 }
+
+@media (max-width: 576px) {
+    .billing-info-container{
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+
+    .billing-info{
+        align-items: center;
+    }
+}
