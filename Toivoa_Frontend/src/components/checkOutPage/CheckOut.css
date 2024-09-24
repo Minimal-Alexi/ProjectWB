@@ -1,0 +1,76 @@
+.check-out-container{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 2rem;
+}
+
+.category-path{
+    padding: 3rem 0;
+}
+
+.billing-header{
+    padding: 0 0 2rem 0;
+}
+
+.billing-info-container{
+    display: flex;
+}
+
+.billing-shipping-information{
+    flex-grow: .5;
+}
+
+.billing-shipping-information form{
+    display: flex;
+    flex-direction: column;
+}
+
+.info{
+    padding: 0 0 1rem 0;
+}
+
+.save-information input{
+    margin-right: .5rem;
+}
+
+.billing-product-information{
+    display: flex;
+    flex-direction: column;
+    flex-grow: .5;
+    row-gap: 1rem;
+}
+
+.billing-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.info input{
+    width: 80%;
+}
+
+.product-pic-name{
+    display: flex;
+    align-items: center;
+}
+
+
+.product-pic-name img {
+    height: 3rem;
+    width: 3rem;
+    margin-right: 1rem;
+}
+
+.payment-options input {
+    margin-right: 1rem;
+}
+
+.place-order-button{
+
+    margin: 0 auto;
+    padding: 1rem 4rem;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background: #6179B7;
+}
