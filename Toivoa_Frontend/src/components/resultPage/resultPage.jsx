@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Heart } from "phosphor-react";
 import { FilterContext } from './FilterContext';
+import style from "./resultPage.module.css";
 
 const ResultPage = () => {
   const { addToCart, cartItems } = useContext(ShopContext);
@@ -17,6 +18,12 @@ const ResultPage = () => {
   };
 
   return (
+    <div className={style.result}>
+      <div>
+        <h1>Search Result(s):</h1>
+      </div>
+
+      {filteredItems.length > 0 ? (
     <section className="product-container">
       {filteredItems.map((product) => {
         const cartItemAmount = cartItems[product.id];
@@ -61,7 +68,13 @@ const ResultPage = () => {
           </div>
         );
       })}
-    </section>
+    </section>) : (
+      <div className={style.noitem}>
+      <h2> No item found</h2>
+      <button onClick={() => navigate("/")}> Return to shop </button>
+      </div>
+    )}
+    </div>
   );
 };
 
