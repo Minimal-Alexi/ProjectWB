@@ -36,8 +36,8 @@ const CheckOut = () => {
                 <input {...companyInput} />
               </div>
               <div className="info">
-                <label>Company Name</label>
-                <input {...companyInput} />
+                <label>Street Address</label>
+                <input {...streetAddressInput} />
               </div>
               <div className="info">
                 <label>Apartment, floor, etc.(optional)</label>
