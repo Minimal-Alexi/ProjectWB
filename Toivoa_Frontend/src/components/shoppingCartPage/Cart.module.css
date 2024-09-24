@@ -1,9 +1,9 @@
+
 .cart {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 50vh;
 }
 
 .cartItem {
@@ -51,6 +51,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 50vh;
 }
 
 .checkout button {
