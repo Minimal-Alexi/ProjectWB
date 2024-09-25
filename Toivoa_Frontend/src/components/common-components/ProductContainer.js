@@ -40,13 +40,14 @@ const ProductContainer = () => {
   useEffect(() => {
     productFetching(10);
   }, []);
+
   return (
     <section className="product-container">
       {products.map((product) => {
-        const cartItemAmount = cartItems[product.id];
-        const isInWishlist = wishlist.some((item) => item.id === product.id);
+        const cartItemAmount = cartItems[product._id];
+        const isInWishlist = wishlist.some((item) => item.id === product._id);
         return (
-          <div className="product-card" key={product.id}>
+          <div className="product-card" key={product._id}>
             <div className="image-container">
               <img
                 src={product.image[0]}
