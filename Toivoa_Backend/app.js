@@ -10,7 +10,7 @@ const { unknownEndpoint, errorHandler } = require("./Middleware/errorHandling");
 connectDB();
 
 // Middleware
-app.use(cors);
+app.use(cors());
 app.use(express.json());
 app.use(logger);
 

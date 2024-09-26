@@ -62,8 +62,8 @@ const loginUser = async (req, res) => {
     try {
         const { createToken } = require('../Middleware/jwtHandling');
 
-        const {username,password} = req.body;
-        const user = await Users.findOne({username});
+        const {email,password} = req.body;
+        const user = await Users.findOne({email});
         if(!user)
             {
                 return res.status(400).json({message:"Invalid credentials"});

@@ -4,23 +4,26 @@ import { useState } from 'react';
 const apiURL = 'http://localhost:4000/api/users'
 
 const CreateAccount = ({ switchToLogin, closeEvent }) => {
-    const [username, setUsername] = useState('testtest');
-    const [email, setEmail] = useState('test@test.com');
-    const [firstName, setFirstName] = useState('test')
-    const [lastName, setLastName] = useState('testtest')
-    const [password, setPassword] = useState('password');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [password, setPassword] = useState('');
     const passwordSalt = 'gsgadthjad'
-    const [accountType, setAccountType] = useState(0);
-    const [countryCode, setCountryCode] = useState(12345);
-    const [location, setLocation] = useState('location');
-    const [phonenumber, setPhonenumber] = useState('1234567');
-    const [age, setAge] = useState('45');
-    const [gender, setGender] = useState('M');
+    const [accountType, setAccountType] = useState();
+    const [countryCode, setCountryCode] = useState();
+    const [location, setLocation] = useState('');
+    const [phonenumber, setPhonenumber] = useState('');
+    const [age, setAge] = useState('');
+    const [gender, setGender] = useState('');
+
+    const [showusernameError, setShowUsernameError] = useState(false);
+    const [showemailError, setShowEmailError] = useState(false);
 
     const handleCreate = async (e) => {
         e.preventDefault();
 
-        const user = { username, email, firstName, lastName, password, passwordSalt, accountType, countryCode };
+        const user = { username, email, firstName, lastName, password, passwordSalt, accountType, countryCode, location, phonenumber, age, gender };
 
         console.log("user object being sent:", user);
 
@@ -35,10 +38,23 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
 
         if (!response.ok) {
             console.log('Error:', json);
+
+            if (json.message && json.message.includes('username')) {
+                setShowUsernameError(true);
+            }
+            if (json.message && json.message.includes('email')) {
+                setShowEmailError(true);
+            }
+            return;
         }
         if (response.ok) {
+            setShowUsernameError(false);
+            setShowEmailError(false);
+
             setUsername('');
             setEmail('');
+            setFirstName('');
+            setLastName('');
             setPassword('');
             setAccountType(0);
             setCountryCode('');
@@ -73,6 +89,9 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
                             />
                         </li>
                         <li>
+                            {showusernameError ? <h4>Username already in use</h4> : null}
+                        </li>
+                        <li>
                             <input
                                 type="email"
                                 id="email"
@@ -82,6 +101,9 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
+                        </li>
+                        <li>
+                            {showemailError ? <h4>Email already in use</h4> : null}
                         </li>
                         <li>
                             <input
