@@ -2,7 +2,7 @@
 import { ProductContext } from "../../context/productContext.jsx";
 import { ShopContext } from "../../context/shopContext.jsx";
 import { WishListContext } from "../../context/WishListContext.jsx"; // Import the WishListContext
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Heart } from "phosphor-react";
 

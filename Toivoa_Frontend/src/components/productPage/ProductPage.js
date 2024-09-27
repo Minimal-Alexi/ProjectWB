@@ -1,8 +1,9 @@
 import "./ProductPage.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { products, relatedProducts } from "../../data";
+import { relatedProducts } from "../../data";
 
+import { ProductContext } from "../../context/productContext.jsx";
 import RelatedProductCard from "./RelatedProductCard";
 import BuyNow from "./BuyNow";
 import SizeSelect from "./SizeSelect";
@@ -14,10 +15,11 @@ const ProductPage = () => {
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
   const [product, setProduct] = useState(null);
+  const { products } = useContext(ProductContext);
 
   useEffect(() => {
     // Find the product based on the ID from the URL
-    const foundProduct = products.find(p => p.id === parseInt(id));
+    const foundProduct = products.find(p => p._id === id);
     if (foundProduct) {
       setProduct(foundProduct);
       // console.log('product is: ',foundProduct)
@@ -26,6 +28,7 @@ const ProductPage = () => {
   }, [id]);
 
   if (!product) {
+    console.log(products);
     return <div>Loading...</div>;
   }
 
