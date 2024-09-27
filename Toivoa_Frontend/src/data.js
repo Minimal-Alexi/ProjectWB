@@ -43,7 +43,6 @@ import monitor_1 from "./images/monitor_1.png"
 import monitor_2 from "./images/monitor_2.png"
 import monitor_3 from "./images/monitor_3.png"
 
-
 export const pageLinks = [
   { id: 1, href: "/", text: "Main" },
   { id: 2, href: "/Settings", text: "Settings" },
@@ -72,7 +71,7 @@ export const products = [
     name: "Iphone 15 Pro",
     price: 899.99,
     reviews: "⭐⭐⭐⭐☆ (800 reviews)",
-    description: "The WORST iphone ever.",
+    description: "The BEST iphone ever.",
     image: [product2, iphone_1, iphone_2, iphone_3],
     sizes: ["128", "256", "1T"],
     isInStock: true,
