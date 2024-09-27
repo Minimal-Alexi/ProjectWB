@@ -1,6 +1,6 @@
 //import { products } from "../../data.js";
-import { ShopContext } from "../shoppingCartPage/shopContext.jsx";
-import { WishListContext } from "../wishLists/WishListContext.js"; // Import the WishListContext
+import { ShopContext } from "../../context/shopContext.jsx";
+import { WishListContext } from "../../context/WishListContext.js"; // Import the WishListContext
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Heart } from "phosphor-react";
@@ -75,7 +75,7 @@ const ProductContainer = () => {
             <div className="product-info">
               <h2
                 className="product-name"
-                onClick={() => handleProductClick(product.id)}
+                onClick={() => handleProductClick(product._id)}
                 style={{ cursor: 'pointer' }}
               >
                 {product.name}
