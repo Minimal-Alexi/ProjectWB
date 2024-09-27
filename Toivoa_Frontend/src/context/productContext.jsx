@@ -17,9 +17,8 @@ export const ProductProvider = ({ children }) => {
                 });
             if (response.ok) {
                 const data = await response.json();
-                //console.log(JSON.stringify(data),2)
-                setProducts(JSON.parse(data));
                 sessionStorage.setItem("products", JSON.stringify(data));
+                setProducts(JSON.parse(sessionStorage.getItem("products")));
             }
         }
         catch (err) {
