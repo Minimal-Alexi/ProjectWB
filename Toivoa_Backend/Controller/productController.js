@@ -4,12 +4,27 @@ const mongoose = require("mongoose");
 const {vendorCheck} = require('../Middleware/verificationHandling');
 
 //GET /products
-const getAllProducts = async (req, res) => {
+const getProductsbyNumberorAll = async (req, res) => {
+    const {number} = req.query;
     try {
-        const ProductList = await Products.find({}).sort({ createdAt: -1 });
-        res.status(200).json(ProductList);
+        if(!number)
+            {
+                const ProductList = await Products.find({}).sort({ createdAt: -1 });
+                res.status(200).json(ProductList);
+            }
+        else
+        {
+            const ProductList = await Products.find().limit(parseInt(number))
+            if (ProductList) {
+                res.status(200).json(ProductList);
+            }
+            else {
+                res.status(404).json({ message: "Products not found." });
+            }
+        }
     }
     catch (error) {
+        console.error(error);
         res.status(500).json({ message: "Failed to retrieve Products." });
     }
 };
@@ -18,7 +33,7 @@ const getAllProducts = async (req, res) => {
 
 const getProductbyID = async (req, res) => {
     const productID = req.params.productID;
-    if (!mongoose.Types.ObjectId.isValid(ProductID)) {
+    if (!mongoose.Types.ObjectId.isValid(productID)) {
         return res.status(400).json({ message: "Invalid ProductID" })
     }
     try {
@@ -107,7 +122,7 @@ const deleteProduct = async (req, res) => {
 
 module.exports =
 {
-    getAllProducts,
+    getProductsbyNumberorAll,
     getProductbyID,
     createProduct,
     updateProduct,

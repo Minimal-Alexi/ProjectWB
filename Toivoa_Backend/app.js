@@ -2,6 +2,8 @@ const connectDB = require("./config/db");
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const cors = require('cors');
+
 require('dotenv').config();
 const port = process.env.PORT || 4000;
 
@@ -21,10 +23,10 @@ const orderRouter = require("./Router/orderRouter");
 const adRouter = require("./Router/adRouter");
 
 // App
-app.use("/api/users", userRouter);
-app.use("/api/products", productRouter);
-app.use("/api/orders", orderRouter);
-app.use("/api/ads", adRouter);
+app.use("/api/users",userRouter);
+app.use("/api/products",productRouter);
+app.use("/api/orders",orderRouter);
+app.use("/api/ads",adRouter);
 
 // Error handling
 app.use(unknownEndpoint);
