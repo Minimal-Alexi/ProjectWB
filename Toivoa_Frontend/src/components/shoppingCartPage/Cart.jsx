@@ -1,5 +1,5 @@
 import { products } from "../../data.js";
-import { ShopContext } from "./shopContext.jsx";
+import { ShopContext } from "../../context/shopContext.jsx";
 import { useContext } from "react";
 import { CartItem } from "./CartItem.jsx";
 import style from "./Cart.module.css";

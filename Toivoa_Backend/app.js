@@ -1,6 +1,8 @@
 const connectDB = require("./config/db");
 const express = require("express");
 const app = express();
+const cors = require('cors');
+
 require('dotenv').config();
 const port = process.env.PORT || 4000
 
@@ -10,7 +12,8 @@ connectDB();
 
 //middleware
 app.use(express.json());
-app.use(logger)
+app.use(logger);
+app.use(cors());
 
 
 //routes
@@ -21,10 +24,10 @@ const adRouter = require("./Router/adRouter");
 
 
 
-app.use("/users",userRouter);
-app.use("/products",productRouter);
-app.use("/orders",orderRouter);
-app.use("/ads",adRouter);
+app.use("/api/users",userRouter);
+app.use("/api/products",productRouter);
+app.use("/api/orders",orderRouter);
+app.use("/api/ads",adRouter);
 
 // Error handling
 app.use(unknownEndpoint);
