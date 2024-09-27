@@ -1,7 +1,7 @@
 import Image from '../../images/image.jpeg';
 import { useState } from 'react';
 
-const apiURL = 'http://localhost:4000/api/users'
+const apiURL = 'http://localhost:4000'
 
 const CreateAccount = ({ switchToLogin, closeEvent }) => {
     const [username, setUsername] = useState('');
@@ -27,7 +27,7 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
 
         console.log("user object being sent:", user);
 
-        const response = await fetch(apiURL, {
+        const response = await fetch(`${apiURL}/api/users`, {
             method: 'POST',
             body: JSON.stringify(user),
             headers: {
@@ -38,6 +38,7 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
 
         if (!response.ok) {
             console.log('Error:', json);
+            console.log('step 1');
 
             if (json.message && json.message.includes('username')) {
                 setShowUsernameError(true);
@@ -66,6 +67,30 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
         }
     };
 
+    const getUsers = (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch(`${apiurl}/api/users`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const json = await response.json();
+
+            if (!response.ok) {
+                console.log('Error:', json);
+                return;
+            }
+
+            console.log('Fetched data:', json);
+        } catch (error) {
+            console.error('Error during account creation:', error);
+        }
+    };
+
     return (
         <div className="white-rectangle">
             <div className="invisible-rectangle">
@@ -73,6 +98,7 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
                     <img src={Image} alt='Image' className='image' />
                 </h1>
             </div>
+            <button onClick={(e) => getUsers(e)}>test button</button>
             <div>
                 <form onSubmit={handleCreate}>
                     <ul className="submit-stuff">
