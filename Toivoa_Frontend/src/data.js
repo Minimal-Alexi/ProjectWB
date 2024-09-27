@@ -71,7 +71,7 @@ export const products = [
     name: "Iphone 15 Pro",
     price: 899.99,
     reviews: "⭐⭐⭐⭐☆ (800 reviews)",
-    description: "The WORST iphone ever.",
+    description: "The BEST iphone ever.",
     image: [product2, iphone_1, iphone_2, iphone_3],
     sizes: ["128", "256", "1T"],
     isInStock: true,

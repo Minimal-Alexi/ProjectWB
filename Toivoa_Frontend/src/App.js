@@ -10,6 +10,7 @@ import WishLists from "./components/wishLists/WishLists";
 import ErrorPage from "./components/notfound-page/ErrorPage";
 import { WishListProvider } from "./context/WishListContext";
 import { ProductProvider } from "./context/productContext.jsx";
+import ResultPage from "./components/resultPage/resultPage.jsx";
 import "./App.css";
 
 const App = () => (
