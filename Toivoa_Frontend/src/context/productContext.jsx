@@ -17,7 +17,9 @@ export const ProductProvider = ({ children }) => {
                 });
             if (response.ok) {
                 const data = await response.json();
-                setProducts(data);
+                //console.log(JSON.stringify(data),2)
+                setProducts(JSON.parse(data));
+                sessionStorage.setItem("products", JSON.stringify(data));
             }
         }
         catch (err) {
@@ -25,13 +27,12 @@ export const ProductProvider = ({ children }) => {
             console.error('Failed to fetch products');
         }
     }
-
     useEffect(() => {
         const storedProducts = sessionStorage.getItem("products");
         if (storedProducts) {
-            setProducts(JSON.parse(storedProducts)); // Load from session storage
+            setProducts(JSON.parse(storedProducts));
         } else {
-            fetchProducts(10); // Fetch if not in session storage
+            fetchProducts(10);
         }
     }, []);
 
