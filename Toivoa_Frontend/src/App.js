@@ -4,11 +4,11 @@ import Main from "./components/mainPage/Main.js";
 import { Cart } from "./components/shoppingCartPage/Cart.jsx";
 import UserSettingsPage from "./components/userSettings/UserSettings";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ShopContextProvider } from "./components/shoppingCartPage/shopContext";
+import { ShopContextProvider } from "./context/shopContext.jsx";
 import ProductPage from "./components/productPage/ProductPage";
 import WishLists from "./components/wishLists/WishLists";
 import ErrorPage from "./components/notfound-page/ErrorPage";
-import { WishListProvider } from "./components/wishLists/WishListContext";
+import { WishListProvider } from "./context/WishListContext";
 import "./App.css";
 
 const App = () => (
