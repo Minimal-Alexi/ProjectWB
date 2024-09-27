@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {
-    getAllProducts,
+    getProductsbyNumberorAll,
     getProductbyID,
     createProduct,
     updateProduct,
@@ -9,7 +9,7 @@ const {
 } = require('../Controller/productController');
 
 //GET /products
-router.get('/',getAllProducts);
+router.get('/',getProductsbyNumberorAll);
 
 //GET /products/:productID
 router.get('/:productID',getProductbyID);

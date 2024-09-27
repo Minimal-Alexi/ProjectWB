@@ -2,6 +2,8 @@
 
 # 1.0 Introduction
 
+This is the introduction of the Toivoa webproject, a web 2.0 app for noridc companies and consumers.
+
 ## 1.1 Members
 Pop Alex (Backend & Sys Ops.)
 
@@ -24,10 +26,16 @@ In effect, Toivoa means to facilitate the trade of goods, services and informati
 
 If you want to test and to use the backend of the application, make sure to use the .env.template file to create a file called ".env" of the same type. Adjust the values accordingly.
 
+Make sure to run <code>npm install</code> in all the apropiate folders.
+
 ## 1.4 Contribution
 
 In order to contribute to code, pull this branch from the repository, and then run the command:
 
 <code>git checkout -b (Your_branch_name)</code>
 
-This is to ensure that the merging process will all be handled by one person at the end. When you finish your branch, send a pull request to sprint-2 branch.
+This is to ensure that the merging process will all be handled by one person at the end. When you finish your branch, send a pull request to sprint-3 branch. In case of big changes, add the sys-ops leader as a reviewee.
+
+# 2.0 Run
+
+In order for the application to run succesfully, both the frontend and backend apps need to run at the same time.

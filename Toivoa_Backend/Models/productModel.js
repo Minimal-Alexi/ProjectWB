@@ -1,3 +1,21 @@
+
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+
+const colorSchema = new mongoose.Schema({
+    name:
+    {
+        type:String,
+        required:true
+    },
+    hex:
+    {
+        type:String,
+        required:true
+    }
+})
+
 /*
     commentID:"21903DKSAKJ"
     userID:"9138249iISDAJFDKA"
@@ -5,10 +23,6 @@
     comment:"Shit product."
     date: "04.01.1994"
 */
-
-const mongoose = require("mongoose");
-
-const Schema = mongoose.Schema;
 
 const reviewSchema = new mongoose.Schema({
     userID: 
@@ -63,11 +77,26 @@ productSchema = new Schema(
             type: String,
             required: true,
         },
-/*         frontImage:
+        image:
         {
-            type: Image,
+            type: [String],
+            required: true,
+        },
+        sizes:
+        {
+            type: [String],
             required: false,
-        }, */
+        },
+        isInStock:
+        {
+            type: Boolean,
+            required: true,
+        },
+        colors:
+        {
+            type:[colorSchema],
+            required:false
+        },
         reviewList:
         {
             type: [reviewSchema],
