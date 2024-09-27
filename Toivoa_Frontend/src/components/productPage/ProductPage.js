@@ -24,11 +24,14 @@ const ProductPage = () => {
       setProduct(foundProduct);
       // console.log('product is: ',foundProduct)
       setSelectedImage(foundProduct.image[0]); // Changed from 'images' to 'image'
+      foundProduct.image.map((img,index) =>
+        {
+          console.log(img,index);
+        })
     }
   }, [id]);
 
   if (!product) {
-    console.log(products);
     return <div>Loading...</div>;
   }
 
