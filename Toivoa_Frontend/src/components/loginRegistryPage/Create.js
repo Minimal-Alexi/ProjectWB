@@ -67,11 +67,11 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
         }
     };
 
-    const getUsers = (e) => {
+    const getUsers = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${apiurl}/api/users`, {
+            const response = await fetch(`${apiURL}/api/users`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
