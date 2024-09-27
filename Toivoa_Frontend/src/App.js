@@ -8,6 +8,7 @@ import { ShopContextProvider } from "./context/shopContext.jsx";
 import ProductPage from "./components/productPage/ProductPage";
 import WishLists from "./components/wishLists/WishLists";
 import ErrorPage from "./components/notfound-page/ErrorPage";
+import CheckOut from "./components/checkOutPage/CheckOut"
 import { FilterProvider } from "./components/resultPage/FilterContext.js";
 import { WishListProvider } from "./context/WishListContext";
 import { ProductProvider } from "./context/productContext.jsx";
@@ -29,6 +30,7 @@ const App = () => (
                 <Route path="/product/:id" element={<ProductPage />} />
                 <Route path="/user" element={<UserSettingsPage />} />
                 <Route path="/result" element={<ResultPage />} />
+                <Route path="/checkout" element={<CheckOut />} />
                 <Route path="*" element={<ErrorPage />} />
               </Routes>
             </Router>
