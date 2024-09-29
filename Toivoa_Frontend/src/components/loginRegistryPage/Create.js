@@ -1,15 +1,12 @@
 import Image from '../../images/image.jpeg';
 import { useState } from 'react';
 
-const apiURL = 'http://localhost:4000'
-
 const CreateAccount = ({ switchToLogin, closeEvent }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [password, setPassword] = useState('');
-    const passwordSalt = 'gsgadthjad'
     const [accountType, setAccountType] = useState();
     const [countryCode, setCountryCode] = useState();
     const [location, setLocation] = useState('');
@@ -23,11 +20,11 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
     const handleCreate = async (e) => {
         e.preventDefault();
 
-        const user = { username, email, firstName, lastName, password, passwordSalt, accountType, countryCode, location, phonenumber, age, gender };
+        const user = { username, email, firstName, lastName, password, accountType, countryCode, location, phonenumber, age, gender };
 
         console.log("user object being sent:", user);
 
-        const response = await fetch(`${apiURL}/api/users`, {
+        const response = await fetch(`/api/users`, {
             method: 'POST',
             body: JSON.stringify(user),
             headers: {
@@ -71,7 +68,7 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${apiURL}/api/users`, {
+            const response = await fetch(`/api/users`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
