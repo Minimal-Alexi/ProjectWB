@@ -31,7 +31,7 @@ export const ProductProvider = ({ children }) => {
         if (storedProducts) {
             setProducts(JSON.parse(storedProducts));
         } else {
-            fetchProducts(10);
+            fetchProducts(12);
         }
     }, []);
 
