@@ -5,14 +5,10 @@ export const ShopContext = createContext(null);
 
 // Dynamically set the innitial amount of item in cart: 0
 const getDefaultCart = (products) => {
-  console.log(products)
   let cart = {};
   for (let i = 0; i < products.length; i++) {
-    console.log(products[i]._id);
     cart[products[i]._id] = 0;
   }
-
-  console.log(cart);
   return cart;
 };
 
@@ -27,8 +23,8 @@ export const ShopContextProvider = (props) => {
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        let itemInfo = products.find((product) => product._id === Number(item));
+      if (cartItems[item]) {
+        let itemInfo = products.find((product) => product._id === item);
         totalAmount += cartItems[item] * itemInfo.price;
       }
     }
@@ -37,7 +33,6 @@ export const ShopContextProvider = (props) => {
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-    //console.log(cartItems[itemId],cartItems);
   };
 
   const removeFromCart = (itemId) => {
