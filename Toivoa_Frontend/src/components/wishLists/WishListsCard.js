@@ -5,7 +5,7 @@ const WishListsCard = (props) => {
     // console.log("test")
     // console.log(props.onDelete)
     // console.log(props.id)
-    props.onDelete(props.id)
+    props.onDelete(props._id)
   }
     return (
         <div className="product-card">
