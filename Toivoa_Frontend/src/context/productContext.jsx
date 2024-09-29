@@ -7,7 +7,7 @@ export const ProductProvider = ({ children }) => {
 
     const fetchProducts = async (number) => {
         try {
-            const link = `http://localhost:4000/api/products?number=${number}`;
+            const link = `api/products?number=${number}`;
             const response = await fetch(link,
                 {
                     method: "GET",
