@@ -6,6 +6,7 @@ import { countryCodes } from "../../data";
 const CreateAccount = ({ switchToLogin, closeEvent }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+    const [phonenumber, setPhonenumber] = useState('');
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [password, setPassword] = useState('');
@@ -14,56 +15,77 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
 
     const usernameField = useField('text', username, setUsername);
     const emailField = useField('email', email, setEmail);
+    const phonenumberField = useField('phonenumber', phonenumber, setPhonenumber);
     const firstNameField = useField('text', firstName, setFirstName);
     const lastNameField = useField('text', lastName, setLastName);
     const passwordField = useField('password', password, setPassword);
     const accountTypeField = useField('select', accountType, setAccountType);
     const countryCodeField = useField('select', countryCode, setCountryCode);
 
-
+    const [showError, setShowError] = useState(false);
     const [showusernameError, setShowUsernameError] = useState(false);
     const [showemailError, setShowEmailError] = useState(false);
 
     const handleCreate = async (e) => {
         e.preventDefault();
 
-        const user = { username, email, firstName, lastName, password, accountType, countryCode };
+        if (!username || !email || !firstName || !lastName || !password || !accountType || !countryCode) {
+            setShowError(true)
+            return
+        } else {
+            const user = { username, email, firstName, lastName, password, accountType, countryCode };
 
-        console.log("user object being sent:", user);
+            console.log("user object being sent:", user);
 
-        const response = await fetch(`/api/users`, {
-            method: 'POST',
-            body: JSON.stringify(user),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        const json = await response.json();
+            const response = await fetch(`/api/users`, {
+                method: 'POST',
+                body: JSON.stringify(user),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const json = await response.json();
 
-        if (!response.ok) {
-            console.log('Error:', json);
-            console.log('step 1');
+            if (!response.ok) {
+                console.log('Error:', json);
+                console.log('Error:', json.error);
+                console.log('step 1');
 
-            if (json.message && json.message.includes('username')) {
-                setShowUsernameError(true);
+                if (json.error && json.error.includes('E11000')) {
+                    if (json.error.includes('username')) {
+                        setShowUsernameError(true);
+                        console.log("Username error")
+                    }
+                    if (json.error.includes('email')) {
+                        setShowEmailError(true);
+                        console.log("Email error")
+                    }
+                } else {
+                    console.error("Unkown error:", json.message)
+                }
+
+                if (json.message && json.message.includes('username')) {
+                    setShowUsernameError(true);
+                }
+                if (json.message && json.message.includes('email')) {
+                    setShowEmailError(true);
+                }
+                return;
             }
-            if (json.message && json.message.includes('email')) {
-                setShowEmailError(true);
-            }
-            return;
-        }
-        if (response.ok) {
-            setShowUsernameError(false);
-            setShowEmailError(false);
+            if (response.ok) {
+                setShowError(false);
+                setShowUsernameError(false);
+                setShowEmailError(false);
 
-            setUsername('');
-            setEmail('');
-            setFirstName('');
-            setLastName('');
-            setPassword('');
-            setAccountType(0);
-            setCountryCode('');
-            console.log('New user added:', json);
+                setUsername('');
+                setEmail('');
+                setFirstName('');
+                setLastName('');
+                setPassword('');
+                setAccountType(0);
+                setCountryCode('');
+                console.log('New user added:', json);
+            }
         }
     };
 
@@ -104,6 +126,15 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
                         </li>
                         <li>
                             <input
+                                {...phonenumberField}
+                                id="phonenumber"
+                                name="phonenumber"
+                                placeholder="Enter your phonenumber"
+                                className="input"
+                            />
+                        </li>
+                        <li>
+                            <input
                                 {...firstNameField}
                                 id="firstName"
                                 name="firstName"
@@ -137,9 +168,12 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
                                 placeholder="Enter your account type"
                                 className="input"
                             >
-                            <option value="1">Consumer</option>
-                            <option value="2">Seller</option>
-                            <option value="3">Marketer Vendor</option>
+                                <option value="" defaultValue>
+                                    Select account type
+                                </option>
+                                <option value="1">Consumer</option>
+                                <option value="2">Seller</option>
+                                <option value="3">Marketer Vendor</option>
                             </select>
                         </li>
                         <li>
@@ -150,12 +184,18 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
                                 placeholder="Enter your country code"
                                 className="input"
                             >
-                            {countryCodes.map((country) => (
-                                <option key={country.code} value={country.code}>
-                                    {country.name}
+                                <option value="" defaultValue>
+                                    Select country
                                 </option>
-                            ))}
+                                {countryCodes.map((country) => (
+                                    <option key={country.code} value={country.code}>
+                                        {country.name}
+                                    </option>
+                                ))}
                             </select>
+                        </li>
+                        <li>
+                            {showError ? <h4>Fill all the fields</h4> : null}
                         </li>
                         <li>
                             <button type="submit">Submit</button>
