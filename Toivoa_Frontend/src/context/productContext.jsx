@@ -37,7 +37,7 @@ export const ProductProvider = ({ children }) => {
 
     return (
         <ProductContext.Provider value={{ products, setProducts, fetchProducts }}>
-            {children} {/* This renders the child components */}
+            {children}
         </ProductContext.Provider>
     );
 }

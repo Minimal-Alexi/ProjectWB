@@ -3,7 +3,7 @@ import { ShopContext } from "../../context/shopContext";
 import style from "./Cart.module.css";
 
 export const CartItem = (props) => {
-  const { id, name, price, image } = props.data;
+  const { _id, name, price, image } = props.data;
   const { cartItems, addToCart, removeFromCart, updateCartItemCount } =
     useContext(ShopContext);
 
@@ -16,12 +16,12 @@ export const CartItem = (props) => {
         </p>
         <p> Price: ${price}</p>
         <div className={style.countHandler}>
-          <button onClick={() => removeFromCart(id)}> - </button>
+          <button onClick={() => removeFromCart(_id)}> - </button>
           <input
-            value={cartItems[id]}
-            onChange={(e) => updateCartItemCount(Number(e.target.value), id)}
+            value={cartItems[_id]}
+            onChange={(e) => updateCartItemCount(Number(e.target.value), _id)}
           />
-          <button onClick={() => addToCart(id)}> + </button>
+          <button onClick={() => addToCart(_id)}> + </button>
         </div>
       </div>
     </div>

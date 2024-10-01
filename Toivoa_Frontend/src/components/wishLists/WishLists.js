@@ -21,7 +21,7 @@ const WishLists = () => {
           return (
             <WishListsCard
               {...wish}
-              key={wish.id}
+              key={wish._id}
               onDelete={handleDeleteWishLists}
             />
           );

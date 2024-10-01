@@ -26,10 +26,11 @@ const ResultPage = () => {
       {filteredItems.length > 0 ? (
     <section className="product-container">
       {filteredItems.map((product) => {
-        const cartItemAmount = cartItems[product.id];
-        const isInWishlist = wishlist.some((item) => item.id === product.id);
-        return (
-          <div className="product-card" key={product.id}>
+            const productId = product._id; // Access the correct product ID
+            const cartItemAmount = cartItems[productId];
+            const isInWishlist = wishlist.some((item) => item._id === productId);
+            return (
+              <div className="product-card" key={productId}>
             <div className="image-container">
               <img
                 src={product.image[0]}
@@ -48,7 +49,7 @@ const ResultPage = () => {
                 className="add-to-cart"
                 onClick={(e) => {
                   e.preventDefault()
-                  addToCart(product.id)
+                  addToCart(product._id)
                 }}
               >
                 Add to cart {cartItemAmount > 0 && `(${cartItemAmount})`}
@@ -57,7 +58,7 @@ const ResultPage = () => {
             <div className="product-info">
               <h2 
                 className="product-name"
-                onClick={() => handleProductClick(product.id)}
+                onClick={() => handleProductClick(product._id)}
                 style={{ cursor: 'pointer' }}
               >
                 {product.name}
