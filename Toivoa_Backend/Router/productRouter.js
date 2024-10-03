@@ -9,18 +9,18 @@ const {
 } = require('../Controller/productController');
 
 //GET /products
-router.get('/',getProductsbyNumberorAll);
+router.get('/', getProductsbyNumberorAll);
 
 //GET /products/:productID
-router.get('/:productID',getProductbyID);
+router.get('/:productID', getProductbyID);
 
 //POST /products
-router.post('/',createProduct);
+router.post('/', createProduct);
 
 //PUT /products/:productID
-router.put('/:productID',updateProduct);
+router.put('/:productID', updateProduct);
 
 //DELETE /products/:productID
-router.delete('/:productID',deleteProduct);
+router.delete('/:productID', deleteProduct);
 
 module.exports = router;

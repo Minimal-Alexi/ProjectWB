@@ -20,12 +20,14 @@ const userRouter = require("./Router/userRouter");
 const productRouter = require("./Router/productRouter");
 const orderRouter = require("./Router/orderRouter");
 const adRouter = require("./Router/adRouter");
+const commentRouter = require("./Router/commentRouter");
 
 // App
-app.use("/api/users",userRouter);
-app.use("/api/products",productRouter);
-app.use("/api/orders",orderRouter);
-app.use("/api/ads",adRouter);
+app.use("/api/users", userRouter);
+app.use("/api/products", productRouter);
+app.use("/api/orders", orderRouter);
+app.use("/api/ads", adRouter);
+app.use("/api/comments", commentRouter);
 
 // Error handling
 app.use(unknownEndpoint);

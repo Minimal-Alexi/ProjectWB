@@ -16,13 +16,14 @@ const colorSchema = new mongoose.Schema({
     }
 })
 
+
 /*
     commentID:"21903DKSAKJ"
     userID:"9138249iISDAJFDKA"
     rating: 3.5
     comment:"Shit product."
     date: "04.01.1994"
-*/
+
 
 const reviewSchema = new mongoose.Schema({
     userID: 
@@ -48,6 +49,7 @@ const reviewSchema = new mongoose.Schema({
         default: Date.now 
     }
 });
+*/
 
 /*
     productID:"9138249iISDAJFDKA"
@@ -97,11 +99,11 @@ productSchema = new Schema(
             type:[colorSchema],
             required:false
         },
-        reviewList:
+        /*reviewList:
         {
             type: [reviewSchema],
             required: false,
-        },
+        },*/
         price:
         {
             type: Number,
