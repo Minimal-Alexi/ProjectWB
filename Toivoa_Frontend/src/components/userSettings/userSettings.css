@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     padding: 2rem 4rem;
-    height:75vh;
+    /* height:75vh; */
 }
 
 .navigate-text {
@@ -47,7 +47,9 @@
 .user-form {
     /* padding: 2rem 2rem; */
     /* flex: 1; */
-    min-width: 50vw;
+    /* min-width: 50vw; */
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -57,8 +59,7 @@
 
 .info-section {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: .6rem;
+    /* margin-bottom: .6rem; */
 }
 
 .info {
@@ -119,4 +120,16 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.1s;
+}
+
+
+
+@media (max-width: 768px){
+    .user-container{
+        flex-direction: column;
+    }
+    .info-section {
+        display: flex;
+        flex-direction: column;
+    }
 }
