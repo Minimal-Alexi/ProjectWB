@@ -1,87 +1,80 @@
-import Image from '../../images/image.jpeg';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useLogin from '../../hooks/useLogin';
+import useField from '../../hooks/useField';
+import Image from '../../images/image.jpeg';
 
 const Login = ({ switchToCreate, closeEvent }) => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const emailField = useField('email', email, setEmail);
+    const passwordField = useField('password', password, setPassword);
+
+    const { login, error } = useLogin('/api/users/login');
 
     const [showErrorNotFilled, setShowErrorNotFilled] = useState(false);
     const [showErrorNotMatch, setShowErrorNotMatch] = useState(false);
 
-    const handleLogin = async (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            if (!email || !password) {
-                setShowErrorNotMatch(false);
-                setShowErrorNotFilled(true);
-            } else {
-                const response = await fetch('/api/users/login', {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ email, password })
-                });
+        if (!email || !password) {
+            setShowErrorNotFilled(true);
+            setShowErrorNotMatch(false);
+            return;
+        }
 
-                if (response.ok) {
-                    const user = await response.json();
-                    sessionStorage.setItem('user', JSON.stringify(user));
-                    console.log("User logged in successfully");
-                    setEmail('');
-                    setPassword('');
+        await login({
+            email: email,
+            password: password,
+        });
 
-                    setShowErrorNotFilled(false);
-                    setShowErrorNotMatch(false);
-                } else {
-                    console.error('Signup failed');
-                    setShowErrorNotMatch(true);
-                }
-            }
-        } catch (error) {
-            console.error("Error during login:", error);
+        if (!error) {
+            setShowErrorNotFilled(false);
+            setShowErrorNotMatch(false);
+            console.log('User logged in successfully');
+            navigate('/');
+        } else {
+            setShowErrorNotMatch(true);
+            console.error('Login failed');
         }
     };
 
     return (
         <div className="white-rectangle">
             <div className="invisible-rectangle">
-                <img src={Image} alt='Image' className='image' />
+                <img src={Image} alt="Image" className="image" />
             </div>
             <div>
-                <form onSubmit={handleLogin}>
+                <form onSubmit={handleFormSubmit}>
                     <ul className="submit-stuff">
                         <li><h1 className="login-title">Log in</h1></li>
                         <li>
                             <input
-                                type="email"
+                                {...emailField}
                                 id="email"
                                 name="email"
                                 placeholder="Enter your email"
                                 className="input"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </li>
                         <li>
                             <input
-                                type="password"
+                                {...passwordField}
                                 id="password"
                                 name="password"
                                 placeholder="Enter your password"
                                 className="input"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </li>
                         <li>
-                            {showErrorNotFilled ? <h4>Fill all the fields</h4> : null}
+                            {showErrorNotFilled && <h4>Fill all the fields</h4>}
+                            {showErrorNotMatch && <h4>Email and password do not match</h4>}
                         </li>
                         <li>
-                            {showErrorNotMatch ? <h4>Email and password does not match</h4> : null}
-                        </li>
-                        <li>
-                            <button type="submit">Submit</button>
+                            <button type="submit">Log in</button>
                         </li>
                         <li>
                             <a onClick={switchToCreate} className="switch-to-create">Don't have an account?</a>

@@ -1,142 +1,118 @@
-const Users = require('../Models/userModel');
-const mongoose = require("mongoose");
-
-//GET /users
-const getAllUsers = async (req, res) => {
-    try {
-        const users = await Users.find({}).sort({ createdAt: -1 });
-        res.status(200).json(users);
-    }
-    catch (error) {
-        res.status(500).json({ message: "Failed to retrieve users." });
-    }
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const User = require('../Models/userModel'); 
+// Generate JWT
+const generateToken = (_id) => {
+  return jwt.sign({ _id }, process.env.SECRET, {
+    expiresIn: "3d",
+  });
 };
 
-//GET /users/:userID
+// @desc    Register new user
+// @route   POST /api/users/signup
+// @access  Public
+const signupUser = async (req, res) => {
+  const {
+    username,
+    email,
+    firstName,
+    lastName,
+    password,
+    phoneNumber,
+    accountType,
+    countryCode,
+    location,
+    age,
+    gender,
+  } = req.body;
 
-const getUserbyID = async (req, res) => {
-    const userID = req.params.userID;
-    if (!mongoose.Types.ObjectId.isValid(userID)) {
-        return res.status(400).json({ message: "Invalid userID" })
+  try {
+    // Ensure all required fields are present
+    if (
+      !username ||
+      !email ||
+      !firstName ||
+      !lastName ||
+      !password ||
+      !accountType ||
+      !countryCode ||
+      !location ||
+      !age ||
+      !gender
+    ) {
+      res.status(400);
+      throw new Error("Please add all required fields");
     }
-    try {
-        const user = await Users.findById(userID);
-        if (user) {
-            res.status(200).json(user);
-        }
-        else {
-            res.status(404).json({ message: "User not found." });
-        }
+
+    // Check if user already exists
+    const userExists = await User.findOne({ username });
+
+    if (userExists) {
+      res.status(400);
+      throw new Error("User already exists");
     }
-    catch (error) {
-        res.status(500).json({ message: "Failed to retrieve user." });
+
+    // Hash password and generate a password salt
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create user
+    const user = await User.create({
+      username,
+      email,
+      firstName,
+      lastName,
+      password: hashedPassword,
+      passwordSalt: salt,
+      accountType,
+      countryCode,
+      location,
+      phoneNumber,
+      age,
+      gender,
+    });
+
+    if (user) {
+      const token = generateToken(user._id);
+      res.status(201).json({ username: user.username, token });
+    } else {
+      res.status(400);
+      throw new Error("Invalid user data");
     }
-}
-
-//POST /users
-
-const createUser = async (req, res) => {
-    try {
-        const { createToken } = require('../Middleware/jwtHandling');
-        const { passwordEncryption } = require('../Middleware/passwordHandling');
-
-        const passwordEssentials = await passwordEncryption(req.body.password)
-        req.body.password = passwordEssentials.hashedPassword;
-        req.body.passwordSalt = passwordEssentials.passwordSalt;
-        const newUser = await Users.create({ ...req.body });
-
-        //Create JWT Token
-        token = createToken(newUser._id);
-
-        res.status(201).json({ message: "User registered successfully", token });
-    }
-    catch (error) {
-        console.error(error);
-        res.status(400).json({ message: "Failed to create user", error: error.message });
-    }
-}
-
-//POST /users/login
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 const loginUser = async (req, res) => {
-    try {
-        const { createToken } = require('../Middleware/jwtHandling');
+  const { username, password } = req.body;
 
-        const {email,password} = req.body;
-        const user = await Users.findOne({email});
-        if(!user)
-            {
-                return res.status(400).json({message:"Invalid credentials"});
-            }
-        const {comparePassword}  = require('../Middleware/passwordHandling');
-        const isMatch = await comparePassword(password,user.password);
-        if(!isMatch)
-            {
-                return res.status(400).json({message:"Invalid credentials"});
-            }
-        //Create JWT Token
-        token = createToken(user._id);
-        res.status(200).json({message:"Login succesful",token});
-    }
-    catch (error)
-    {
-        console.error(error);
-        res.status(500).json({ error: "Server error" });
-    }
-}
+  try {
+    // Check for the user by username
+    const user = await User.findOne({ username });
 
-//PUT /users/:userID
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const token = generateToken(user._id);
+      res.status(200).json({ username: user.username, token });
+    } else {
+      res.status(400);
+      throw new Error("Invalid credentials");
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
-const updateUser = async (req, res) => {
-    const userID = req.params.userID;
-    if (!mongoose.Types.ObjectId.isValid(userID)) {
-        return res.status(400).json({ message: "Invalid userID" })
-    }
-    try {
-        const updatedUser = await Users.findOneAndUpdate(
-            { _id: userID },
-            { ...req.body },
-            { new: true, overwrite: true },
-        )
-        if (updatedUser) {
-            res.status(200).json(updatedUser);
-        }
-        else {
-            res.status(404).json({ message: "User not found." });
-        }
-    }
-    catch (error) {
-        res.status(500).json({ message: "Failed to update user." });
-    }
-}
+const getMe = async (req, res) => {
+  try {
+    res.status(200).json(req.user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
-//DELETE /users/:userID
-
-const deleteUser = async (req, res) => {
-    const userID = req.params.userID;
-    if (!mongoose.Types.ObjectId.isValid(userID)) {
-        return res.status(400).json({ message: "Invalid userID" })
-    }
-    try {
-        const deletedUser = await Users.findOneAndDelete({ _id: userID })
-        if (deletedUser) {
-            res.status(200).json({ message: "User deleted successfully." });
-        }
-        else {
-            res.status(404).json({ message: "User not found." });
-        }
-    }
-    catch (error) {
-        res.status(500).json({ message: "Failed to update user." });
-    }
-}
-
-module.exports =
-{
-    getAllUsers,
-    getUserbyID,
-    createUser,
-    loginUser,
-    updateUser,
-    deleteUser
-}
+module.exports = {
+  signupUser,
+  loginUser,
+  getMe,
+};

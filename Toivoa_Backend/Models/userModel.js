@@ -44,16 +44,11 @@ const userSchema = new Schema(
             type:String,
             required:true,
         },
-        passwordSalt:
-        {
-            type:String,
-            required:true,
-        },
-        accountType:
-        {
-            type:Number,
-            required:true,
-        },
+        accountType: {
+            type: String,
+            required: true,
+            enum: ['consumer', 'seller', 'market vendor'], // Define the choices for accountType
+          },
         countryCode:
         {
             type:String,
