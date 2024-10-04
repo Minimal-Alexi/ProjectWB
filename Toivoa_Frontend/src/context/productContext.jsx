@@ -26,6 +26,38 @@ export const ProductProvider = ({ children }) => {
             console.error('Failed to fetch products');
         }
     }
+
+    const fetchProductbyID = async (id) => {
+            try
+            {
+                const link = `api/products/${id}`;
+                const response = await fetch(link,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-type": "application/json",
+                        },
+                    }
+                );
+                console.log(response);
+                if (response.ok)
+                    {
+                        const data = await response.json();
+                        if(!products.includes(data))
+                            {
+                                setProducts(prevProducts => [...prevProducts,data])
+                            }
+                        return data;
+                    }
+            }
+            catch (err)
+            {
+                console.error(err);
+                console.error("Failed to fetch product.");
+                return null;
+            }
+        }
+
     useEffect(() => {
         const storedProducts = sessionStorage.getItem("products");
         if (storedProducts) {
@@ -36,7 +68,7 @@ export const ProductProvider = ({ children }) => {
     }, []);
 
     return (
-        <ProductContext.Provider value={{ products, setProducts, fetchProducts }}>
+        <ProductContext.Provider value={{ products, setProducts, fetchProducts,fetchProductbyID}}>
             {children}
         </ProductContext.Provider>
     );
