@@ -2,12 +2,15 @@ const mongoose = require("mongoose");
 require('dotenv').config();
 
 const connectDB = async () => {
+  const MONGO_URI = process.env.NODE_ENV === 'test'
+  ? process.env.TEST_MONGO_URI
+  : process.env.MONGO_URI
   const maxRetries = 5;
   let attempts = 0;
 
   while (attempts < maxRetries) {
     try {
-      const conn = await mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/web-dev");
+      const conn = await mongoose.connect(MONGO_URI || "mongodb://localhost:27017/web-dev");
       console.log(`MongoDB Connected: ${conn.connection.host}`);
       return; // Exit the function if connected successfully
     } catch (error) {
