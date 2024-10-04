@@ -3,7 +3,7 @@ import main_logo from "../../images/main_logo.png";
 import { useState, useEffect, useRef, useContext} from 'react';
 import Create from '../loginRegistryPage/Create';
 import Login from '../loginRegistryPage/Login';
-import { products } from "../../data.js";
+import { ProductContext } from "../../context/productContext.jsx";
 import '../loginRegistryPage/login-create.css';
 import { ShoppingCart, MagnifyingGlass, Heart, User } from "phosphor-react";
 import { FilterContext } from "../resultPage/FilterContext.js";
@@ -15,6 +15,7 @@ const NavBar = () => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const { setFilteredItems } = useContext(FilterContext);
+  const { products } = useContext(ProductContext);
 
   const popupRef = useRef(null);
 
