@@ -3,7 +3,8 @@ const router = express.Router();
 const {
     getComments,
     createComment,
-    updateComment
+    updateComment,
+    deleteComment
 } = require('../Controller/commentController');
 
 //GET /comments

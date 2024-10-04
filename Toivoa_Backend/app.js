@@ -3,8 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
-require('dotenv').config();
-const port = process.env.PORT || 4000;
+
 
 const logger = require("./Middleware/logger");
 const { unknownEndpoint, errorHandler } = require("./Middleware/errorHandling");
@@ -32,8 +31,6 @@ app.use("/api/comments", commentRouter);
 // Error handling
 app.use(unknownEndpoint);
 app.use(errorHandler);
+// Export server
 
-// Start the server
-app.listen(port, () => {
-  console.log(`The server is running at http://localhost:${port}`);
-});
+module.exports = app;
