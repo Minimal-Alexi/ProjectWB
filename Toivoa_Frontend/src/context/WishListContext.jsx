@@ -7,7 +7,7 @@ export const WishListProvider = ({ children }) => {
 
   const addToWishlist = (product) => {
     setWishlist((prevWishlist) => {
-      if (!prevWishlist.find((item) => item.id === product.id)) {
+      if (!prevWishlist.find((item) => item._id === product._id)) {
         return [...prevWishlist, product];
       }
       return prevWishlist;
@@ -16,7 +16,7 @@ export const WishListProvider = ({ children }) => {
 
   const removeFromWishlist = (productId) => {
     setWishlist((prevWishlist) =>
-      prevWishlist.filter((item) => item.id !== productId)
+      prevWishlist.filter((item) => item._id !== productId)
     );
   };
 

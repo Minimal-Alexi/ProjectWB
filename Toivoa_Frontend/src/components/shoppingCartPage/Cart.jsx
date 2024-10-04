@@ -1,5 +1,5 @@
-import { products } from "../../data.js";
 import { ShopContext } from "../../context/shopContext.jsx";
+import { ProductContext } from "../../context/productContext";
 import { useContext } from "react";
 import { CartItem } from "./CartItem.jsx";
 import style from "./Cart.module.css";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Cart = () => {
   const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
+  const { products } = useContext(ProductContext);
   const totalAmount = getTotalCartAmount();
 
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export const Cart = () => {
       </div>
       <div className={style.cart}>
         {products.map((product, index) => {
-          if (cartItems[product.id] !== 0) {
+          if (cartItems[product._id] !== 0) {
             return <CartItem data={product} key={index} />;
           }
         })}

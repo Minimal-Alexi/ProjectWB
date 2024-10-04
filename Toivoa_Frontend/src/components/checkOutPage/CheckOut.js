@@ -1,4 +1,6 @@
-import useField from "./useField";
+import { useContext } from "react";
+import { ShopContext } from "../../context/shopContext";
+import useField from "../../hooks/useField";
 import { products } from "../../data";
 import "./CheckOut.css";
 
@@ -11,6 +13,8 @@ const CheckOut = () => {
   const phoneNumber = useField("tel");
   const emailInput = useField("email");
 
+
+  const { cartItems } = useContext(ShopContext);
   const handleSubmit = (e) => {
     e.preventDefault();
   };

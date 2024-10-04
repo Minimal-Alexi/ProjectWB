@@ -1,8 +1,8 @@
 import "./ProductPage.css";
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { relatedProducts } from "../../data";
 
+import getRandomProducts from "../../hooks/randomProductGetter.js";
 import { ProductContext } from "../../context/productContext.jsx";
 import RelatedProductCard from "./RelatedProductCard";
 import BuyNow from "./BuyNow";
@@ -12,24 +12,34 @@ import ColorSelect from "./ColorSelect";
 import DeliveryInfo from "./DeliveryInfo"
 
 const ProductPage = () => {
+  const relatedProductNumber = 4;
+
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
   const [product, setProduct] = useState(null);
-  const { products } = useContext(ProductContext);
+  const { products, fetchProductbyID } = useContext(ProductContext);
 
   useEffect(() => {
-    // Find the product based on the ID from the URL
-    const foundProduct = products.find(p => p._id === id);
-    if (foundProduct) {
-      setProduct(foundProduct);
-      // console.log('product is: ',foundProduct)
-      setSelectedImage(foundProduct.image[0]); // Changed from 'images' to 'image'
-      foundProduct.image.map((img,index) =>
-        {
-          console.log(img,index);
-        })
-    }
-  }, [id]);
+    const fetchAndSetProduct = async () => {
+      // Find the product based on the ID from the URL
+      const foundProduct = products.find(p => p._id === id);
+
+      if (foundProduct) {
+          setProduct(foundProduct);
+          setSelectedImage(foundProduct.image[0]); // Use the first image
+      } else {
+          const product = await fetchProductbyID(id); // Await the asynchronous call
+          if (product) {
+              setProduct(product);
+              setSelectedImage(product.image[0]); // Use the first image
+          }
+      }
+  };
+
+  fetchAndSetProduct(); // Call the function
+  }, [id,products]);
+
+  const relatedProducts = getRandomProducts(products,relatedProductNumber);
 
   if (!product) {
     return <div>Loading...</div>;
@@ -87,7 +97,7 @@ const ProductPage = () => {
       <div className="product-card-container-related">
         {relatedProducts
           .map((relatedProduct) => (
-            <RelatedProductCard {...relatedProduct} key={relatedProduct.id} />
+            <RelatedProductCard {...relatedProduct} key={relatedProduct._id} />
           ))}
       </div>
     </div>

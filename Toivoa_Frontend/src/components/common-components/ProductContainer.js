@@ -43,7 +43,7 @@ const ProductContainer = () => {
                 className="add-to-cart"
                 onClick={(e) => {
                   e.preventDefault()
-                  addToCart(product.id)
+                  addToCart(product._id)
                 }}
               >
                 Add to cart {cartItemAmount > 0 && `(${cartItemAmount})`}

@@ -144,6 +144,104 @@
       ],
       "reviewList": [],
       "price": 88.28
-    }
+    },
+    {
+      "vendorID": "66f12510204a57f78e48da0f",
+      "name": "Wooden Armchair",
+      "description": "Comfortable armchair with cushioned seating, perfect for living rooms.",
+      "image": ["./images/armchair.jpg", "./images/armchair.jpg", "./images/armchair.jpg"],
+      "sizes": [],
+      "isInStock": true,
+      "colors": [
+        { "name": "Dark Brown", "hex": "#5C4033" },
+        { "name": "Light Beige", "hex": "#F5F5DC" }
+      ],
+      "reviewList": [],
+      "price": 150.50
+    },
+    {
+      "vendorID": "66f12510204a57f78e48da0d",
+      "name": "Queen Size Bed",
+      "description": "Modern queen-sized bed frame with minimalist design and sturdy build.",
+      "image": ["./images/bed.jpg", "./images/bed.jpg"],
+      "sizes": [],
+      "isInStock": true,
+      "colors": [
+        { "name": "White", "hex": "#FFFFFF" },
+        { "name": "Gray", "hex": "#808080" }
+      ],
+      "reviewList": [],
+      "price": 320.75
+    },
+    {
+      "vendorID": "66f12510204a57f78e48da0f",
+      "name": "Dining Chair",
+      "description": "Elegant dining chair with cushioned seat, perfect for formal dining setups.",
+      "image": ["./images/chair.jpg", "./images/chair.jpg"],
+      "sizes": [],
+      "isInStock": false,
+      "colors": [
+        { "name": "Black", "hex": "#0c1417" },
+        { "name": "Red", "hex": "#C41E3A" }
+      ],
+      "reviewList": [],
+      "price": 75.00
+    },
+    {
+      "vendorID": "66f12510204a57f78e48da0f",
+      "name": "Ergonomic Office Chair",
+      "description": "Adjustable office chair with lumbar support, breathable mesh back, and smooth-rolling wheels.",
+      "image": ["./images/chair.jpg", "./images/chair.jpg"],
+      "sizes": [],
+      "isInStock": true,
+      "colors": [
+        { "name": "Black", "hex": "#0c1417" },
+        { "name": "Blue", "hex": "#1e90ff" }
+      ],
+      "reviewList": [],
+      "price": 129.99
+    },
+    {
+      "vendorID": "66f12510204a57f78e48da0d",
+      "name": "Luxury King Bed",
+      "description": "King-size bed with a sleek design, upholstered headboard, and high-quality frame.",
+      "image": ["./images/bed.jpg", "./images/bed.jpg", "./images/bed.jpg"],
+      "sizes": [],
+      "isInStock": false,
+      "colors": [
+        { "name": "Dark Gray", "hex": "#2F4F4F" },
+        { "name": "Beige", "hex": "#F5F5DC" }
+      ],
+      "reviewList": [],
+      "price": 450.00
+    },
+    {
+      "vendorID": "66f12510204a57f78e48da0f",
+      "name": "Classic Wooden Armchair",
+      "description": "Vintage wooden armchair with plush cushions, suitable for any modern or classic living room.",
+      "image": ["./armchair.jpg", "./armchair.jpg"],
+      "sizes": [],
+      "isInStock": true,
+      "colors": [
+        { "name": "Chestnut Brown", "hex": "#CD5C5C" },
+        { "name": "Ivory", "hex": "#FFFFF0" }
+      ],
+      "reviewList": [],
+      "price": 215.89
+    },
+    {
+      "vendorID": "66f12510204a57f78e48da0d",
+      "name": "Minimalist Dining Chair",
+      "description": "Simple yet elegant dining chair crafted from high-quality materials with a sleek design.",
+      "image": ["./images/chair.jpg", "./images/chair.jpg"],
+      "sizes": [],
+      "isInStock": false,
+      "colors": [
+        { "name": "Oak", "hex": "#D2B48C" },
+        { "name": "Black", "hex": "#0c1417" }
+      ],
+      "reviewList": [],
+      "price": 59.99
+    }        
   ]
   
