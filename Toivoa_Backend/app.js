@@ -31,7 +31,5 @@ app.use("/api/ads",adRouter);
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
-// Start the server
-app.listen(port, () => {
-  console.log(`The server is running at http://localhost:${port}`);
-});
+// Export the server
+module.exports = app;
