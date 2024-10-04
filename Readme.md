@@ -24,7 +24,7 @@ In effect, Toivoa means to facilitate the trade of goods, services and informati
 
 ## 1.3 Setup
 
-If you want to test and to use the backend of the application, make sure to use the .env.template file to create a file called ".env" of the same type. Adjust the values accordingly.
+If you want to test and to use the backend of the application, make sure to use the .env.template file to create a file called ".env" of the same type. Adjust the values accordingly. In the frontend, you can modify the serverProxy file to send the information to a different api server.
 
 Make sure to run <code>npm install</code> in all the apropiate folders.
 
@@ -39,3 +39,6 @@ This is to ensure that the merging process will all be handled by one person at 
 # 2.0 Run
 
 In order for the application to run succesfully, both the frontend and backend apps need to run at the same time.
+
+## 2.1 Database Management
+

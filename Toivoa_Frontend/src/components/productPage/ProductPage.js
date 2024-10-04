@@ -30,7 +30,6 @@ const ProductPage = () => {
       } else {
           const product = await fetchProductbyID(id); // Await the asynchronous call
           if (product) {
-              console.log(product);
               setProduct(product);
               setSelectedImage(product.image[0]); // Use the first image
           }

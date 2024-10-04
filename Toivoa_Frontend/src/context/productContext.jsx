@@ -30,7 +30,8 @@ export const ProductProvider = ({ children }) => {
     const fetchProductbyID = async (id) => {
             try
             {
-                const link = `api/products/${id}`;
+                const link = `/api/products/${id}`;
+                console.log(link);
                 const response = await fetch(link,
                     {
                         method: "GET",
