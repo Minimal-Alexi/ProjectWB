@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import findUsername from "../../hooks/findUsername";
-import starDisplay from "../../hooks/reviewDisplay";
+import StarDisplay from "../../hooks/reviewDisplay";
 
 /*
     userID:"9138249iISDAJFDKA"
@@ -26,7 +26,7 @@ const ReviewCard = (props) => {
                 <h4>{username}</h4>
                 <p>{props.date}</p>
             </span>
-            <starDisplay score={props.rating} />
+            <StarDisplay score={props.rating} />
             <p>{props.comment}</p>
         </div>
     );
