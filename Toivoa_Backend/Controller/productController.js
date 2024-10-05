@@ -151,7 +151,7 @@ const deleteComment = async (req, res) => {
     try {
         const foundProduct = await Products.findById(productID);
         const deleteReviewID = req.body.deleteReviewID
-        const updatedReviewList =foundProduct.reviewList.filter(review => review._id !== deleteReviewID)
+        const updatedReviewList =foundProduct.reviewList.filter(review => review._id.toString() !== deleteReviewID)
         if (updatedReviewList.length === foundProduct.reviewList.length) {
             return res.status(404).json({ message: "Comment not found" });
         }
@@ -161,7 +161,8 @@ const deleteComment = async (req, res) => {
 
     }
     catch (err) {
-        res.status(500).json({ message: "Failed to add comment." });
+        console.error(err);
+        res.status(500).json({ message: "Failed to delete comment." });
     }
 }
 
