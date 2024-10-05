@@ -52,7 +52,7 @@ const createUser = async (req, res) => {
         res.status(201).json({ message: "User registered successfully", token });
     }
     catch (error) {
-        console.error(error);
+        //console.error(error);
         res.status(400).json({ message: "Failed to create user", error: error.message });
     }
 }
