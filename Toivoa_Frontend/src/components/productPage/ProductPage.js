@@ -11,6 +11,7 @@ import ProductInfo from "./ProductInfo";
 import ColorSelect from "./ColorSelect";
 import DeliveryInfo from "./DeliveryInfo"
 import ReviewCard from "./ReviewCard.js";
+import AddReviewField from "./AddReviewField.js";
 
 const ProductPage = () => {
   const relatedProductNumber = 4;
@@ -27,12 +28,12 @@ const ProductPage = () => {
 
       if (foundProduct) {
         setProduct(foundProduct);
-        setSelectedImage(foundProduct.image[0]); // Use the first image
+        setSelectedImage(foundProduct.image[0]); //We use the first image for display.
       } else {
-        const product = await fetchProductbyID(id); // Await the asynchronous call
+        const product = await fetchProductbyID(id); 
         if (product) {
           setProduct(product);
-          setSelectedImage(product.image[0]); // Use the first image
+          setSelectedImage(product.image[0]);
         }
       }
       console.log(product);
@@ -93,7 +94,9 @@ const ProductPage = () => {
         </div>
       </div>
       <div className="review-container">
-        {Array.isArray(product.reviewList) ? (
+        <h4>Reviews</h4>
+        <AddReviewField/>
+        {Array.isArray(product.reviewList) && product.reviewList.length > 0 ? (
           product.reviewList.map((review, index) => (
             <ReviewCard {...review} key={index} />
           ))
