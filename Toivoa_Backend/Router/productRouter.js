@@ -5,7 +5,9 @@ const {
     getProductbyID,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    addComment,
+    deleteComment
 } = require('../Controller/productController');
 
 //GET /products
@@ -22,5 +24,11 @@ router.put('/:productID',updateProduct);
 
 //DELETE /products/:productID
 router.delete('/:productID',deleteProduct);
+
+//POST /products/comments
+router.post('/:productID/comments',addComment);
+
+//DELETE /products/comments
+router.delete('/:productID/comments',deleteComment);
 
 module.exports = router;

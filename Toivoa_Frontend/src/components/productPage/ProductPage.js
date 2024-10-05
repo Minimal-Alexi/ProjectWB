@@ -10,6 +10,8 @@ import SizeSelect from "./SizeSelect";
 import ProductInfo from "./ProductInfo";
 import ColorSelect from "./ColorSelect";
 import DeliveryInfo from "./DeliveryInfo"
+import ReviewCard from "./ReviewCard.js";
+import AddReviewField from "./AddReviewField.js";
 
 const ProductPage = () => {
   const relatedProductNumber = 4;
@@ -25,21 +27,22 @@ const ProductPage = () => {
       const foundProduct = products.find(p => p._id === id);
 
       if (foundProduct) {
-          setProduct(foundProduct);
-          setSelectedImage(foundProduct.image[0]); // Use the first image
+        setProduct(foundProduct);
+        setSelectedImage(foundProduct.image[0]); //We use the first image for display.
       } else {
-          const product = await fetchProductbyID(id); // Await the asynchronous call
-          if (product) {
-              setProduct(product);
-              setSelectedImage(product.image[0]); // Use the first image
-          }
+        const product = await fetchProductbyID(id); 
+        if (product) {
+          setProduct(product);
+          setSelectedImage(product.image[0]);
+        }
       }
-  };
+      console.log(product);
+    };
 
-  fetchAndSetProduct(); // Call the function
-  }, [id,products]);
+    fetchAndSetProduct(); // Call the function
+  }, [id, products]);
 
-  const relatedProducts = getRandomProducts(products,relatedProductNumber);
+  const relatedProducts = getRandomProducts(products, relatedProductNumber);
 
   if (!product) {
     return <div>Loading...</div>;
@@ -74,7 +77,7 @@ const ProductPage = () => {
         />
 
         <div className="product-details-text">
-          
+
           <ProductInfo {...product} />
           <div className="color-select-wrapper">
             <h4>Colours:</h4>
@@ -89,6 +92,17 @@ const ProductPage = () => {
           <BuyNow product={product} />
           <DeliveryInfo />
         </div>
+      </div>
+      <div className="review-container">
+        <h4>Reviews</h4>
+        <AddReviewField/>
+        {Array.isArray(product.reviewList) && product.reviewList.length > 0 ? (
+          product.reviewList.map((review, index) => (
+            <ReviewCard {...review} key={index} />
+          ))
+        ) : (
+          <p>No reviews available</p>
+        )}
       </div>
       <div className="related-items-container">
         <div className="related-items-padding"></div>

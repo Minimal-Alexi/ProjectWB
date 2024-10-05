@@ -31,7 +31,6 @@ export const ProductProvider = ({ children }) => {
             try
             {
                 const link = `/api/products/${id}`;
-                console.log(link);
                 const response = await fetch(link,
                     {
                         method: "GET",
@@ -40,7 +39,6 @@ export const ProductProvider = ({ children }) => {
                         },
                     }
                 );
-                console.log(response);
                 if (response.ok)
                     {
                         const data = await response.json();
