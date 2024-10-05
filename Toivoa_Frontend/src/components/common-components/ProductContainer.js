@@ -1,3 +1,6 @@
+import StarDisplay from "../../hooks/reviewDisplay";
+import reviewScoreAvg from "../../hooks/reviewScoreAvg";
+
 //import { products } from "../../data.js";
 import { ProductContext } from "../../context/productContext.jsx";
 import { ShopContext } from "../../context/shopContext.jsx";
@@ -11,7 +14,6 @@ const ProductContainer = () => {
   const { addToWishlist, wishlist } = useContext(WishListContext); // Get the addToWishlist function from context
   const { products } = useContext(ProductContext);
 
-
   const navigate = useNavigate();
 
   const handleProductClick = (productId) => {
@@ -21,6 +23,7 @@ const ProductContainer = () => {
   return (
     <section className="product-container">
       {products.map((product) => {
+        const average = reviewScoreAvg(product.reviewList);
         const cartItemAmount = cartItems[product._id];
         const isInWishlist = wishlist.some((item) => item.id === product._id);
         return (
@@ -58,7 +61,7 @@ const ProductContainer = () => {
                 {product.name}
               </h2>
               <p className="product-price">${product.price}</p>
-              <p className="product-reviews">{product.reviews}</p>
+              <StarDisplay score={average}/>
             </div>
           </div>
         );
