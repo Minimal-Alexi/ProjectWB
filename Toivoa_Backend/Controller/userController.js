@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 //GET /users
 const getAllUsers = async (req, res) => {
     try {
-        const users = await Users.find({}).sort({ createdAt: -1 });
+        //The select is here so password can't be leaked.
+        const users = await Users.find({}).select('-password').sort({ createdAt: -1 });
         res.status(200).json(users);
     }
     catch (error) {
@@ -20,7 +21,8 @@ const getUserbyID = async (req, res) => {
         return res.status(400).json({ message: "Invalid userID" })
     }
     try {
-        const user = await Users.findById(userID);
+        //The select is here so password can't be leaked.
+        const user = await Users.findById(userID).select('-password');
         if (user) {
             res.status(200).json(user);
         }
