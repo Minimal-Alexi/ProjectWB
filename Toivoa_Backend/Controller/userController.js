@@ -41,8 +41,7 @@ const createUser = async (req, res) => {
         const { passwordEncryption } = require('../Middleware/passwordHandling');
 
         const passwordEssentials = await passwordEncryption(req.body.password)
-        req.body.password = passwordEssentials.hashedPassword;
-        req.body.passwordSalt = passwordEssentials.passwordSalt;
+        req.body.password = passwordEssentials;
         const newUser = await Users.create({ ...req.body });
 
         //Create JWT Token

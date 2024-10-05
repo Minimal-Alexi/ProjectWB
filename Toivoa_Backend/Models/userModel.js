@@ -44,11 +44,6 @@ const userSchema = new Schema(
             type:String,
             required:true,
         },
-        passwordSalt:
-        {
-            type:String,
-            required:true,
-        },
         accountType:
         {
             type:Number,
