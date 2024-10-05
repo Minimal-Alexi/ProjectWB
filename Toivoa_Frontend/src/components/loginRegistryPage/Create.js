@@ -9,17 +9,17 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
   const navigate = useNavigate();
 
   // Local state for user inputs
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [password, setPassword] = useState('');
-  const [location, setLocation] = useState('');
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
-  const [accountType, setAccountType] = useState('');
-  const [countryCode, setCountryCode] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
+  const [location, setLocation] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [accountType, setAccountType] = useState("");
+  const [countryCode, setCountryCode] = useState("");
 
   // Field hooks for user input
   const usernameField = useField("text", username, setUsername);
@@ -77,7 +77,10 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
             </li>
             <li>
               <label>Username:</label>
-              <input {...usernameField} placeholder="Enter your account username" />
+              <input
+                {...usernameField}
+                placeholder="Enter your account username"
+              />
             </li>
             <li>
               <label>Email:</label>
@@ -85,7 +88,10 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
             </li>
             <li>
               <label>Phone Number:</label>
-              <input {...phoneNumberField} placeholder="Enter your phone number" />
+              <input
+                {...phoneNumberField}
+                placeholder="Enter your phone number"
+              />
             </li>
             <li>
               <label>First Name:</label>
@@ -103,9 +109,9 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
               <label>Account Type:</label>
               <select {...accountTypeField}>
                 <option defaultValue>Select account type</option>
-                <option value={accountTypeField.value}>Consumer</option>
-                <option value={accountTypeField.value}>Seller</option>
-                <option value={accountTypeField.value}>Marketer Vendor</option>
+                <option value="consumer">Consumer</option>
+                <option value="seller">Seller</option>
+                <option value="market vendor">Marketer Vendor</option>
               </select>
             </li>
             <li>
@@ -131,9 +137,9 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
               <label>Gender:</label>
               <select {...genderField}>
                 <option defaultValue>Select gender</option>
-                <option value={genderField.value}>Male</option>
-                <option value={genderField.value}>Female</option>
-                <option value={genderField.value}>Other</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
               </select>
             </li>
             <li>
