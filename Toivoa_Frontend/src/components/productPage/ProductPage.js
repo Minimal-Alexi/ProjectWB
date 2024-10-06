@@ -36,7 +36,7 @@ const ProductPage = () => {
           setSelectedImage(product.image[0]);
         }
       }
-      console.log(product);
+      //console.log(product);
     };
 
     fetchAndSetProduct(); // Call the function
@@ -95,7 +95,7 @@ const ProductPage = () => {
       </div>
       <div className="review-container">
         <h4>Reviews</h4>
-        <AddReviewField/>
+        <AddReviewField _id = {product._id}/>
         {Array.isArray(product.reviewList) && product.reviewList.length > 0 ? (
           product.reviewList.map((review, index) => (
             <ReviewCard {...review} key={index} />
