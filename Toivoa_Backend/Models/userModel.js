@@ -46,9 +46,8 @@ const userSchema = new Schema(
         },
         accountType:
         {
-            type:String,
+            type:Number,
             required:true,
-            enum: ['consumer', 'seller', 'market vendor'],
         },
         countryCode:
         {

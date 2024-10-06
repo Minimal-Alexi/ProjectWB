@@ -1,6 +1,6 @@
 const { createToken } = require('../Middleware/jwtHandling');
 const bcrypt = require("bcrypt");
-const User = require('../Models/userModel');
+const Users = require('../Models/userModel');
 const mongoose = require("mongoose");
 
 //GET /users
@@ -44,8 +44,7 @@ const createUser = async (req, res) => {
       const { passwordEncryption } = require('../Middleware/passwordHandling');
 
       const passwordEssentials = await passwordEncryption(req.body.password)
-      req.body.password = passwordEssentials.hashedPassword;
-      req.body.passwordSalt = passwordEssentials.passwordSalt;
+      req.body.password = passwordEssentials;
       const newUser = await Users.create({ ...req.body });
 
       //Create JWT Token
@@ -206,7 +205,7 @@ const loginUser = async (req, res) => {
 
   try {
     // Check for the user by username
-    const user = await User.findOne({ email });
+    const user = await Users.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
       const token = createToken(user._id);

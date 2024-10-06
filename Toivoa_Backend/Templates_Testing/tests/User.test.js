@@ -57,7 +57,6 @@ describe("User API", function () {
             })
             it("should succesfully register a new user.", async function () {
                 const newUser = UserMocks[0];
-
                 const response = await api
                     .post("/api/users")
                     .send(newUser)
