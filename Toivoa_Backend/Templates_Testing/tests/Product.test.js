@@ -72,18 +72,19 @@ describe("Products API", function () {
         describe("when creating a product", function () {
             it("should create a new product and return 201 status", async function () {
                 const productToAdd = ProductMocks[0];
-                productToAdd.vendorID = await User.findOne().vendorID
-                console.log(await User.findOne({}).select({accountType:1}).vendorID)
+                const user = await User.findOne({accountType: 1}).select('_id');
+                productToAdd.vendorID = user._id;
                 const response = await api
                 .post(`/api/products`)
                 .send(productToAdd)
                 .expect(201)
-                expect(response.body).toContain(productToAdd.vendorID)
+                expect(response.body.vendorID).toContain(productToAdd.vendorID.toString())
             });
 
             it("should return 403 if the user is not a vendor", async function () {
                 const productToAdd = ProductMocks[0];
-                productToAdd.vendorID = await User.findOne({accountType: 0})
+                const user = await User.findOne({accountType: 0}).select('_id');
+                productToAdd.vendorID = user._id;
                 await api
                 .post(`/api/products`)
                 .send(productToAdd)
@@ -95,19 +96,24 @@ describe("Products API", function () {
     describe("PUT /products/:productID", function () {
         describe("when updating a product", function () {
             it("should update an existing product and return the updated product", async function () {
-                // Test logic here
+                const productToModify = await Product.findOne();
+                const edit = 
+                {
+                    name: "Banana",
+                    description : "Banana"
+                }
+                const response = await api
+                .put(`/api/products/${productToModify._id}`)
+                .send(edit)
+                .expect(200)
+                expect(response.body.name).toEqual("Banana")
             });
 
             it("should return 404 if the product is not found", async function () {
-                // Test logic here
-            });
-
-            it("should return 400 if the ProductID is invalid", async function () {
-                // Test logic here
-            });
-
-            it("should return 500 if the update fails due to server error", async function () {
-                // Test logic here
+                const invalidID = "6702437e3a61345c7ea50e02"
+                await api 
+                .put(`/api/products/${invalidID}`)
+                .expect(404)
             });
         });
     });
@@ -115,35 +121,39 @@ describe("Products API", function () {
     describe("DELETE /products/:productID", function () {
         describe("when deleting a product", function () {
             it("should delete a product and return success message", async function () {
-                // Test logic here
+                const productToDelete = await Product.findOne();
+                await api
+                .put(`/api/products/${productToDelete._id}`)
+                .expect(200)
+                expect(Product.find({}.length == 0))
             });
 
             it("should return 404 if the product is not found", async function () {
-                // Test logic here
-            });
-
-            it("should return 400 if the ProductID is invalid", async function () {
-                // Test logic here
-            });
-
-            it("should return 500 if the deletion fails due to server error", async function () {
-                // Test logic here
+                const invalidID = "6702437e3a61345c7ea50e02"
+                await api 
+                .delete(`/api/products/${invalidID}`)
+                .expect(404)
             });
         });
     });
-
     describe("POST /products/:productID/comment", function () {
         describe("when adding a comment to a product", function () {
             it("should add a comment and return success message", async function () {
-                // Test logic here
-            });
-
-            it("should return 400 if the ProductID is invalid", async function () {
-                // Test logic here
-            });
-
-            it("should return 500 if adding the comment fails due to server error", async function () {
-                // Test logic here
+                const productToComment = await Product.findOne({});
+                const productID = productToComment._id;
+                const user = await User.findOne()
+                const userID = user._id;
+                const comment = 
+                {
+                    userID: userID,
+                    rating: 5,
+                    comment:"Shit product.",
+                    date: "04.01.1994"
+                }
+                await api
+                .post(`/api/products/${productID}/comments`)
+                .send(comment)
+                .expect(200)
             });
         });
     });
@@ -151,19 +161,27 @@ describe("Products API", function () {
     describe("DELETE /products/:productID/comment", function () {
         describe("when deleting a comment from a product", function () {
             it("should delete the comment and return success message", async function () {
-                // Test logic here
+                const productToComment = await Product.findOne({
+                    reviewList:{$ne:[]}
+                });
+                const productID = productToComment._id;
+                const comment = productToComment.reviewList[0];
+                const commentID = comment._id;
+                console.log(commentID);
+                await api
+                .delete(`/api/products/${productID}/comments`)
+                .send({ deleteReviewID: commentID })
+                .expect(200)
             });
 
             it("should return 404 if the comment is not found", async function () {
-                // Test logic here
-            });
-
-            it("should return 400 if the ProductID is invalid", async function () {
-                // Test logic here
-            });
-
-            it("should return 500 if deleting the comment fails due to server error", async function () {
-                // Test logic here
+                const invalidID = "6702437e3a61345c7ea50e02";
+                const product = await Product.findOne();
+                const productID = product._id;
+                await api 
+                .delete(`/api/products/${productID}/comments`)
+                .send({ deleteReviewID: invalidID })
+                .expect(404)
             });
         });
     });
