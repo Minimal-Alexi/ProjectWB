@@ -10,11 +10,19 @@ const {
     deleteComment
 } = require('../Controller/productController');
 
+const 
+{
+    requireAuth
+} = require("../Middleware/jwtHandling")
+
+
 //GET /products
 router.get('/',getProductsbyNumberorAll);
 
 //GET /products/:productID
 router.get('/:productID',getProductbyID);
+
+router.use(requireAuth)
 
 //POST /products
 router.post('/',createProduct);
