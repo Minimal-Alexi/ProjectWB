@@ -233,9 +233,9 @@ const CreateAccount = () => {
                 <option value="" defaultValue>
                   Select account type
                 </option>
-                <option value="consumer">Consumer</option>
-                <option value="seller">Seller</option>
-                <option value="market vendor">Marketer Vendor</option>
+                <option value= "0">Consumer</option>
+                <option value= "1">Seller</option>
+                <option value= "2">Marketer Vendor</option>
               </select>
             </li>
             <li>
