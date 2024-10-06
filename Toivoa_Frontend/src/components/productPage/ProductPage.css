@@ -470,3 +470,47 @@
     width: 30%;
   }
 } */
+.review-container {
+  background: #3f8af4; /* White background for contrast */
+  border-radius: 0.5rem; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 2rem; /* Padding around the content */
+  margin: 2rem 0; /* Vertical margin to separate from other sections */
+}
+
+
+.ReviewCard {
+  background: #f5f5f5; /* Match the product card background */
+  border-radius: 0.5rem; /* Match product card border radius */
+  padding: 1rem; /* Padding for the review card */
+  margin-bottom: 1rem; /* Space between reviews */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.ReviewCard span {
+  display: flex;
+  justify-content: space-between; /* Align user name and date */
+  margin-bottom: 0.5rem; /* Space between user/date and the rest of the content */
+}
+
+.ReviewCard h4 {
+  font-size: 1.25rem; /* Slightly larger font for username */
+  margin: 0; /* Remove default margin */
+  color: #333; /* Dark text color for contrast */
+}
+
+.ReviewCard p {
+  margin: 0; /* Remove default margin */
+  color: #666; /* Lighter text for comments and dates */
+}
+
+.ReviewCard .starDisplay {
+  margin: 0.5rem 0; /* Space between star rating and comment */
+}
+
+/* Style for the comment text */
+.ReviewCard .comment {
+  font-size: 1rem; /* Base font size for comments */
+  line-height: 1.5; /* Improve readability */
+  color: #444; /* Slightly darker text for comments */
+}
