@@ -1,12 +1,70 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const User = require('../Models/userModel'); 
+const User = require('../Models/userModel');
+const mongoose = require("mongoose");
+
+
 // Generate JWT
 const generateToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, {
     expiresIn: "3d",
   });
 };
+
+//GET /users
+const getAllUsers = async (req, res) => {
+  try {
+      const users = await Users.find({}).sort({ createdAt: -1 });
+      res.status(200).json(users);
+  }
+  catch (error) {
+      res.status(500).json({ message: "Failed to retrieve users." });
+  }
+};
+
+//GET /users/:userID
+
+const getUserbyID = async (req, res) => {
+  const userID = req.params.userID;
+  if (!mongoose.Types.ObjectId.isValid(userID)) {
+      return res.status(400).json({ message: "Invalid userID" })
+  }
+  try {
+      const user = await Users.findById(userID);
+      if (user) {
+          res.status(200).json(user);
+      }
+      else {
+          res.status(404).json({ message: "User not found." });
+      }
+  }
+  catch (error) {
+      res.status(500).json({ message: "Failed to retrieve user." });
+  }
+}
+
+//POST /users
+
+const createUser = async (req, res) => {
+  try {
+      const { createToken } = require('../Middleware/jwtHandling');
+      const { passwordEncryption } = require('../Middleware/passwordHandling');
+
+      const passwordEssentials = await passwordEncryption(req.body.password)
+      req.body.password = passwordEssentials.hashedPassword;
+      req.body.passwordSalt = passwordEssentials.passwordSalt;
+      const newUser = await Users.create({ ...req.body });
+
+      //Create JWT Token
+      token = createToken(newUser._id);
+
+      res.status(201).json({ message: "User registered successfully", token });
+  }
+  catch (error) {
+      console.error(error);
+      res.status(400).json({ message: "Failed to create user", error: error.message });
+  }
+}
 
 // @desc    Register new user
 // @route   POST /api/users/signup
@@ -84,35 +142,64 @@ const signupUser = async (req, res) => {
   }
 };
 
+//POST /users/login
+
 const loginUser = async (req, res) => {
-  const { username, password } = req.body;
-
   try {
-    // Check for the user by username
-    const user = await User.findOne({ username });
+      const { createToken } = require('../Middleware/jwtHandling');
 
-    if (user && (await bcrypt.compare(password, user.password))) {
-      const token = generateToken(user._id);
-      res.status(200).json({ username: user.username, token });
-    } else {
-      res.status(400);
-      throw new Error("Invalid credentials");
-    }
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+      const {email,password} = req.body;
+      const user = await Users.findOne({email});
+      if(!user)
+          {
+              return res.status(400).json({message:"Invalid credentials"});
+          }
+      const {comparePassword}  = require('../Middleware/passwordHandling');
+      const isMatch = await comparePassword(password,user.password);
+      if(!isMatch)
+          {
+              return res.status(400).json({message:"Invalid credentials"});
+          }
+      //Create JWT Token
+      token = createToken(user._id);
+      res.status(200).json({message:"Login succesful",token});
   }
-};
-
-const getMe = async (req, res) => {
-  try {
-    res.status(200).json(req.user);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  catch (error)
+  {
+      console.error(error);
+      res.status(500).json({ error: "Server error" });
   }
-};
+}
 
-module.exports = {
-  signupUser,
-  loginUser,
-  getMe,
-};
+// const loginUser = async (req, res) => {
+//   const { username, password } = req.body;
+
+//   try {
+//     // Check for the user by username
+//     const user = await User.findOne({ username });
+
+//     if (user && (await bcrypt.compare(password, user.password))) {
+//       const token = generateToken(user._id);
+//       res.status(200).json({ username: user.username, token });
+//     } else {
+//       res.status(400);
+//       throw new Error("Invalid credentials");
+//     }
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
+
+
+module.exports =
+{
+    getAllUsers,
+    getUserbyID,
+    createUser,
+    loginUser,
+    updateUser,
+    deleteUser,
+    signupUser
+}
+
+
