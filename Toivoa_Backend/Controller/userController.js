@@ -1,15 +1,7 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const { createToken } = require('../Middleware/jwtHandling');
+const bcrypt = require("bcrypt");
 const User = require('../Models/userModel');
 const mongoose = require("mongoose");
-
-
-// Generate JWT
-const generateToken = (_id) => {
-  return jwt.sign({ _id }, process.env.SECRET, {
-    expiresIn: "3d",
-  });
-};
 
 //GET /users
 const getAllUsers = async (req, res) => {
@@ -47,7 +39,6 @@ const getUserbyID = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-      const { createToken } = require('../Middleware/jwtHandling');
       const { passwordEncryption } = require('../Middleware/passwordHandling');
 
       const passwordEssentials = await passwordEncryption(req.body.password)
@@ -168,7 +159,7 @@ const signupUser = async (req, res) => {
     });
 
     if (user) {
-      const token = generateToken(user._id);
+      const token = createToken(user._id);
       res.status(201).json({ username: user.username, token });
     } else {
       res.status(400);
@@ -216,7 +207,7 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      const token = generateToken(user._id);
+      const token = createToken(user._id);
       res.status(200).json({ username: user.username, token });
     } else {
       res.status(400);
