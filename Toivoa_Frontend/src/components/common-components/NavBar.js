@@ -74,7 +74,7 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="logo-search-container">
-        <Link to="/" className="main" aria-label="Main Page">
+        <Link to="/" className="main">
           <img src={main_logo} alt="Toivoa Logo" />
         </Link>
         <div className="search">

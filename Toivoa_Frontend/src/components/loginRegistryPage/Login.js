@@ -32,7 +32,7 @@ const Login = () => {
 
         // Make the API call to login
         const response = await login({ email: emailField.value, password: passwordField.value });
-
+        console.log(response)
         // If the login is successful
         if (response?.token) {
             // Use the AuthContext login method to update the auth state
