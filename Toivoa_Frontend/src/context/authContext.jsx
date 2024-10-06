@@ -27,6 +27,7 @@ export function AuthProvider({ children }) {
     setIsLoggedIn(false);
     setToken(null);
     localStorage.removeItem("jwt");
+    localStorage.removeItem("user");
   }
 
   const authValue = {

@@ -26,10 +26,14 @@ export default function useLogin(url) {
         return;
       }
 
+       // Save user data to local storage (optional)
+       localStorage.setItem("user", JSON.stringify(user));
+
       // Use the login method from AuthContext to save the JWT token
       authLogin(user.token);
 
       setIsLoading(false);
+      return user;
     } catch (err) {
       setError("Something went wrong");
       setIsLoading(false);
