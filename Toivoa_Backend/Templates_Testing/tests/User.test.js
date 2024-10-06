@@ -151,7 +151,7 @@ describe("User API", function () {
             })
         })
         afterAll(async () => {
-            User.deleteMany({});
+            await User.deleteMany({});
         })
 
     })
