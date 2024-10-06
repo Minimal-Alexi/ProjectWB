@@ -33,6 +33,7 @@ export default function useSignup(url) {
       authLogin(user.token);
 
       setIsLoading(false);
+      return user
     } catch (err) {
       setError("Something went wrong");
       setIsLoading(false);

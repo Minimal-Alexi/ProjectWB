@@ -113,7 +113,7 @@ const NavBar = () => {
             >
               <Heart size={32} />
             </Link>
-            <span>{JSON.parse(localStorage.getItem("user")).email}</span>
+            <span>{JSON.parse(localStorage.getItem("user")).username}</span>
             <Link to="/user" className="user-icon" aria-label="User">
               <User size={32} />
             </Link>
