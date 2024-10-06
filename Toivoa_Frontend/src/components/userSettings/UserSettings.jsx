@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { AuthContext } from "../../context/authContext"; // Import the AuthContext
 import "./userSettings.css";
 
 const UserSettingsPage = () => {
+  const { isAuthenticated, isLoading, user } = useContext(AuthContext); // Access authentication context
+
   const [newAccountDetails, setNewAccountDetails] = useState({
     username: "",
     email: "",
     firstName: "",
     lastName: "",
     password: "",
+    confirmPassword: "",
     passwordSalt: "",
     accountType: "",
     countryCode: "",
@@ -17,6 +22,7 @@ const UserSettingsPage = () => {
     gender: "",
   });
 
+  // Handle input change
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setNewAccountDetails((prevDetails) => ({
@@ -25,16 +31,22 @@ const UserSettingsPage = () => {
     }));
   };
 
+  // Handle cancel action
   const cancelHandler = () => {
-    // Implement cancel logic here
+    // Logic for cancel can be implemented here
   };
+
+  // If the user is not authenticated, redirect to login page
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <main className="user-setting-container">
       <div className="navigate-text">
         <p>Home / My Account</p>
         <p>
-          Welcome <a href="">Guest</a>
+          Welcome <span>{user?.username || "Guest"}</span>
         </p>
       </div>
       <div className="user-container">

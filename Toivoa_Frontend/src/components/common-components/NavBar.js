@@ -1,13 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import main_logo from "../../images/main_logo.png";
-import { useState, useEffect, useRef, useContext} from 'react';
-import Create from '../loginRegistryPage/Create';
-import Login from '../loginRegistryPage/Login';
+import { useState, useEffect, useRef, useContext } from "react";
 import { ProductContext } from "../../context/productContext.jsx";
-import '../loginRegistryPage/login-create.css';
+import "../loginRegistryPage/login-create.css";
 import { ShoppingCart, MagnifyingGlass, Heart, User } from "phosphor-react";
 import { FilterContext } from "../resultPage/FilterContext.js";
-
+import { AuthContext } from "../../context/authContext";
 
 const NavBar = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -16,6 +14,8 @@ const NavBar = () => {
   const navigate = useNavigate();
   const { setFilteredItems } = useContext(FilterContext);
   const { products } = useContext(ProductContext);
+  const {isAuthenticated, logout} = useContext(AuthContext)
+
 
   const popupRef = useRef(null);
 
@@ -41,7 +41,7 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    document.removeEventListener('mousedown', handleClickOutside);
+    document.removeEventListener("mousedown", handleClickOutside);
   }, [showLogin, showCreate]);
 
   const handleInputChange = (event) => {
@@ -52,12 +52,23 @@ const NavBar = () => {
     event.preventDefault();
     // Handle the form submission
     const filteredItems = products.filter(
-      (product) => product.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
+      (product) =>
+        product.name.toLowerCase().indexOf(query.toLowerCase()) !== -1
     );
     setQuery("");
     console.log(filteredItems); // Do something with the filtered items
     setFilteredItems(filteredItems);
-    navigate('/result')
+    navigate("/result");
+  };
+
+  // const handleSignOut = (e) => {
+  //   setIsAuthenticated(false);
+  //   localStorage.removeItem("user");
+  // };
+
+  const handleSignOut = () => {
+    logout(); 
+    navigate("/"); 
   };
 
   return (
@@ -78,24 +89,48 @@ const NavBar = () => {
             />
           </form>
           <div>
-          <button type="submit" onClick={handleSubmit} style ={{border: "none", cursor: "pointer"}} aria-label="Search Button">
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              style={{ border: "none", cursor: "pointer" }}
+              aria-label="Search Button"
+            >
               <MagnifyingGlass size={32} />
             </button>
           </div>
-          
         </div>
       </div>
       <div className="user-options">
-        <Link to="/cart" className="cart" aria-label="View Cart">
-          <ShoppingCart size={32} />
-        </Link>
-        <Link to="/wishList" className="wishlist" aria-label="View Wishlist">
-          <Heart size={32} />
-        </Link>
-        <Link to="/user" className="user-icon" aria-label="User">
-          <User size={32} />
-        </Link>
-        <a onClick={clickEventCreate} className="sign-up-btn">
+        {isAuthenticated && (
+          <>
+            <Link to="/cart" className="cart" aria-label="View Cart">
+              <ShoppingCart size={32} />
+            </Link>
+            <Link
+              to="/wishList"
+              className="wishlist"
+              aria-label="View Wishlist"
+            >
+              <Heart size={32} />
+            </Link>
+            <span>{JSON.parse(localStorage.getItem("user")).email}</span>
+            <Link to="/user" className="user-icon" aria-label="User">
+              <User size={32} />
+            </Link>
+            <button onClick={handleSignOut} className="sign-out-btn">
+              Sign Out
+            </button>
+          </>
+
+        )}
+        {!isAuthenticated && (
+          <div>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Signup</Link>
+          </div>
+        )}
+
+        {/* <a onClick={clickEventCreate} className="sign-up-btn">
           Sign Up
         </a>
         <a onClick={clickEventLogin} className="sign-in-btn">
@@ -112,11 +147,10 @@ const NavBar = () => {
           <div ref={popupRef} className="popup-container">
             <Create switchToLogin={clickEventLogin} closeEvent={closeEvent} />
           </div>
-        ) : null}
+        ) : null} */}
       </div>
     </nav>
   );
 };
 
 export default NavBar;
-

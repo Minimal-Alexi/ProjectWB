@@ -5,7 +5,7 @@ import useField from "../../hooks/useField";
 import { countryCodes } from "../../data";
 import Image from "../../images/image.jpeg";
 
-const CreateAccount = ({ switchToLogin, closeEvent }) => {
+const CreateAccount = () => {
   const navigate = useNavigate();
 
   // Local state for user inputs
@@ -36,8 +36,18 @@ const CreateAccount = ({ switchToLogin, closeEvent }) => {
 
   const { signup, error } = useSignup("/api/users/signup");
 
+  const switchToLogin = () => {
+    navigate('/login')
+  }
+
+  const closeEvent = () => {
+    navigate('/')
+  }
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+
 
     // Construct user object for signup
     const user = {

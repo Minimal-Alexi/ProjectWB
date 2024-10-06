@@ -1,46 +1,59 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useLogin from '../../hooks/useLogin';
+import { AuthContext } from '../../context/authContext'; // Import AuthContext
+import useLogin from '../../hooks/useLogin'; 
 import useField from '../../hooks/useField';
 import Image from '../../images/image.jpeg';
 
-const Login = ({ switchToCreate, closeEvent }) => {
+const Login = () => {
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const { login: contextLogin } = useContext(AuthContext); // Access login from AuthContext
 
-    const emailField = useField('email', email, setEmail);
-    const passwordField = useField('password', password, setPassword);
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
 
-    const { login, error } = useLogin('/api/users/login');
+    const emailField = useField('email');
+    const passwordField = useField('password');
+    console.log(emailField)
+    console.log(passwordField)
 
-    const [showErrorNotFilled, setShowErrorNotFilled] = useState(false);
-    const [showErrorNotMatch, setShowErrorNotMatch] = useState(false);
+    const { login, error } = useLogin('/api/users/login'); // Assuming this sends the login request to the server
+
+    const [showError, setShowError] = useState('');
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-
-        if (!email || !password) {
-            setShowErrorNotFilled(true);
-            setShowErrorNotMatch(false);
+        
+        // Check if the fields are filled
+        if (!emailField.value || !passwordField.value) {
+            setShowError('Please fill all fields.');
             return;
         }
 
-        await login({
-            email: email,
-            password: password,
-        });
+        // Make the API call to login
+        const response = await login({ email: emailField.value, password: passwordField.value });
 
-        if (!error) {
-            setShowErrorNotFilled(false);
-            setShowErrorNotMatch(false);
+        // If the login is successful
+        if (response?.token) {
+            // Use the AuthContext login method to update the auth state
+            contextLogin(response.token); // Save the JWT token
+            setShowError(''); // Clear previous error messages
             console.log('User logged in successfully');
-            navigate('/');
+            navigate('/'); // Redirect to home page
         } else {
-            setShowErrorNotMatch(true);
+            // If login fails, show an error message
+            setShowError('Email and password do not match.');
             console.error('Login failed');
         }
     };
+
+    const switchToCreate = () => {
+        navigate('/signup')
+    }
+
+    const closeEvent = () => {
+        navigate('/')
+    }
 
     return (
         <div className="white-rectangle">
@@ -58,6 +71,7 @@ const Login = ({ switchToCreate, closeEvent }) => {
                                 name="email"
                                 placeholder="Enter your email"
                                 className="input"
+                                required
                             />
                         </li>
                         <li>
@@ -67,11 +81,11 @@ const Login = ({ switchToCreate, closeEvent }) => {
                                 name="password"
                                 placeholder="Enter your password"
                                 className="input"
+                                required
                             />
                         </li>
                         <li>
-                            {showErrorNotFilled && <h4>Fill all the fields</h4>}
-                            {showErrorNotMatch && <h4>Email and password do not match</h4>}
+                            {showError && <h4>{showError}</h4>}
                         </li>
                         <li>
                             <button type="submit">Log in</button>
