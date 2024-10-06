@@ -66,6 +66,53 @@ const createUser = async (req, res) => {
   }
 }
 
+//PUT /users/:userID
+
+const updateUser = async (req, res) => {
+  const userID = req.params.userID;
+  if (!mongoose.Types.ObjectId.isValid(userID)) {
+      return res.status(400).json({ message: "Invalid userID" })
+  }
+  try {
+      const updatedUser = await Users.findOneAndUpdate(
+          { _id: userID },
+          { ...req.body },
+          { new: true, overwrite: true },
+      )
+      if (updatedUser) {
+          res.status(200).json(updatedUser);
+      }
+      else {
+          res.status(404).json({ message: "User not found." });
+      }
+  }
+  catch (error) {
+      res.status(500).json({ message: "Failed to update user." });
+  }
+}
+
+//DELETE /users/:userID
+
+const deleteUser = async (req, res) => {
+  const userID = req.params.userID;
+  if (!mongoose.Types.ObjectId.isValid(userID)) {
+      return res.status(400).json({ message: "Invalid userID" })
+  }
+  try {
+      const deletedUser = await Users.findOneAndDelete({ _id: userID })
+      if (deletedUser) {
+          res.status(200).json({ message: "User deleted successfully." });
+      }
+      else {
+          res.status(404).json({ message: "User not found." });
+      }
+  }
+  catch (error) {
+      res.status(500).json({ message: "Failed to update user." });
+  }
+}
+
+
 // @desc    Register new user
 // @route   POST /api/users/signup
 // @access  Public
