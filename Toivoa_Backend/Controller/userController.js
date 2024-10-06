@@ -126,9 +126,6 @@ const signupUser = async (req, res) => {
     phoneNumber,
     accountType,
     countryCode,
-    location,
-    age,
-    gender,
   } = req.body;
 
   try {
@@ -140,10 +137,7 @@ const signupUser = async (req, res) => {
       !lastName ||
       !password ||
       !accountType ||
-      !countryCode ||
-      !location ||
-      !age ||
-      !gender
+      !countryCode
     ) {
       res.status(400);
       throw new Error("Please add all required fields");
@@ -168,13 +162,9 @@ const signupUser = async (req, res) => {
       firstName,
       lastName,
       password: hashedPassword,
-      passwordSalt: salt,
       accountType,
       countryCode,
-      location,
       phoneNumber,
-      age,
-      gender,
     });
 
     if (user) {
@@ -191,51 +181,51 @@ const signupUser = async (req, res) => {
 
 //POST /users/login
 
-const loginUser = async (req, res) => {
-  try {
-      const { createToken } = require('../Middleware/jwtHandling');
-
-      const {email,password} = req.body;
-      const user = await Users.findOne({email});
-      if(!user)
-          {
-              return res.status(400).json({message:"Invalid credentials"});
-          }
-      const {comparePassword}  = require('../Middleware/passwordHandling');
-      const isMatch = await comparePassword(password,user.password);
-      if(!isMatch)
-          {
-              return res.status(400).json({message:"Invalid credentials"});
-          }
-      //Create JWT Token
-      token = createToken(user._id);
-      res.status(200).json({message:"Login succesful",token});
-  }
-  catch (error)
-  {
-      console.error(error);
-      res.status(500).json({ error: "Server error" });
-  }
-}
-
 // const loginUser = async (req, res) => {
-//   const { username, password } = req.body;
-
 //   try {
-//     // Check for the user by username
-//     const user = await User.findOne({ username });
+//       const { createToken } = require('../Middleware/jwtHandling');
 
-//     if (user && (await bcrypt.compare(password, user.password))) {
-//       const token = generateToken(user._id);
-//       res.status(200).json({ username: user.username, token });
-//     } else {
-//       res.status(400);
-//       throw new Error("Invalid credentials");
-//     }
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
+//       const {email,password} = req.body;
+//       const user = await Users.findOne({email});
+//       if(!user)
+//           {
+//               return res.status(400).json({message:"Invalid credentials"});
+//           }
+//       const {comparePassword}  = require('../Middleware/passwordHandling');
+//       const isMatch = await comparePassword(password,user.password);
+//       if(!isMatch)
+//           {
+//               return res.status(400).json({message:"Invalid credentials"});
+//           }
+//       //Create JWT Token
+//       token = createToken(user._id);
+//       res.status(200).json({message:"Login succesful",token});
 //   }
-// };
+//   catch (error)
+//   {
+//       console.error(error);
+//       res.status(500).json({ error: "Server error" });
+//   }
+// }
+
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Check for the user by username
+    const user = await User.findOne({ email });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const token = generateToken(user._id);
+      res.status(200).json({ username: user.username, token });
+    } else {
+      res.status(400);
+      throw new Error("Invalid credentials");
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 
 module.exports =
