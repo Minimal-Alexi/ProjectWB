@@ -28,7 +28,7 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "globalTeardown": "./Templates&Testing/tests/teardown.js"
+    "globalTeardown": "./Templates_Testing/tests/teardown.js"
   },
   "overrides": {
     "glob": "^11.0.0"
