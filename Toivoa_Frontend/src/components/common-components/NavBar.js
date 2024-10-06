@@ -3,7 +3,13 @@ import main_logo from "../../images/main_logo.png";
 import { useState, useEffect, useRef, useContext } from "react";
 import { ProductContext } from "../../context/productContext.jsx";
 import "../loginRegistryPage/login-create.css";
-import { ShoppingCart, MagnifyingGlass, Heart, User } from "phosphor-react";
+import {
+  ShoppingCart,
+  MagnifyingGlass,
+  Heart,
+  User,
+  SignOut,
+} from "phosphor-react";
 import { FilterContext } from "../resultPage/FilterContext.js";
 import { AuthContext } from "../../context/authContext";
 
@@ -14,8 +20,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   const { setFilteredItems } = useContext(FilterContext);
   const { products } = useContext(ProductContext);
-  const {isAuthenticated, logout} = useContext(AuthContext)
-
+  const { isAuthenticated, logout } = useContext(AuthContext);
 
   const popupRef = useRef(null);
 
@@ -67,8 +72,8 @@ const NavBar = () => {
   // };
 
   const handleSignOut = () => {
-    logout(); 
-    navigate("/"); 
+    logout();
+    navigate("/");
   };
 
   return (
@@ -100,7 +105,7 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <div className="user-options">
+      <div className="user-options" style={{ display: "flex", alignItems: "center"}}>
         {isAuthenticated && (
           <>
             <Link to="/cart" className="cart" aria-label="View Cart">
@@ -113,20 +118,30 @@ const NavBar = () => {
             >
               <Heart size={32} />
             </Link>
-            <span>{JSON.parse(localStorage.getItem("user")).username}</span>
+              <span>{JSON.parse(localStorage.getItem("user")).username}</span>
             <Link to="/user" className="user-icon" aria-label="User">
               <User size={32} />
             </Link>
-            <button onClick={handleSignOut} className="sign-out-btn">
-              Sign Out
+            <button
+              onClick={handleSignOut}
+              style={{
+                border: "none",
+                cursor: "pointer",
+                background: "transparent",
+              }}
+            >
+              <SignOut size={32} />
             </button>
           </>
-
         )}
         {!isAuthenticated && (
           <div>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
+            <Link to="/login" style={{ margin: "0 1rem" }}>
+              Login
+            </Link>
+            <Link to="/signup" style={{ margin: "0 1rem" }}>
+              Signup
+            </Link>
           </div>
         )}
 

@@ -11,7 +11,11 @@ const { unknownEndpoint, errorHandler } = require("./Middleware/errorHandling");
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(logger);
+if(process.env.NODE_ENV !== 'test')
+    {
+        //this makes it so only the tests are console logged.
+        app.use(logger);
+    }
 
 connectDB();
 

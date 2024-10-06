@@ -5,34 +5,36 @@ const mongoose = require("mongoose");
 
 //GET /users
 const getAllUsers = async (req, res) => {
-  try {
-      const users = await Users.find({}).sort({ createdAt: -1 });
-      res.status(200).json(users);
-  }
-  catch (error) {
-      res.status(500).json({ message: "Failed to retrieve users." });
-  }
+    try {
+        //The select is here so password can't be leaked.
+        const users = await Users.find({}).select('-password').sort({ createdAt: -1 });
+        res.status(200).json(users);
+    }
+    catch (error) {
+        res.status(500).json({ message: "Failed to retrieve users." });
+    }
 };
 
 //GET /users/:userID
 
 const getUserbyID = async (req, res) => {
-  const userID = req.params.userID;
-  if (!mongoose.Types.ObjectId.isValid(userID)) {
-      return res.status(400).json({ message: "Invalid userID" })
-  }
-  try {
-      const user = await Users.findById(userID);
-      if (user) {
-          res.status(200).json(user);
-      }
-      else {
-          res.status(404).json({ message: "User not found." });
-      }
-  }
-  catch (error) {
-      res.status(500).json({ message: "Failed to retrieve user." });
-  }
+    const userID = req.params.userID;
+    if (!mongoose.Types.ObjectId.isValid(userID)) {
+        return res.status(400).json({ message: "Invalid userID" })
+    }
+    try {
+        //The select is here so password can't be leaked.
+        const user = await Users.findById(userID).select('-password');
+        if (user) {
+            res.status(200).json(user);
+        }
+        else {
+            res.status(404).json({ message: "User not found." });
+        }
+    }
+    catch (error) {
+        res.status(500).json({ message: "Failed to retrieve user." });
+    }
 }
 
 //POST /users

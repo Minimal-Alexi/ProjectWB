@@ -4,7 +4,7 @@ const passwordEncryption = async (password) =>
     {
         const passwordSalt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, passwordSalt);
-        return {passwordSalt,hashedPassword}
+        return hashedPassword
     }
 const comparePassword = async (password,storedPassword) => 
     {
