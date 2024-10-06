@@ -136,7 +136,7 @@ const signupUser = async (req, res) => {
     }
 
     // Check if user already exists
-    const userExists = await User.findOne({ username });
+    const userExists = await Users.findOne({ username });
 
     if (userExists) {
       res.status(400);
@@ -148,7 +148,7 @@ const signupUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create user
-    const user = await User.create({
+    const user = await Users.create({
       username,
       email,
       firstName,
