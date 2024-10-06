@@ -110,34 +110,48 @@ describe("User API", function () {
             })
 
         })
-        describe("when updating an account", function()
-        {
+        describe("when updating an account", function () {
             it("should be able to update an account.", async function () {
                 const userToEdit = await User.findOne({ username: UserMocks[0].username });
-                const editedSettings = 
+                const editedSettings =
                 {
                     username: "Banana"
                 }
-                console.log(userToEdit._id);
-                await api
-                .post(`/api/users/${userToEdit._id}`)
-                .send(editedSettings)
-                .expect(200)
-                
+                const response = await api
+                    .put(`/api/users/${userToEdit._id}`)
+                    .send(editedSettings)
+                    .expect(200)
+                expect(response.body.username).toContain("Banana");
             })
-            it("shouldn't update with the wrong fields.", async function ()
-            {
-                const userToEdit = await User.findOne({ username: UserMocks[0].username });
-                const editedSettings = 
+            it("shouldn't update with the wrong fields.", async function () {
+                const userToEdit = await User.findOne({ username: "Banana" });
+                const editedSettings =
                 {
-                    badfield:"lol"
+                    badfield: "lol"
                 }
 
-                await api
-                .post(`/api/users/${userToEdit._id}`)
-                .send(editedSettings)
-                .expect(500)
+                const response = await api
+                    .put(`/api/users/${userToEdit._id}`)
+                    .send(editedSettings)
+                    .expect(200)
+                expect(response.body).not.toHaveProperty("badfield");
             })
+        })
+        describe("delete an account", function () {
+            it("should be able to delete an account", async function(){
+                const userToDelete = await User.findOne();
+                await api
+                .delete(`/api/users/${userToDelete._id}`)
+                .expect(200)
+            })
+            it("should throw an error if the account isn't found.",async function(){
+                await api
+                .delete(`/api/users/670225f3e9f9dc2ef07da54c`)
+                .expect(404);
+            })
+        })
+        afterAll(async () => {
+            User.deleteMany({});
         })
 
     })
