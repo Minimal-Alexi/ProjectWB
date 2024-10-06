@@ -13,6 +13,7 @@ import { FilterProvider } from "./components/resultPage/FilterContext.js";
 import { WishListProvider } from "./context/WishListContext";
 import { ProductProvider } from "./context/productContext.jsx";
 import ResultPage from "./components/resultPage/resultPage.jsx";
+import AddProductPage from "./components/productPage/AddProducts.js"
 import "./App.css";
 
 const App = () => (
@@ -31,6 +32,7 @@ const App = () => (
                 <Route path="/user" element={<UserSettingsPage />} />
                 <Route path="/result" element={<ResultPage />} />
                 <Route path="/checkout" element={<CheckOut />} />
+                <Route path="/addproduct" element={<AddProductPage />} />
                 <Route path="*" element={<ErrorPage />} />
               </Routes>
             </Router>

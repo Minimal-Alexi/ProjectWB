@@ -1,5 +1,5 @@
 
-const useField = (type,value,setValue) => {
+const useField = (type, value, setValue) => {
 
   const onChange = (event) => setValue(event.target.value);
 
