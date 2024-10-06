@@ -44,11 +44,11 @@ const userSchema = new Schema(
             type:String,
             required:true,
         },
-        accountType: {
-            type: String,
-            required: true,
-            enum: ['consumer', 'seller', 'market vendor'], // Define the choices for accountType
-          },
+        accountType:
+        {
+            type:Number,
+            required:true,
+        }
         countryCode:
         {
             type:String,
