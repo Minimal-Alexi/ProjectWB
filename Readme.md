@@ -5,13 +5,13 @@
 This is the introduction of the Toivoa webproject, a web 2.0 app for noridc companies and consumers.
 
 ## 1.1 Members
-Pop Alex (Backend & Sys Ops.)
+Pop Alex (Fullstack & Sys Ops.)
 
-Loc Dang (Frontend Dev)
+Loc Dang (Fullstack Dev)
 
 Ngoc Thien Luu (SCRUM & Fullstack Dev)
 
-Vikko Veikkolainen (Frontend dev)
+Vikko Veikkolainen (Fullstack dev)
 
 
 ## 1.2 Description and Target Audience

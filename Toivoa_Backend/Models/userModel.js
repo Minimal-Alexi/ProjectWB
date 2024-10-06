@@ -48,7 +48,7 @@ const userSchema = new Schema(
         {
             type:Number,
             required:true,
-        },
+        }
         countryCode:
         {
             type:String,

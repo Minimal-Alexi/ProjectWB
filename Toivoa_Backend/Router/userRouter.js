@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 const {
@@ -6,7 +7,8 @@ const {
     createUser,
     loginUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    signupUser
 } = require('../Controller/userController');
 
 //GET /users
@@ -20,6 +22,9 @@ router.post('/',createUser);
 
 //POST /users/login
 router.post('/login',loginUser);
+
+// signup route
+router.post("/signup", signupUser);
 
 //PUT /users/:userID
 router.put('/:userID',updateUser);
