@@ -516,45 +516,45 @@
 }
 
 /*Add Products Page*/
-.addProducts {
+.add-edit-Products {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.addProductForm {
+.add-edit-ProductForm {
   display: flex;
   flex-direction: column;
 }
 
-.addProductsTitle {
+.add-edit-ProductsTitle {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.addProductInputs {
+.add-edit-ProductInputs {
   margin-bottom: 15px;
   display: flex;
   flex-direction: column;
 }
 
-.addProductInputs input,
-.addProductInputs select,
-.addProductInputs button {
+.add-edit-ProductInputs input,
+.add-edit-ProductInputs select,
+.add-edit-ProductInputs button {
   width: 100%;
   padding: 20px;
   margin-top: 2.5rem;
 }
 
-.addProductInputs select {
+.add-edit-ProductInputs select {
   padding: 10px;
 }
 
-.addProductInputs button {
+.add-edit-ProductInputs button {
   background-color: #6179B7;
   color: white;
 }
 
-.addProductInputs button:hover {
+.add-edit-ProductInputs button:hover {
   background-color: #334c8a;
 }

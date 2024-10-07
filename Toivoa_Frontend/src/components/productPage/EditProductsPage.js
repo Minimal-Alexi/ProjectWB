@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import useField from "../../hooks/useField";
+import { ProductContext } from "../../context/productContext";
+import { useParams } from "react-router-dom";
 import "./ProductPage.css";
 
-const AddProduct = () => {
+const EditProduct = () => {
+    const { fetchProductById } = useContext(ProductContext)
+    const { id } = useParams();
+
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState([]);
@@ -19,14 +24,27 @@ const AddProduct = () => {
     const colorsField = useField('text', colors, setColors);
     const priceField = useField('number', price, setPrice);
 
-    const handleProductSubmission = async (e) => {
-        e.preventDefault();
-
-        if (!name || !description || !image.length === 0 || !isInStock || price <= 0) {
-            console.log("Fill all necesary fields");
-            return;
+    useEffect(() => {
+        const fetchProductData = async () => {
+            if (id) {
+                const product = await fetchProductById(id)
+                if (product) {
+                    setName(product.name);
+                    setDescription(product.description);
+                    setImage(product.image);
+                    setSizes(product.sizes);
+                    setIsInStock(product.isInStock);
+                    setColors(product.colors);
+                    setPrice(product.prics);
+                }
+            }
         }
 
+        fetchProductData
+    }, [id, fetchProductById]);
+
+    const handleProductSubmission = async (e) => {
+        e.preventDefault();
         const product = {
             name,
             description,
@@ -38,8 +56,8 @@ const AddProduct = () => {
         };
 
         try {
-            const response = await fetch(`/api/products`, {
-                method: 'POST',
+            const response = await fetch(`/api/products${id}`, {
+                method: 'PUT',
                 body: JSON.stringify(product),
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,7 +83,7 @@ const AddProduct = () => {
         <div className="add-edit-Products">
             <form onSubmit={handleProductSubmission} className="add-edit-ProductForm">
                 <div className="add-edit-ProductsTitle">
-                    <h1>Add Product</h1>
+                    <h1>Edit Product</h1>
                 </div>
                 <div className="add-edit-ProductInputs">
                     <input
@@ -127,4 +145,4 @@ const AddProduct = () => {
     )
 };
 
-export default AddProduct;
+export default EditProduct;

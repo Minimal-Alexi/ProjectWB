@@ -13,7 +13,8 @@ import { FilterProvider } from "./components/resultPage/FilterContext.js";
 import { WishListProvider } from "./context/WishListContext";
 import { ProductProvider } from "./context/productContext.jsx";
 import ResultPage from "./components/resultPage/resultPage.jsx";
-import AddProductPage from "./components/productPage/AddProducts.js"
+import AddProductPage from "./components/productPage/AddProducts.js";
+import EditProductsPage from "./components/productPage/EditProductsPage.js";
 import "./App.css";
 
 const App = () => (
@@ -33,6 +34,7 @@ const App = () => (
                 <Route path="/result" element={<ResultPage />} />
                 <Route path="/checkout" element={<CheckOut />} />
                 <Route path="/addproduct" element={<AddProductPage />} />
+                <Route path="/editproduct" element={<EditProductsPage />} />
                 <Route path="*" element={<ErrorPage />} />
               </Routes>
             </Router>
