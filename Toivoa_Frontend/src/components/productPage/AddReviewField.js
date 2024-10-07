@@ -45,7 +45,7 @@ const AddReviewField = ({ _id }) => {
     };
 
     return (
-        <div class="review-form-container">
+        <div className="review-form-container">
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Score:</label>

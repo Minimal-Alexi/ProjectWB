@@ -20,7 +20,6 @@ const ProductPage = () => {
   const [selectedImage, setSelectedImage] = useState("");
   const [product, setProduct] = useState(null);
   const { products, fetchProductbyID } = useContext(ProductContext);
-  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const fetchAndSetProduct = async () => {
@@ -38,8 +37,7 @@ const ProductPage = () => {
         }
       }
       console.log(product);
-      setRefresh(false);
-      console.log(refresh);
+
     };
 
     fetchAndSetProduct(); // Call the function
