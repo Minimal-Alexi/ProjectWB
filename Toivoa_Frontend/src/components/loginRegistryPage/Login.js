@@ -60,7 +60,7 @@ const Login = () => {
             <div className="invisible-rectangle">
                 <img src={Image} alt="Image" className="image" />
             </div>
-            <div>
+            <div className='sign-in-up-form'> 
                 <form onSubmit={handleFormSubmit}>
                     <ul className="submit-stuff">
                         <li><h1 className="login-title">Log in</h1></li>
@@ -94,9 +94,10 @@ const Login = () => {
                             <a onClick={switchToCreate} className="switch-to-create">Don't have an account?</a>
                         </li>
                     </ul>
+                    <button onClick={closeEvent} className='closeButton'><h1>x</h1></button>
                 </form>
             </div>
-            <button onClick={closeEvent} className='closeButton'><h1>x</h1></button>
+
         </div>
     );
 };

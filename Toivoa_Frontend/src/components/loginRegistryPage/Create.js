@@ -158,7 +158,7 @@ const CreateAccount = () => {
           <img src={Image} alt="Image" className="image" />
         </h1>
       </div>
-      <div>
+      <div className="sign-in-up-form">
         <form onSubmit={handleCreate}>
           <ul className="submit-stuff">
             <li>
@@ -233,9 +233,9 @@ const CreateAccount = () => {
                 <option value="" defaultValue>
                   Select account type
                 </option>
-                <option value= "0">Consumer</option>
-                <option value= "1">Seller</option>
-                <option value= "2">Marketer Vendor</option>
+                <option value="0">Consumer</option>
+                <option value="1">Seller</option>
+                <option value="2">Marketer Vendor</option>
               </select>
             </li>
             <li>
@@ -266,11 +266,11 @@ const CreateAccount = () => {
               </a>
             </li>
           </ul>
+          <button onClick={closeEvent} className="closeButton">
+            <h1>x</h1>
+          </button>
         </form>
       </div>
-      <button onClick={closeEvent} className="closeButton">
-        <h1>x</h1>
-      </button>
     </div>
   );
 };
