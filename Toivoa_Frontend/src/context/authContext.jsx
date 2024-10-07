@@ -7,7 +7,6 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-
   useEffect(() => {
     const storedJwt = localStorage.getItem("jwt");
     if (storedJwt) {

@@ -13,7 +13,7 @@ export default function useLogin(url) {
     setError(null);
     
     try {
-      const response = await fetch(url, {
+      const response = await fetch(`${url}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(object),
@@ -25,6 +25,8 @@ export default function useLogin(url) {
         setIsLoading(false);
         return;
       }
+
+      console.log(user);
 
        // Save user data to local storage (optional)
        localStorage.setItem("user", JSON.stringify(user));

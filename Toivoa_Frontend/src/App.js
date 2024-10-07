@@ -20,12 +20,12 @@ import { ShopContextProvider } from "./context/shopContext.jsx";
 import { FilterProvider } from "./components/resultPage/FilterContext.js";
 import { WishListProvider } from "./context/WishListContext";
 import { ProductProvider } from "./context/productContext.jsx";
-import { AuthProvider } from "./context/authContext"; // Import AuthProvider
+import { AuthProvider } from "./context/authContext";
 import "./App.css";
 
 const App = () => {
   return (
-    <AuthProvider> {/* Ensure AuthProvider wraps the entire app */}
+    <AuthProvider>
       <ProductProvider>
         <FilterProvider>
           <WishListProvider>

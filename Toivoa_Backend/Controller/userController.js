@@ -161,7 +161,7 @@ const signupUser = async (req, res) => {
 
     if (user) {
       const token = createToken(user._id);
-      res.status(201).json({ username: user.username, token });
+      res.status(201).json({ user, token });
     } else {
       res.status(400);
       throw new Error("Invalid user data");
@@ -209,7 +209,7 @@ const loginUser = async (req, res) => {
 
     if (user && (await bcrypt.compare(password, user.password))) {
       const token = createToken(user._id);
-      res.status(200).json({ username: user.username, token });
+      res.status(200).json({ user, token });
     } else {
       res.status(400);
       throw new Error("Invalid credentials");
