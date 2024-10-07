@@ -12,6 +12,8 @@ import CheckOut from "./components/checkOutPage/CheckOut";
 import ResultPage from "./components/resultPage/resultPage.jsx";
 import Login from "./components/loginRegistryPage/Login.js";
 import Create from "./components/loginRegistryPage/Create.js";
+import AddProductPage from "./components/productPage/AddProduct.js";
+import EditProductPage from "./components/productPage/EditProductPage.js";
 
 // Context Provider
 import { ShopContextProvider } from "./context/shopContext.jsx";
@@ -40,6 +42,8 @@ const App = () => {
                   <Route path="/login" element={<Login />} />
                   <Route path="/result" element={<ResultPage />} />
                   <Route path="/checkout" element={<CheckOut />} />
+                  <Route path="/addproduct" element={<AddProductPage />} />
+                  <Route path="/editproduct" element={<EditProductPage />} />
                   <Route path="*" element={<ErrorPage />} />
                 </Routes>
               </Router>

@@ -572,3 +572,40 @@
 .review-form-container button[type="submit"]:hover {
   background-color: #495b94; /* Darker shade on hover */
 }
+
+/*Add Products Page*/
+.addProducts {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.addProductForm {
+  display: flex;
+  flex-direction: column;
+}
+.addProductsTitle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.addProductInputs {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.addProductInputs input,
+.addProductInputs select,
+.addProductInputs button {
+  width: 100%;
+  padding: 20px;
+  margin-top: 2.5rem;
+}
+.addProductInputs select {
+  padding: 10px;
+}
+.addProductInputs button {
+  background-color: #6179B7;
+  color: white;
+}
+.addProductInputs button:hover {
+  background-color: #334c8a;
+}
