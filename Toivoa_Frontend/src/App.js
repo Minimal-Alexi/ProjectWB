@@ -14,6 +14,7 @@ import Login from "./components/loginRegistryPage/Login.js";
 import Create from "./components/loginRegistryPage/Create.js";
 import AddProductPage from "./components/productPage/AddProduct.js";
 import EditProductPage from "./components/productPage/EditProductPage.js";
+import OrderSuccess from "./components/orderSuccess/OrderSuccess.js";
 
 // Context Provider
 import { ShopContextProvider } from "./context/shopContext.jsx";
@@ -44,6 +45,7 @@ const App = () => {
                   <Route path="/checkout" element={<CheckOut />} />
                   <Route path="/addproduct" element={<AddProductPage />} />
                   <Route path="/editproduct" element={<EditProductPage />} />
+                  <Route path="/order-success" element={<OrderSuccess />} />
                   <Route path="*" element={<ErrorPage />} />
                 </Routes>
               </Router>

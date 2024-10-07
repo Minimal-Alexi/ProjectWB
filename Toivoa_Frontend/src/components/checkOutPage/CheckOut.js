@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ShopContext } from "../../context/shopContext";
 import useField from "../../hooks/useField";
-import { products } from "../../data";
+import { useNavigate } from "react-router-dom";
 import "./CheckOut.css";
 
 const CheckOut = () => {
@@ -13,11 +13,28 @@ const CheckOut = () => {
   const phoneNumber = useField("tel");
   const emailInput = useField("email");
 
+  const { cartItems, products } = useContext(ShopContext);
+  const navigate = useNavigate();
 
-  const { cartItems } = useContext(ShopContext);
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setTimeout(() => {
+      navigate("/order-success");
+    }, 1000);
   };
+
+  if (!products) {
+    return <div>Loading...</div>;
+  }
+
+  const cartProducts = products.filter(product => cartItems[product._id] !== 0);
+
+  // Calculate total price 
+  let totalPrice = 0;
+  for (let i = 0; i < cartProducts.length; i++) {
+    totalPrice += cartProducts[i].price;
+  }
 
   return (
     <div className="check-out-container">
@@ -65,27 +82,23 @@ const CheckOut = () => {
                   Save this information for faster check-out next time
                 </label>
               </div>
+              <button type="submit" className="place-order-button">Place order</button>
             </div>
           </form>
         </div>
         <div className="billing-product-information">
-          <div className="billing-info">
-            <div className="product-pic-name">
-              <img src={products[0].image[0]} alt="product-image" />
-              <p>{products[0].name}</p>
+          {cartProducts.map((product, index) => (
+            <div className="billing-info" key={index}>
+              <div className="product-pic-name">
+                <img src={product.image[0]} alt="product-image" />
+                <p>{product.name}</p>
+              </div>
+              <p>${product.price}</p>
             </div>
-            <p>${products[0].price}</p>
-          </div>
-          <div className="billing-info">
-            <div className="product-pic-name">
-              <img src={products[1].image[1]} alt="product-image" />
-              <p>{products[1].name}</p>
-            </div>
-            <p>${products[1].price}</p>
-          </div>
+          ))}
           <div className="billing-info">
             <p>Subtotal:</p>
-            <p>${products[0].price + products[1].price}</p>
+            <p>${totalPrice}</p>
           </div>
           <hr></hr>
           <div className="billing-info">
@@ -95,17 +108,16 @@ const CheckOut = () => {
           <hr></hr>
           <div className="billing-info">
             <p>Total:</p>
-            <p>{products[0].price + products[1].price}</p>
+            <p>${totalPrice}</p>
           </div>
           <div className="payment-options">
-            <input type="radio" checked value="Bank" name="payment" />
+            <input type="radio" value="Bank" name="payment" />
             <label>Bank</label>
           </div>
           <div className="payment-options">
             <input type="radio" value="Cash" name="payment" />
             <label>Cash on delivery</label>
           </div>
-          <button className="place-order-button">Place order</button>
         </div>
       </div>
     </div>

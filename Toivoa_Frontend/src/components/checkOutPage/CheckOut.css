@@ -75,6 +75,12 @@
     background: #6179B7;
 }
 
+.place-order-button:hover {
+    background: #4a5d9e; /* Darker shade of the original background color */
+}
+
+
+
 @media (max-width: 576px) {
     .billing-info-container{
         flex-direction: column;

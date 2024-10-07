@@ -3,7 +3,7 @@ import { ProductContext } from "./productContext";
 
 export const ShopContext = createContext(null);
 
-// Dynamically set the innitial amount of item in cart: 0
+// Dynamically set the initial amount of item in cart: 0
 const getDefaultCart = (products) => {
   let cart = {};
   for (let i = 0; i < products.length; i++) {
@@ -17,7 +17,9 @@ export const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    setCartItems(getDefaultCart(products));
+    if (products && products.length > 0) {
+      setCartItems(getDefaultCart(products));
+    }
   }, [products]);
 
   const getTotalCartAmount = () => {
@@ -44,7 +46,7 @@ export const ShopContextProvider = (props) => {
   };
 
   const checkout = () => {
-    setCartItems(getDefaultCart());
+    setCartItems(getDefaultCart(products));
   };
 
   const contextValue = {
@@ -54,9 +56,8 @@ export const ShopContextProvider = (props) => {
     removeFromCart,
     getTotalCartAmount,
     checkout,
+    products,
   };
-
-  // console.log(cartItems);
 
   return (
     <ShopContext.Provider value={contextValue}>
