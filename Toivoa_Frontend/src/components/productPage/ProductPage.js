@@ -37,12 +37,13 @@ const ProductPage = () => {
         }
       }
       console.log(product);
+
     };
 
     fetchAndSetProduct(); // Call the function
   }, [id, products]);
 
-  const relatedProducts = getRandomProducts(products, relatedProductNumber);
+  const relatedProducts = getRandomProducts(products, relatedProductNumber, id);
 
   if (!product) {
     return <div>Loading...</div>;
@@ -95,7 +96,7 @@ const ProductPage = () => {
       </div>
       <div className="review-container">
         <h4>Reviews</h4>
-        <AddReviewField/>
+        <AddReviewField productID = {product._id}/>
         {Array.isArray(product.reviewList) && product.reviewList.length > 0 ? (
           product.reviewList.map((review, index) => (
             <ReviewCard {...review} key={index} />

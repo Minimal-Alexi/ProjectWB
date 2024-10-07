@@ -11,6 +11,11 @@ const {
     signupUser
 } = require('../Controller/userController');
 
+const 
+{
+    requireAuth
+} = require("../Middleware/jwtHandling")
+
 //GET /users
 router.get('/',getAllUsers);
 
@@ -25,6 +30,8 @@ router.post('/login',loginUser);
 
 // signup route
 router.post("/signup", signupUser);
+
+router.use(requireAuth);
 
 //PUT /users/:userID
 router.put('/:userID',updateUser);

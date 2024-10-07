@@ -4,7 +4,8 @@ const app = require("../../app");
 const api = supertest(app);
 const User = require("../../Models/userModel");
 
-const UserMocks = require("../MockData/MOCK_DATA_USER.json")
+const UserMocks = require("../MockData/MOCK_DATA_USER.json");
+const { createToken } = require("../../Middleware/jwtHandling");
 
 beforeAll(async () => {
     await User.deleteMany({});
@@ -110,44 +111,60 @@ describe("User API", function () {
 
         })
         describe("when updating an account", function () {
+            let token;
+            beforeAll(async () => {
+                const user = await User.findOne({ username: UserMocks[0].username });
+                token = createToken(user);
+            })
             it("should be able to update an account.", async function () {
                 const userToEdit = await User.findOne({ username: UserMocks[0].username });
-                const editedSettings =
-                {
+                const editedSettings = {
                     username: "Banana"
-                }
-                const response = await api
-                    .put(`/api/users/${userToEdit._id}`)
-                    .send(editedSettings)
-                    .expect(200)
-                expect(response.body.username).toContain("Banana");
-            })
-            it("shouldn't update with the wrong fields.", async function () {
-                const userToEdit = await User.findOne({ username: "Banana" });
-                const editedSettings =
-                {
-                    badfield: "lol"
-                }
+                };
 
                 const response = await api
                     .put(`/api/users/${userToEdit._id}`)
+                    .set("Authorization", `Bearer ${token}`)  // Set JWT token
                     .send(editedSettings)
-                    .expect(200)
+                    .expect(200);
+
+                expect(response.body.username).toContain("Banana");
+            });
+
+            it("shouldn't update with the wrong fields.", async function () {
+                const userToEdit = await User.findOne({ username: "Banana" });
+                const editedSettings = {
+                    badfield: "lol"
+                };
+
+                const response = await api
+                    .put(`/api/users/${userToEdit._id}`)
+                    .set("Authorization", `Bearer ${token}`)  // Set JWT token
+                    .send(editedSettings)
+                    .expect(200);
+
                 expect(response.body).not.toHaveProperty("badfield");
-            })
+            });
         })
         describe("delete an account", function () {
-            it("should be able to delete an account", async function(){
+            beforeAll(async () => {
+                const user = await User.findOne({ username: UserMocks[0].username });
+                token = createToken(user);
+            })
+            it("should be able to delete an account", async function () {
                 const userToDelete = await User.findOne();
                 await api
-                .delete(`/api/users/${userToDelete._id}`)
-                .expect(200)
-            })
-            it("should throw an error if the account isn't found.",async function(){
+                    .delete(`/api/users/${userToDelete._id}`)
+                    .set("Authorization", `Bearer ${token}`)  // Set JWT token
+                    .expect(200);
+            });
+
+            it("should throw an error if the account isn't found.", async function () {
                 await api
-                .delete(`/api/users/670225f3e9f9dc2ef07da54c`)
-                .expect(404);
-            })
+                    .delete(`/api/users/670225f3e9f9dc2ef07da54c`)
+                    .set("Authorization", `Bearer ${token}`)  // Set JWT token
+                    .expect(404);
+            });
         })
         afterAll(async () => {
             await User.deleteMany({});

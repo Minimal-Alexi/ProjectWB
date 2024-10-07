@@ -1,39 +1,71 @@
-import {useState} from "react";
+import { useState, useContext } from "react";
 import useField from "../../hooks/useField"
 import ReviewScoreSetter from "../../hooks/reviewScoreSetter";
+import { AuthContext } from "../../context/authContext";
 
-const AddReviewField = () => 
-    {
-        const [rating,setRating] = useState(0);
-        const [comment,setComment] = useState('');
+const AddReviewField = ({ _id }) => {
+    const { token } = useContext(AuthContext);
 
-        const commentField = useField("text",comment,setComment);
+    const [rating, setRating] = useState(0);
+    const comment = useField("text");
 
 
-        const handleSubmit = (event) => {
-            event.preventDefault();
-            // You can handle the review submission here
-            console.log(`Rating: ${rating}, Comment: ${comment}`);
-          };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-        return(
+        const reviewData = {
+            rating: rating,
+            comment: comment.value
+        };
+
+        try {
+            const response = await fetch(`/api/products/${_id}/comments`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify(reviewData)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Error:', errorData);
+                return;
+            }
+
+            const data = await response.json();
+            console.log('Review submitted:', data);
+            setRating(0);
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while submitting your review');
+        }
+    };
+
+    return (
+        <div className="review-form-container">
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Score:</label>
-                    <ReviewScoreSetter rating={rating} setRating={setRating}/>
+                    <ReviewScoreSetter rating={rating} setRating={setRating} />
                 </div>
                 <div>
                     <label>Review:</label>
-                    <textarea {...commentField}
-                    rows="4"
-                    cols="50"
-                    placeholder="Write your review here."
+                    <textarea {...comment}
+                        id="comment"
+                        rows="4"
+                        cols="50"
+                        placeholder="Write your review here."
                     />
                 </div>
                 <button type="submit">Submit review</button>
             </form>
-        )
+        </div>
 
-    }
+    )
+
+}
 
 export default AddReviewField;

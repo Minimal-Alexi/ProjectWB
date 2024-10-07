@@ -125,9 +125,10 @@ const addComment = async (req, res) => {
     }
     try {
         const foundProduct = await Products.findById(productID);
+        console.log(req.userID);
         const newReview =
         {
-            userID: req.body.userID,
+            userID: req.userID,
             rating: req.body.rating,
             comment: req.body.comment,
             date: new Date
@@ -138,6 +139,7 @@ const addComment = async (req, res) => {
 
     }
     catch (err) {
+        console.error(err);
         res.status(500).json({ message: "Failed to add comment." });
     }
 }
