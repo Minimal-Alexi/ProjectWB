@@ -1,10 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext"; // Import the AuthContext
 import "./userSettings.css";
 
 const UserSettingsPage = () => {
   const { isAuthenticated, isLoading, user } = useContext(AuthContext); // Access authentication context
+
+
 
   const [newAccountDetails, setNewAccountDetails] = useState({
     username: "",
@@ -13,7 +15,6 @@ const UserSettingsPage = () => {
     lastName: "",
     password: "",
     confirmPassword: "",
-    passwordSalt: "",
     accountType: "",
     countryCode: "",
     location: "",
@@ -21,6 +22,11 @@ const UserSettingsPage = () => {
     age: "",
     gender: "",
   });
+
+  useEffect(()=>
+    {
+
+    },[])
 
   // Handle input change
   const handleInputChange = (event) => {
@@ -46,7 +52,7 @@ const UserSettingsPage = () => {
       <div className="navigate-text">
         <p>Home / My Account</p>
         <p>
-          Welcome <span>{user?.username || "Guest"}</span>
+          Welcome <span>{user.username || "Guest"}</span>
         </p>
       </div>
       <div className="user-container">
