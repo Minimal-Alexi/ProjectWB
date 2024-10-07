@@ -26,6 +26,8 @@ export default function useLogin(url) {
         return;
       }
 
+      console.log(user);
+
        // Save user data to local storage (optional)
        localStorage.setItem("user", JSON.stringify(user));
 
