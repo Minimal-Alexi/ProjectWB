@@ -2,8 +2,7 @@ import { useState } from "react";
 import useField from "../../hooks/useField";
 import "./ProductPage.css";
 
-const AddProduct = () => {
-    const [name, setName] = useState('');
+const AddProduct = () => {const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState([]);
     const [sizes, setSizes] = useState([]);
@@ -38,7 +37,7 @@ const AddProduct = () => {
         };
 
         try {
-            const response = await fetch(`/products`, {
+            const response = await fetch(`/api/products`, {
                 method: 'POST',
                 body: JSON.stringify(product),
                 headers: {
