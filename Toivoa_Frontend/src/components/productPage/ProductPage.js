@@ -20,6 +20,7 @@ const ProductPage = () => {
   const [selectedImage, setSelectedImage] = useState("");
   const [product, setProduct] = useState(null);
   const { products, fetchProductbyID } = useContext(ProductContext);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const fetchAndSetProduct = async () => {
@@ -36,13 +37,15 @@ const ProductPage = () => {
           setSelectedImage(product.image[0]);
         }
       }
-      //console.log(product);
+      console.log(product);
+      setRefresh(false);
+      console.log(refresh);
     };
 
     fetchAndSetProduct(); // Call the function
   }, [id, products]);
 
-  const relatedProducts = getRandomProducts(products, relatedProductNumber);
+  const relatedProducts = getRandomProducts(products, relatedProductNumber, id);
 
   if (!product) {
     return <div>Loading...</div>;
@@ -95,7 +98,7 @@ const ProductPage = () => {
       </div>
       <div className="review-container">
         <h4>Reviews</h4>
-        <AddReviewField _id = {product._id}/>
+        <AddReviewField productID = {product._id}/>
         {Array.isArray(product.reviewList) && product.reviewList.length > 0 ? (
           product.reviewList.map((review, index) => (
             <ReviewCard {...review} key={index} />

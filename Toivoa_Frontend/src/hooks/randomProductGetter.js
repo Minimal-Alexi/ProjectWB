@@ -1,6 +1,7 @@
-const getRandomProducts = (products, amount) => {
-    const shuffled = [...products].sort(() => 0.5 - Math.random()); // Shuffle the array
-    return shuffled.slice(0, amount); // Select the first 'amount' of items
-  };
-
+const getRandomProducts = (products, amount, id) => {
+  //MAKE SURE TO FILTER OUT THE ID OF THE PRODUCT PAGE YOU'RE CURRENTLY ON! THANK YOU.
+  const filteredProducts = products.filter(product => product._id !== id);
+  const shuffled = [...filteredProducts].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, amount);
+};
 export default getRandomProducts
