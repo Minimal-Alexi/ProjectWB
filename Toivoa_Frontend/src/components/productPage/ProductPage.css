@@ -514,3 +514,61 @@
   line-height: 1.5; /* Improve readability */
   color: #444; /* Slightly darker text for comments */
 }
+
+/* Review Form Container */
+.review-form-container {
+  background: #f5f5f5; /* Same background as the review cards */
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  margin: 2rem 0; /* Separate from surrounding content */
+}
+
+/* Form Fields */
+.review-form-container form div {
+  margin-bottom: 1.5rem; /* Space between form fields */
+}
+
+.review-form-container label {
+  display: block;
+  font-size: 1rem;
+  color: #333; /* Darker text color for readability */
+  margin-bottom: 0.5rem;
+}
+
+.review-form-container textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Review Score Setter */
+.review-form-container .ReviewScoreSetter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.review-form-container .ReviewScoreSetter input[type="radio"] {
+  margin-right: 0.5rem;
+}
+
+/* Submit Button */
+.review-form-container button[type="submit"] {
+  background-color: #6179b7;
+  color: white;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.review-form-container button[type="submit"]:hover {
+  background-color: #495b94; /* Darker shade on hover */
+}
