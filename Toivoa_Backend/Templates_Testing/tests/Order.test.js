@@ -9,6 +9,9 @@ const Product = require("../../Models/productModel");
 const UserMocks = require("../MockData/MOCK_DATA_USER.json");
 const ProductMocks = require("../MockData/MOCK_DATA_PRODUCT.json");
 const OrderMocks = require("../MockData/MOCK_DATA_ORDER.json");
+const {createToken} = require("../../Middleware/jwtHandling")
+
+let token;
 
 beforeAll(async () => {
   await User.deleteMany({});
@@ -18,12 +21,17 @@ beforeAll(async () => {
   await Product.insertMany(ProductMocks);
   await Orders.insertMany(OrderMocks);
 });
+beforeAll(async () => {
+    const user = await User.findOne({ accountType: 2 });
+    token = createToken(user);
+})
 
 describe("Orders API", function () {
   describe("GET /orders", function () {
     describe("when fetching all orders", function () {
       it("should return all orders", async function () {
-        const response = await api.get("/api/orders").expect(200);
+        const response = await api.get("/api/orders").expect(200)
+        .set("Authorization", `Bearer ${token}`);
         expect(response.body).toHaveLength(OrderMocks.length);
       });
 
@@ -31,7 +39,8 @@ describe("Orders API", function () {
         await api
           .get("/api/orders")
           .expect(200)
-          .expect("Content-Type", /application\/json/);
+          .expect("Content-Type", /application\/json/)
+          .set("Authorization", `Bearer ${token}`);
       });
     });
   });
@@ -42,18 +51,21 @@ describe("Orders API", function () {
         const orderToFind = await Orders.findOne({});
         const response = await api
           .get(`/api/orders/${orderToFind._id}`)
-          .expect(200);
+          .expect(200)
+          .set("Authorization", `Bearer ${token}`);;
         expect(response.body).toEqual(JSON.parse(JSON.stringify(orderToFind)));
       });
 
       it("should return 404 if the order is not found", async function () {
         const invalidID = "6702437e3a61345c7ea50e02";
-        await api.get(`/api/orders/${invalidID}`).expect(404);
+        await api.get(`/api/orders/${invalidID}`).expect(404)
+        .set("Authorization", `Bearer ${token}`);;
       });
 
       it("should return 400 if the orderID is invalid", async function () {
         const invalidID = "invalidID";
-        await api.get(`/api/orders/${invalidID}`).expect(400);
+        await api.get(`/api/orders/${invalidID}`).expect(400)
+        .set("Authorization", `Bearer ${token}`);;
       });
     });
   });
@@ -74,7 +86,8 @@ describe("Orders API", function () {
         const response = await api
           .post(`/api/orders`)
           .send(orderToAdd)
-          .expect(201);
+          .expect(201)
+          .set("Authorization", `Bearer ${token}`);;
         expect(response.body.userID).toContain(orderToAdd.userID.toString());
         expect(response.body.productID).toContain(
           orderToAdd.productID.toString()
@@ -83,7 +96,8 @@ describe("Orders API", function () {
 
       it("should return 400 if required fields are missing", async function () {
         const orderToAdd = { quantity: 2 }; // Missing userID and productID
-        await api.post(`/api/orders`).send(orderToAdd).expect(400);
+        await api.post(`/api/orders`).send(orderToAdd).expect(400)
+        .set("Authorization", `Bearer ${token}`);;
       });
     });
   });
@@ -96,13 +110,15 @@ describe("Orders API", function () {
         const response = await api
           .put(`/api/orders/${orderToModify._id}`)
           .send(edit)
-          .expect(200);
+          .expect(200)
+          .set("Authorization", `Bearer ${token}`);;
         expect(response.body.quantity).toEqual(5);
       });
 
       it("should return 404 if the order is not found", async function () {
         const invalidID = "6702437e3a61345c7ea50e02";
-        await api.put(`/api/orders/${invalidID}`).expect(404);
+        await api.put(`/api/orders/${invalidID}`).expect(404)
+        .set("Authorization", `Bearer ${token}`);;
       });
     });
   });
@@ -114,7 +130,8 @@ describe("Orders API", function () {
         const initialCount = initialOrders.length;
         const orderToDelete = initialOrders[0];
 
-        await api.delete(`/api/orders/${orderToDelete._id}`).expect(200);
+        await api.delete(`/api/orders/${orderToDelete._id}`).expect(200)
+        .set("Authorization", `Bearer ${token}`);;
 
         const remainingOrders = await Orders.find({});
         const finalCount = remainingOrders.length;
@@ -127,7 +144,8 @@ describe("Orders API", function () {
 
       it("should return 404 if the order is not found", async function () {
         const invalidID = "6702437e3a61345c7ea50e02";
-        await api.delete(`/api/orders/${invalidID}`).expect(404);
+        await api.delete(`/api/orders/${invalidID}`).expect(404)
+        .set("Authorization", `Bearer ${token}`);;
       });
     });
   });
