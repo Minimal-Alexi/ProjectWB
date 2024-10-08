@@ -7,6 +7,9 @@ const Ads = require("../../Models/adModel");
 
 const UserMocks = require("../MockData/MOCK_DATA_USER.json");
 const AdMocks = require("../MockData/MOCK_DATA_AD.json");
+const {createToken} = require("../../Middleware/jwtHandling")
+
+let token;
 
 beforeAll(async () => {
   await User.deleteMany({});
@@ -15,11 +18,17 @@ beforeAll(async () => {
   await Ads.insertMany(AdMocks);
 });
 
+beforeAll(async () => {
+  const user = await User.findOne({ accountType: 2 });
+  token = createToken(user);
+})
+
 describe("Ads API", function () {
   describe("GET /ads", function () {
     describe("when fetching all ads", function () {
       it("should return all ads", async function () {
-        const response = await api.get("/api/ads");
+        const response = await api.get("/api/ads")
+        .set("Authorization", `Bearer ${token}`);
         expect(response.body).toHaveLength(AdMocks.length);
       });
 
@@ -27,7 +36,8 @@ describe("Ads API", function () {
         await api
           .get("/api/ads")
           .expect(200)
-          .expect("Content-Type", /application\/json/);
+          .expect("Content-Type", /application\/json/)
+          .set("Authorization", `Bearer ${token}`);;
       });
     });
   });
@@ -36,18 +46,21 @@ describe("Ads API", function () {
     describe("when fetching a specific ad", function () {
       it("should return an ad by its ID", async function () {
         const adToFind = await Ads.findOne({});
-        const response = await api.get(`/api/ads/${adToFind._id}`).expect(200);
+        const response = await api.get(`/api/ads/${adToFind._id}`).expect(200)
+        .set("Authorization", `Bearer ${token}`);;
         expect(response.body).toEqual(JSON.parse(JSON.stringify(adToFind)));
       });
 
       it("should return 404 if the ad is not found", async function () {
         const invalidID = "6702437e3a61345c7ea50e02";
-        await api.get(`/api/ads/${invalidID}`).expect(404);
+        await api.get(`/api/ads/${invalidID}`).expect(404)
+        .set("Authorization", `Bearer ${token}`);;
       });
 
       it("should return 400 if the adID is invalid", async function () {
         const invalidID = "invalidID";
-        await api.get(`/api/ads/${invalidID}`).expect(400);
+        await api.get(`/api/ads/${invalidID}`).expect(400)
+        .set("Authorization", `Bearer ${token}`);;
       });
     });
   });
@@ -64,7 +77,8 @@ describe("Ads API", function () {
         const response = await api
         .post(`/api/ads`)
         .send(adToAdd)
-        .expect(201);
+        .expect(201)
+        .set("Authorization", `Bearer ${token}`);;
         expect(response.body.vendorID).toContain(adToAdd.vendorID.toString());
       });
 
@@ -72,7 +86,8 @@ describe("Ads API", function () {
         const adToAdd = AdMocks[0];
         const user = await User.findOne({ accountType: 0 }).select("_id");
         adToAdd.vendorID = user._id;
-        await api.post(`/api/ads`).send(adToAdd).expect(403);
+        await api.post(`/api/ads`).send(adToAdd).expect(403)
+        .set("Authorization", `Bearer ${token}`);;
       });
     });
   });
@@ -85,13 +100,15 @@ describe("Ads API", function () {
         const response = await api
           .put(`/api/ads/${adToModify._id}`)
           .send(edit)
-          .expect(200);
+          .expect(200)
+          .set("Authorization", `Bearer ${token}`);;
         expect(response.body.pricing).toEqual(999);
       });
 
       it("should return 404 if the ad is not found", async function () {
         const invalidID = "6702437e3a61345c7ea50e02";
-        await api.put(`/api/ads/${invalidID}`).expect(404);
+        await api.put(`/api/ads/${invalidID}`).expect(404)
+        .set("Authorization", `Bearer ${token}`);;
       });
     });
   });
@@ -102,7 +119,8 @@ describe("Ads API", function () {
         const adToDelete = await Ads.findOne();
         await api
         .delete(`/api/ads/${adToDelete._id}`)
-        .expect(200);
+        .expect(200)
+        .set("Authorization", `Bearer ${token}`);;
         expect(Ads.find({}.length == 0))
       });
 
@@ -110,7 +128,8 @@ describe("Ads API", function () {
         const invalidID = "6702437e3a61345c7ea50e02";
         await api
         .delete(`/api/ads/${invalidID}`
-        ).expect(404);
+        ).expect(404)
+        .set("Authorization", `Bearer ${token}`);;
       });
     });
   });
