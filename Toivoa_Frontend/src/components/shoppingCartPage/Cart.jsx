@@ -1,14 +1,14 @@
-import { products } from "../../data.js";
-import { ShopContext } from "./shopContext.jsx";
+import { ShopContext } from "../../context/shopContext.jsx";
+import { ProductContext } from "../../context/productContext";
 import { useContext } from "react";
 import { CartItem } from "./CartItem.jsx";
 import style from "./Cart.module.css";
 import { useNavigate } from "react-router-dom";
 
 export const Cart = () => {
-  const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
+  const { cartItems, getTotalCartAmount } = useContext(ShopContext);
+  const { products } = useContext(ProductContext);
   const totalAmount = getTotalCartAmount();
-
   const navigate = useNavigate();
 
   return (
@@ -18,7 +18,7 @@ export const Cart = () => {
       </div>
       <div className={style.cart}>
         {products.map((product, index) => {
-          if (cartItems[product.id] !== 0) {
+          if (cartItems[product._id] !== 0) {
             return <CartItem data={product} key={index} />;
           }
         })}
@@ -28,22 +28,19 @@ export const Cart = () => {
         <div className={style.checkout}>
           <p> Subtotal: {totalAmount} </p>
           <button onClick={() => navigate("/")}> Continue Shopping </button>
-              <button
-                onClick={() => {
-                  checkout();
-                  navigate("/#");
-                }}
-              >
-                {" "}
-                Checkout{" "}
-              </button>
+          <button
+            onClick={() => {
+              navigate("/checkout", { state: { cartItems, products } });
+            }}
+          >
+            Checkout
+          </button>
         </div>
       ) : (
         <div className={style.checkout}>
-        <h2> Your Shopping Cart is Empty</h2>
-        <button onClick={() => navigate("/")}> Return to shop </button>
+          <h2> Your Shopping Cart is Empty</h2>
+          <button onClick={() => navigate("/")}> Return to shop </button>
         </div>
-        
       )}
     </div>
   );

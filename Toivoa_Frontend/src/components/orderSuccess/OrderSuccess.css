@@ -1,0 +1,21 @@
+.order-success-container {
+    text-align: center;
+    padding: 50px;
+  }
+  
+  .order-success-container h1 {
+    color: rgb(97, 121, 183);
+  }
+  
+  .order-success-container button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: rgb(97, 121, 183);
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .order-success-container button:hover {
+    background-color: rgb(63, 138, 244);
+  }

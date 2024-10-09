@@ -1,5 +1,5 @@
 import WishListsCard from "./WishListsCard";
-import { WishListContext } from "./WishListContext"; // Import the context
+import { WishListContext } from "../../context/WishListContext"; // Import the context
 import { useContext } from "react";
 import "./WishLists.css";
 
@@ -21,7 +21,7 @@ const WishLists = () => {
           return (
             <WishListsCard
               {...wish}
-              key={wish.id}
+              key={wish._id}
               onDelete={handleDeleteWishLists}
             />
           );

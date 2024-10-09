@@ -208,6 +208,7 @@
   border-radius: 5px;
 }
 
+
 /* MEDIA QUERIES */
 
 @media (max-width: 768px) {
@@ -275,4 +276,17 @@
     width: 50%;
     border-radius: 5px;
   }
+}
+
+
+.Stars {
+  display: flex; /* Use flexbox to arrange items in a row */
+  justify-content: left; /* Center the stars if needed */
+  align-items: center; /* Align stars vertically */
+}
+
+.Stars span {
+  font-size: 1.5rem; /* Adjust the size of the stars */
+  margin: 0 0.1rem; /* Optional: Add some space between stars */
+  color: #891dd1; /* Gold color for filled stars */
 }
