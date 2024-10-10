@@ -1,0 +1,580 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Documentation",
+      "version": "1.0.0",
+      "description": "API documentation for Users, Products, Orders, and Ads"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:4000/api"
+      }
+    ],
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+      "schemas": {
+        "User": {
+          "type": "object",
+          "properties": {
+            "username": { "type": "string" },
+            "email": { "type": "string" },
+            "firstName": { "type": "string" },
+            "lastName": { "type": "string" },
+            "password": { "type": "string" },
+            "accountType": { "type": "integer" },
+            "countryCode": { "type": "string" },
+            "location": { "type": "string" },
+            "phoneNumber": { "type": "string" },
+            "age": { "type": "integer" },
+            "gender": { "type": "string" }
+          },
+          "required": ["username", "email", "firstName", "lastName", "password", "accountType", "countryCode"]
+        },
+        "Product": {
+          "type": "object",
+          "properties": {
+            "vendorID": { "type": "string" },
+            "name": { "type": "string" },
+            "description": { "type": "string" },
+            "image": { "type": "array", "items": { "type": "string" } },
+            "sizes": { "type": "array", "items": { "type": "string" } },
+            "isInStock": { "type": "boolean" },
+            "colors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "hex": { "type": "string" }
+                }
+              }
+            },
+            "reviewList": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "userID": { "type": "string" },
+                  "rating": { "type": "number" },
+                  "comment": { "type": "string" },
+                  "date": { "type": "string", "format": "date-time" }
+                }
+              }
+            },
+            "price": { "type": "number" }
+          },
+          "required": ["vendorID", "name", "description", "image", "isInStock", "price"]
+        },
+        "Order": {
+          "type": "object",
+          "properties": {
+            "productID": { "type": "string" },
+            "userID": { "type": "string" },
+            "quantity": { "type": "integer" }
+          },
+          "required": ["productID", "userID", "quantity"]
+        },
+        "Ad": {
+          "type": "object",
+          "properties": {
+            "vendorID": { "type": "string" },
+            "pricing": { "type": "number" }
+          },
+          "required": ["vendorID", "pricing"]
+        }
+      }
+    },
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "paths": {
+      "/users": {
+        "get": {
+          "summary": "Get all users",
+          "security": [{ "bearerAuth": [] }],
+          "responses": {
+            "200": {
+              "description": "A list of users",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": { "$ref": "#/components/schemas/User" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new user",
+          "security": [{ "bearerAuth": [] }],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "User created successfully",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/User" }
+                }
+              }
+            }
+          },
+          "security": []
+        }
+      },
+    "/users/login": {
+      "post": {
+        "summary": "Login a user and generate a token",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful and JWT token returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid credentials"
+          }
+        },
+        "security": []
+      }
+    },
+      "/users/{userID}": {
+        "get": {
+          "summary": "Get user by ID",
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "userID",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User details",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/User" }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update user by ID",
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "userID",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/User" }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete user by ID",
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "userID",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User deleted successfully"
+            }
+          }
+        }
+      },
+      "/products": {
+        "get": {
+          "summary": "Get all products",
+          "security": [{ "bearerAuth": [] }],
+          "responses": {
+            "200": {
+              "description": "A list of products",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": { "$ref": "#/components/schemas/Product" }
+                  }
+                }
+              }
+            }
+          },
+          "security": []
+        },
+        "post": {
+          "summary": "Create a new product",
+          "security": [{ "bearerAuth": [] }],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Product" }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Product created successfully",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Product" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/products/{productID}": {
+        "get": {
+          "summary": "Get product by ID",
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "productID",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Product details",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Product" }
+                }
+              }
+            }
+          },
+          "security": []
+        },
+        "put": {
+          "summary": "Update product by ID",
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "productID",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Product" }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Product updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Product" }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete product by ID",
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "productID",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Product deleted successfully"
+            }
+          }
+        }
+      },
+      "/orders": {
+        "get": {
+          "summary": "Get all orders",
+          "security": [{ "bearerAuth": [] }],
+          "responses": {
+            "200": {
+              "description": "A list of orders",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": { "$ref": "#/components/schemas/Order" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new order",
+          "security": [{ "bearerAuth": [] }],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Order" }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Order created successfully",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Order" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/orders/{orderID}": {
+        "get": {
+          "summary": "Get order by ID",
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "orderID",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Order details",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Order" }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update order by ID",
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "orderID",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Order" }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Order updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Order" }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete order by ID",
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "orderID",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Order deleted successfully"
+            }
+          }
+        }
+      },
+      "/ads": {
+        "get": {
+          "summary": "Get all ads",
+          "security": [{ "bearerAuth": [] }],
+          "responses": {
+            "200": {
+              "description": "A list of ads",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": { "$ref": "#/components/schemas/Ad" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new ad",
+          "security": [{ "bearerAuth": [] }],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Ad" }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Ad created successfully",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Ad" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/ads/{adID}": {
+        "get": {
+          "summary": "Get ad by ID",
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "adID",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Ad details",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Ad" }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update ad by ID",
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "adID",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Ad" }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Ad updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/Ad" }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete ad by ID",
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "adID",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Ad deleted successfully"
+            }
+          }
+        }
+      }
+    }
+  }
