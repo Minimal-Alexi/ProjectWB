@@ -40,5 +40,7 @@ This is to ensure that the merging process will all be handled by one person at 
 
 In order for the application to run succesfully, both the frontend and backend apps need to run at the same time.
 
-## 2.1 Database Management
+## 2.1 Deployment site
 
+The frontend proxy can be set up to connect locally or to the following address:
+https://toivoa-backend.onrender.com
